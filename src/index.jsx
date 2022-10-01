@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import App from './App';
-import store from './store/store';
+import LoginPage from './Components/LoginPage/LoginPage';
+import RegisterPage from './Components/RegisterPage/RegisterPage';
+import LandingPage from './Components/LandingPage/LandingPage';
+
+import './index.scss';
+
+const router = createBrowserRouter([
+	{
+		path: '/login',
+		element: <LoginPage />,
+	},
+	{
+		path: '/register',
+		element: <RegisterPage />,
+	},
+	{
+		path: '/home',
+		element: <LandingPage />,
+	},
+]);
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>,
 	document.getElementById('root')
 );

@@ -2,18 +2,17 @@
   "name": "se-group26-proj1",
   "version": "1.0.0",
   "scripts": {
-		"start": "webpack serve --mode development --hot",
-		"build": "webpack --mode production"
-	},
+    "start": "webpack serve --mode development --hot",
+    "build": "webpack --mode production"
+  },
   "repository": "https://github.com/ekanshsinghal/se-group26-proj1.git",
   "author": "Ekansh Singhal <ekanshsinghal@icloud.com>",
   "license": "MIT",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.5",
+    "antd": "^4.23.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.4",
-    "redux-logger": "^3.0.6"
+    "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -37,7 +36,7 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
   },
-	"eslintConfig": {
-		"extends": "react-app"
-	}
+  "eslintConfig": {
+    "extends": "react-app"
+  }
 }

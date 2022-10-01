@@ -1,0 +1,12 @@
+.LoginPage {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.Box {
+		border: 1px solid #eee;
+		padding: 1.5rem;
+	}
+}

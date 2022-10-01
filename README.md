@@ -1,5 +1,14 @@
 # se-group26-proj1
 
+![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
+![GitHub](https://img.shields.io/badge/Language-JavaScript-blue.svg)
+![Yarn](https://img.shields.io/badge/Yarn-v1.22.19-yellow.svg)
+![npm](https://img.shields.io/badge/npm-v8.9.0-yellow.svg)
+![Node](https://img.shields.io/badge/node-v16.15.1-yellow.svg)
+![GitHub issues](https://img.shields.io/github/issues/ekanshsinghal/se-group26-proj1)
+![Lines of code](https://img.shields.io/tokei/lines/github/ekanshsinghal/se-group26-proj1)
+![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
+
 ## Built With
 
 -   `react 18.2.x`
