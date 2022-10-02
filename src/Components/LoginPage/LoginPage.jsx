@@ -5,17 +5,25 @@ import { Link } from 'react-router-dom';
 import './LoginPage.scss';
 
 export default function LoginPage() {
+	const onFinish = (values) => console.log(values);
+
 	return (
 		<div className="LoginPage">
 			<div className="Box">
-				<Form>
+				<Form
+					labelCol={{ span: 8 }}
+					wrapperCol={{ span: 16 }}
+					initialValues={{ remember: true }}
+					onFinish={onFinish}
+					autoComplete="off"
+				>
 					<Form.Item
-						label="Username"
-						name="username"
+						label="Email"
+						name="email"
 						rules={[
 							{
 								required: true,
-								message: 'Please input your username!',
+								message: 'Please input your email!',
 							},
 						]}
 					>
@@ -40,7 +48,7 @@ export default function LoginPage() {
 					>
 						<Checkbox>Remember me</Checkbox>
 					</Form.Item>
-					<Form.Item>
+					<Form.Item wrapperCol={{ span: 24 }}>
 						<Button type="primary" htmlType="submit" block>
 							Log In
 						</Button>
