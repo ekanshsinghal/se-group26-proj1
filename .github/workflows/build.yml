@@ -1,13 +1,15 @@
 name: frontend-build
 on: [push]
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-    - uses: actions/checkout@v3
-    - uses: borales/actions-yarn@v3.0.0
-      with:
-        cmd: install
-    - uses: borales/actions-yarn@v3.0.0
-      with:
-        cmd: build
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - uses: actions/checkout@v3
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: build
