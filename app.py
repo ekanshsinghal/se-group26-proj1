@@ -13,7 +13,7 @@ Applications = db.Applications
 
 
 @app.route("/", methods=["post", "get"])
-def index():
+def register():
     message = ""
     if "email" in session:
         return redirect(url_for("home"))
@@ -30,13 +30,13 @@ def index():
         email_found = UserRecords.find_one({"Email": email})
         # if user_found:
         #     message = "There already is a user by that name"
-        #     return render_template("index.html", message=message)
+        #     return render_template("register.html", message=message)
         if email_found:
             message = "This email already exists in database"
-            return render_template("index.html", message=message)
+            return render_template("register.html", message=message)
         if password1 != password2:
             message = "Passwords should match!"
-            return render_template("index.html", message=message)
+            return render_template("register.html", message=message)
         
         else:
             hashed = bcrypt.hashpw(password2.encode("utf-8"), bcrypt.gensalt())
@@ -48,7 +48,7 @@ def index():
             new_email = user_data["Email"]
             #if registered redirect to logged in as the registered user
             return render_template("home.html", email=new_email)
-    return render_template("index.html")
+    return render_template("register.html")
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -93,7 +93,7 @@ def logout():
         session.pop("email", None)
         return render_template("signout.html")
     else:
-        return render_template("index.html")
+        return render_template("register.html")
 
 
 @app.route("/add")
