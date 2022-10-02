@@ -1,10 +1,7 @@
-import { Button, Dropdown } from 'antd';
 import React from 'react';
+import { Button } from 'antd';
+import { EditFilled } from '@ant-design/icons';
 
 export default function EditDropDown() {
-	return (
-		<Dropdown placement="bottomRight">
-			<Button>Edit</Button>
-		</Dropdown>
-	);
+	return <Button type="text" icon={<EditFilled />} />;
 }

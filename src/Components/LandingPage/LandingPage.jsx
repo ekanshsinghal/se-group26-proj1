@@ -8,7 +8,7 @@ import './LandingPage.scss';
 
 const { Header, Content } = Layout;
 
-const columns = ['Applied', 'In Consideration', 'Offer'];
+const columns = ['Applied', 'In Consideration', 'Offer', 'Rejected'];
 export default function LandingPage() {
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
 
@@ -30,6 +30,10 @@ export default function LandingPage() {
 						})
 					)}
 				/>
+				<div className="flex" />
+				<Button type="primary" danger>
+					Logout
+				</Button>
 			</Header>
 			<Content className="Content">
 				<div className="SubHeader">
@@ -47,60 +51,24 @@ export default function LandingPage() {
 						onClose={toggleAddApplication}
 					/>
 				</div>
-				<table>
-					<thead>
-						<tr>
-							{columns.map((col) => (
-								<td key={col}>
-									<Typography.Title level={5}>
-										{col}
-									</Typography.Title>
-								</td>
+
+				<div className="MainContent">
+					{columns.map((col) => (
+						<div className="Status">
+							<Typography.Title level={5}>{col}</Typography.Title>
+							{new Array(3).fill(null).map((_, index) => (
+								<Card
+									title={`Job ${index}`}
+									extra={<EditDropDown />}
+									className="Job"
+								>
+									{col}
+								</Card>
 							))}
-						</tr>
-					</thead>
-					<tbody>
-						{new Array(3).fill(null).map((_, index) => (
-							<tr key={String(index + 1)}>
-								<td>
-									<Card
-										title={`Job ${index}`}
-										extra={<EditDropDown />}
-									>
-										{columns[0]}
-									</Card>
-								</td>
-								<td>
-									<Card
-										title={`Job ${index}`}
-										extra={<EditDropDown />}
-									>
-										{columns[1]}
-									</Card>
-								</td>
-								<td>
-									<Card
-										title={`Job ${index}`}
-										extra={<EditDropDown />}
-									>
-										{columns[2]}
-									</Card>
-								</td>
-							</tr>
-						))}
-						<tr>
-							<td>
-								<Card loading />
-							</td>
-							<td>
-								<Card loading />
-							</td>
-							<td>
-								<Card loading />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							<Card loading />
+						</div>
+					))}
+				</div>
 			</Content>
 		</Layout>
 	);

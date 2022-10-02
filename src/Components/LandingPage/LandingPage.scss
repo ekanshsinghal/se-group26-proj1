@@ -3,13 +3,18 @@
 		position: fixed;
 		width: 100%;
 		z-index: 1;
+		display: flex;
+		padding: 0 1.5rem;
 
 		.logo {
-			float: left;
 			width: 120px;
 			height: 31px;
-			margin: 16px 24px;
+			margin: 1rem 1rem 1rem 0;
 			background-color: rgba(255, 255, 255, 0.2);
+		}
+
+		button {
+			margin: 1rem 0;
 		}
 	}
 
@@ -24,24 +29,20 @@
 			padding: 0.7rem;
 		}
 
-		table {
-			width: 100%;
-			border-collapse: separate;
-			border-spacing: 1rem 0;
+		.MainContent {
+			display: flex;
+			justify-content: space-between;
 
-			td {
+			.Status {
 				background-color: #e7f3f2;
-				padding: 0.5rem 1rem;
-			}
+				border-radius: 0.5rem;
+				flex: 1;
+				margin: 0.5rem;
+				padding: 0.75rem 1rem;
 
-			thead td {
-				border-top-left-radius: 0.5rem !important;
-				border-top-right-radius: 0.5rem !important;
-			}
-
-			tbody tr:last-child td {
-				border-bottom-left-radius: 0.5rem !important;
-				border-bottom-right-radius: 0.5rem !important;
+				.Job {
+					margin: 1rem 0;
+				}
 			}
 		}
 	}

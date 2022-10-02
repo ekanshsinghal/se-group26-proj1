@@ -70,6 +70,10 @@ export default function AddApplication({ isOpen, onClose }) {
 							required: true,
 							message: 'Please enter URL / Application Link!',
 						},
+						{
+							type: 'url',
+							warningOnly: true,
+						},
 					]}
 				>
 					<Input placeholder="Enter URL / Application Link" />

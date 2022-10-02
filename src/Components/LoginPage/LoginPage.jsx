@@ -1,6 +1,7 @@
-import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import './LoginPage.scss';
 
@@ -11,14 +12,12 @@ export default function LoginPage() {
 		<div className="LoginPage">
 			<div className="Box">
 				<Form
-					labelCol={{ span: 8 }}
-					wrapperCol={{ span: 16 }}
 					initialValues={{ remember: true }}
 					onFinish={onFinish}
 					autoComplete="off"
+					size="large"
 				>
 					<Form.Item
-						label="Email"
 						name="email"
 						rules={[
 							{
@@ -27,10 +26,12 @@ export default function LoginPage() {
 							},
 						]}
 					>
-						<Input />
+						<Input
+							prefix={<UserOutlined className="LoginIcons" />}
+							placeholder="Email"
+						/>
 					</Form.Item>
 					<Form.Item
-						label="Password"
 						name="password"
 						rules={[
 							{
@@ -39,7 +40,10 @@ export default function LoginPage() {
 							},
 						]}
 					>
-						<Input.Password />
+						<Input.Password
+							prefix={<LockOutlined className="LoginIcons" />}
+							placeholder="Password"
+						/>
 					</Form.Item>
 					<Form.Item
 						name="remember"
@@ -48,16 +52,14 @@ export default function LoginPage() {
 					>
 						<Checkbox>Remember me</Checkbox>
 					</Form.Item>
-					<Form.Item wrapperCol={{ span: 24 }}>
+					<Form.Item>
 						<Button type="primary" htmlType="submit" block>
 							Log In
 						</Button>
 					</Form.Item>
 				</Form>
-				<Typography>
-					Don&#39;t have a account?{' '}
-					<Link to="/register">Click here</Link> to register.
-				</Typography>
+				Don&#39;t have a account? <Link to="/register">Click here</Link>{' '}
+				to register.
 			</div>
 		</div>
 	);
