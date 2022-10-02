@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Layout, Menu, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import EditDropDown from './EditDropDown';
+import AddApplication from '../AddApplication/AddApplication';
 import './LandingPage.scss';
 
 const { Header, Content } = Layout;
 
+const columns = ['Applied', 'In Consideration', 'Offer'];
 export default function LandingPage() {
-	const columns = ['Applied', 'In Consideration', 'Result'];
+	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
+
+	const toggleAddApplication = () => {
+		setAddApplicationOpen(!addApplicationOpen);
+	};
+
 	return (
 		<Layout className="LandingPage">
 			<Header>
@@ -27,9 +34,18 @@ export default function LandingPage() {
 			<Content className="Content">
 				<div className="SubHeader">
 					<div className="flex" />
-					<Button type="primary" size="large" icon={<PlusOutlined />}>
+					<Button
+						type="primary"
+						size="large"
+						icon={<PlusOutlined />}
+						onClick={toggleAddApplication}
+					>
 						Add Application
 					</Button>
+					<AddApplication
+						isOpen={addApplicationOpen}
+						onClose={toggleAddApplication}
+					/>
 				</div>
 				<table>
 					<thead>
