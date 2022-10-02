@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Your applications{% endblock %}
+
+{% block content %}
+
+{% if message  %}
+    <div class="alert alert-secondary" role="alert">
+        <p>{{ message }}</p>
+    </div>
+{% endif %}
+
+
+
+<div class="container">
+    {% for app in apps %}
+
+    <div class="card bg-light" style="max-width: 26rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{app["Company"]}}</h5>
+          <h6 class="card-subtitle">{{ app["Job Title"] }}</h6>
+          <p class="card-text">{{ app["Date"] }}</p>
+          <a href="{{app['URL / Application Link']}}" class="btn btn-primary">Job link</a>
+          <a href="#" class="btn btn-primary">Status: {{ app['Status'] }}</a>
+        </div>
+      </div>
+      
+        <!-- <h2>{{app["Company"]}}</h2>
+        <p>Position: {{ app["Title"] }}</p>
+        <p>URL: <a href= {{app["URL / Application Link"]}} >{{ app["Job ID"] }}</a></p>
+        <p>Status: {{ app["Status"] }}</p>
+        <p>Date: {{ app["Date"] }}</p> -->
+    {% endfor %}
+  
+</div>
+
+
+{% endblock %}
+

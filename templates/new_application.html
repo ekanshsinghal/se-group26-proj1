@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Enter a new application{% endblock %}
+
+{% block content %}
+
+{% if message  %}
+    <div class="alert alert-secondary" role="alert">
+        <p>{{ message }}</p>
+    </div>
+{% endif %}
+
+<div class="container">
+  <form action="/add_application" method="post">
+    <div class="form-group">
+      <label for="company">Company Name</label>
+      <input name="company" class="form-control" id="inputCompanyName" aria-describedby="emailHelp" placeholder="Enter company name">
+      <small id="company" class="form-text text-muted">Please enter the company's name</small>
+    </div>
+    <div class="form-group">
+      <label for="title">Job Title</label>
+      <input name="title" class="form-control" id="inputJobTitle" aria-describedby="emailHelp" placeholder="Enter job title">
+      <small id="title" class="form-text text-muted">Please enter the job title</small>
+    </div>
+    <div class="form-group">
+      <label for="jobid">Job ID</label>
+      <input name="jobid" class="form-control" id="inputJobId" aria-describedby="emailHelp" placeholder="Enter job ID">
+      <small id="jobid" class="form-text text-muted">Please enter the job ID</small>
+    </div>
+    <div class="form-group">
+      <label for="url">URL / Application Link</label>
+      <input name="url" class="form-control" id="inputURL" aria-describedby="emailHelp" placeholder="Enter URL / Application Link">
+      <small id="url" class="form-text text-muted">Please enter the URL / Application Link</small>
+    </div>
+  
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" name="date" class="form-control" id="inputDate" aria-describedby="emailHelp" placeholder="Enter the date you applied">
+      <small id="date" class="form-text text-muted">Please enter the date you applied</small>
+    </div>
+  
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select name="status" class="form-control" id="inputStatus" aria-describedby="emailHelp" placeholder="Enter the status of application">
+        <option value="Have to apply">Have to apply</option>
+        <option value="Applied">Applied</option>
+        <option value="Recruiter Contact">Recruiter Contact</option>
+        <option value="Online Assessment">Online Assessment</option>
+        <option value="Interview">Interview</option>
+        <option value="Offer">Offer</option>
+        <option value="Reject">Reject</option>
+      </select>
+      <small id="status" class="form-text text-muted">Please enter the status of application</small>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
+
+
+
+
+{% endblock %}
+
