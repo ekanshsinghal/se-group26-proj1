@@ -4,10 +4,9 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	background-color: #ececec;
 
-	.Box {
-		border: 1px solid #eee;
-		padding: 1.5rem;
+	.ant-card {
 		width: min(100vw, 400px);
 	}
 

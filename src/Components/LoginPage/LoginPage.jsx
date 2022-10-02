@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Card, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import './LoginPage.scss';
@@ -10,7 +10,7 @@ export default function LoginPage() {
 
 	return (
 		<div className="LoginPage">
-			<div className="Box">
+			<Card bordered={false} title="Login">
 				<Form
 					initialValues={{ remember: true }}
 					onFinish={onFinish}
@@ -60,7 +60,7 @@ export default function LoginPage() {
 				</Form>
 				Don&#39;t have a account? <Link to="/register">Click here</Link>{' '}
 				to register.
-			</div>
+			</Card>
 		</div>
 	);
 }

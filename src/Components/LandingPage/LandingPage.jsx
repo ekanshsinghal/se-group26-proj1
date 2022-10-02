@@ -56,16 +56,17 @@ export default function LandingPage() {
 					{columns.map((col) => (
 						<div className="Status">
 							<Typography.Title level={5}>{col}</Typography.Title>
-							{new Array(3).fill(null).map((_, index) => (
+							{new Array(2).fill(null).map((_, index) => (
 								<Card
 									title={`Job ${index}`}
 									extra={<EditDropDown />}
 									className="Job"
+									bordered={false}
 								>
 									{col}
 								</Card>
 							))}
-							<Card loading />
+							<Card loading bordered={false} />
 						</div>
 					))}
 				</div>

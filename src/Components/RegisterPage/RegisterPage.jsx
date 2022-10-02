@@ -1,4 +1,4 @@
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Card, Form, Input, Typography } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export default function RegisterPage() {
 
 	return (
 		<div className="RegisterPage">
-			<div className="Box">
+			<Card bordered={false} title="Register">
 				<Form
 					initialValues={{ remember: true }}
 					onFinish={onFinish}
@@ -111,7 +111,7 @@ export default function RegisterPage() {
 					Already have an account? <Link to="/login">Click here</Link>{' '}
 					to login.
 				</Typography>
-			</div>
+			</Card>
 		</div>
 	);
 }
