@@ -1,16 +1,25 @@
 import React from 'react';
-import { Button, Card, Form, Input, Typography } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Card, Form, Input, message, Typography } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import './RegisterPage.scss';
 
 export default function RegisterPage() {
+	const navigate = useNavigate();
 	const onFinish = (values) => {
+		const loading = message.loading('Loading...', 0);
 		axios
 			.post('/api/register', values)
-			.then(({ data }) => console.log(data))
-			.catch((err) => console.error(err));
+			.then(({ data }) => {
+				loading();
+				console.log(data);
+				navigate('/home');
+			})
+			.catch((err) => {
+				loading();
+				message.error(err.response.data.error);
+			});
 	};
 
 	return (

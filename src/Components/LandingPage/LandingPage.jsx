@@ -5,6 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import EditDropDown from './EditDropDown';
 import AddApplication from '../AddApplication/AddApplication';
 import './LandingPage.scss';
+import { Link } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 
@@ -31,9 +32,11 @@ export default function LandingPage() {
 					)}
 				/>
 				<div className="flex" />
-				<Button type="primary" danger>
-					Logout
-				</Button>
+				<Link to="/login">
+					<Button type="primary" danger>
+						Logout
+					</Button>
+				</Link>
 			</Header>
 			<Content className="Content">
 				<div className="SubHeader">

@@ -1,17 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Card, Checkbox, Form, Input } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Card, Checkbox, Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import './LoginPage.scss';
 
 export default function LoginPage() {
+	const navigate = useNavigate();
+
 	const onFinish = async (values) => {
+		const loading = message.loading('Loading...', 0);
 		await axios
 			.post('/api/login', values)
-			.then(({ data }) => console.log(data))
-			.catch((err) => console.error(err));
+			.then(({ data }) => {
+				loading();
+				console.log(data);
+				navigate('/home');
+			})
+			.catch((err) => {
+				loading();
+				message.error(err.response.data.error);
+			});
 	};
 
 	return (

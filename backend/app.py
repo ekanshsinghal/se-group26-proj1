@@ -49,9 +49,6 @@ def register():
 
 @app.route("/login", methods=["POST"])
 def login():
-    if "email" in session:
-        return jsonify({'message': 'Login successful'}), 200
-
     try:
         req = request.get_json()
         email = req["email"]
@@ -59,6 +56,7 @@ def login():
 
         #check if email exists in database
         email_found = UserRecords.find_one({"Email": email})
+        print(email, password, email_found)
         if email_found:
             email_val = email_found["Email"]
             passwordcheck = email_found["Password"]
