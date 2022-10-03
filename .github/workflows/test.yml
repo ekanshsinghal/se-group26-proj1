@@ -2,7 +2,7 @@ name: frontend-build
 on: [push]
 jobs:
   build:
-    name: build
+    name: Run test cases
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
@@ -12,4 +12,4 @@ jobs:
           cmd: install
       - uses: borales/actions-yarn@v3.0.0
         with:
-          cmd: build
+          cmd: test

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { DatePicker, Form, Input, Modal, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
 
 export default function AddApplication({ isOpen, onClose }) {
 	const [form] = Form.useForm();
@@ -20,10 +20,15 @@ export default function AddApplication({ isOpen, onClose }) {
 			title="Add Application"
 			open={isOpen}
 			onOk={onOk}
-			okText="Add"
 			onCancel={onClose}
 			width={700}
 			centered
+			footer={[
+				<Button onClick={onClose}>Cancel</Button>,
+				<Button type="primary" onClick={onOk} id="add-submit">
+					Add
+				</Button>,
+			]}
 		>
 			<Form form={form} layout="vertical" requiredMark={false}>
 				<Form.Item

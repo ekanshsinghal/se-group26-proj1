@@ -39,6 +39,7 @@ export default function LandingPage() {
 				<div className="SubHeader">
 					<div className="flex" />
 					<Button
+						id="Add Application"
 						type="primary"
 						size="large"
 						icon={<PlusOutlined />}
@@ -54,10 +55,11 @@ export default function LandingPage() {
 
 				<div className="MainContent">
 					{columns.map((col) => (
-						<div className="Status">
+						<div className="Status" key={col}>
 							<Typography.Title level={5}>{col}</Typography.Title>
 							{new Array(2).fill(null).map((_, index) => (
 								<Card
+									key={col + index}
 									title={`Job ${index}`}
 									extra={<EditDropDown />}
 									className="Job"
