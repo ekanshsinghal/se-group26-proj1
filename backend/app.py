@@ -178,74 +178,53 @@ def delete_application():
         return jsonify({'error': "Something went wrong"}), 400
 
 
-@app.route("/modify", methods=["POST"])
+@app.route("/modify_application", methods=["POST"])
 def modify_application():
-    payload = {"status":False,"msg":""}
+    try:
+        if "email" in session:
+            email = session["email"]
+            req = request.get_json()
+            # filter = {'_id':ObjectId(application_id), "email": email}
+            company = req["company"]
+            title = req["title"]
+            jobid = req["jobid"]
+            url = req["url"]
+            date = req["date"]
+            status = req["status"]
+            
+            filter = {"Job ID": jobid, "Email": email}
 
-
-    #Use this if not using session
-    
-    # application_id = request.form["_id"]
-    # email = request.form["email"]
-    # filter = {'_id':ObjectId(application_id), "email": email}
-    # set_values = {"$set":{}}
-    # for i in request.form:
-    #     if i!="_id" and i!="email":
-    #         set_values["$set"][i] = request.form[i]
-    # modify_document = Application.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
-    # if modify_document == None:
-    #     payload["msg"] = "No such application id or email"
-    # else:
-    #     payload["status"] = True
-    #     payload["msg"] = "Modified application"
-    # return jsonify(payload),200
-
-
-    #IF using session, use this:
-    
-    if "email" in session:
-        # application_id = request.form["_id"]
-        email = session["email"]
-        
-        # filter = {'_id':ObjectId(application_id), "email": email}
-        company = request.form.get("company")
-        title = request.form.get("title")
-        jobid = request.form.get("jobid")
-        url = request.form.get("url")
-        date = request.form.get("date")
-        status = request.form.get("status")
-        filter = {"Job ID": jobid, "Email": email}
-
-        application = {
-            "Email": email,
-            "Company": company,
-            "Job Title": title,
-            "Job ID": jobid,
-            "URL / Application Link": url,
-            # "Details": {
-            #     "Industry": "Software Development",
-            #     "Employment Type": "Full-time",
-            #     "Seniority": "Entry Level",
-            #     "Posted Date": datetime.datetime(2022, 7, 23),
-            #     "Location": {
-            #         "City": "Seattle",
-            #         "State": "WA"
-            #     },
-            # },
-            "Date": date,
-            "Status": status
-        }
-        set_values = {"$set": application}
-        modify_document = Applications.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
-        if modify_document == None:
-            payload["msg"] = "No such application id or email"
+            application = {
+                "Email": email,
+                "Company": company,
+                "Job Title": title,
+                "Job ID": jobid,
+                "URL / Application Link": url,
+                # "Details": {
+                #     "Industry": "Software Development",
+                #     "Employment Type": "Full-time",
+                #     "Seniority": "Entry Level",
+                #     "Posted Date": datetime.datetime(2022, 7, 23),
+                #     "Location": {
+                #         "City": "Seattle",
+                #         "State": "WA"
+                #     },
+                # },
+                "Date": date,
+                "Status": status
+            }
+            set_values = {"$set": application}
+            modify_document = Applications.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
+            if modify_document == None:
+                return jsonify({"error": "No such Job ID found for this user's email"}), 400
+            else:
+                return jsonify({"message": "Job Application modified successfully"}), 200
         else:
-            payload["status"] = True
-            payload["msg"] = "Modified application"
-    else:
-        payload["msg"] = "Session timed out"
-
-    return jsonify(payload),200
+            return jsonify({'error': "Not Logged in"}), 400
+    
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
 
 @app.route("/profile", methods=["post"])
