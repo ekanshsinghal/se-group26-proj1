@@ -1,4 +1,4 @@
-name: frontend-build
+name: frontend-tests
 on: [push]
 jobs:
   build:
