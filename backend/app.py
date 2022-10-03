@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from pymongo import MongoClient, ReturnDocument
 import bcrypt
@@ -75,129 +76,106 @@ def login():
         return jsonify({'error': "Something went wrong"}), 400
 
 
-@app.route("/logout", methods=["POST"])
+@app.route("/logout", methods=["POST", "GET"])
 def logout():
     if "email" in session:
         session.pop("email", None)
     return jsonify({'message': 'Logout successful'}), 200
 
 
-@app.route("/add")
-def add():
-    if "email" in session:
-        email = session["email"]
-        return render_template("new_application.html", email=email)
-    else:
-        return redirect(url_for("login"))
+# @app.route("/add")
+# def add():
+#     if "email" in session:
+#         email = session["email"]
+#         return render_template("new_application.html", email=email)
+#     else:
+#         return redirect(url_for("login"))
 
 
-@app.route("/view", methods=["GET"])
-def view():
-    payload={"status":False,"msg":"","Applications":[]}
-
-    #Use this if not using session
-
-    # email = request.form["email"]
-    # out = Applications.find({"Email": email})
-    # if out:
-    #     payload["status"]=True
-    #     payload["msg"]="Applications present"
-    #     for i in out:
-    #         del i['_id']
-    #         del i['Email']
-    #         payload.append(i)
-    # else:
-    #     payload["msg"]="No Applications / Email does not exist"
-    # return jsonify(payload),200
-
-
-    #IF using session, use this:
-
-    if "email" in session:
-        payload["status"]=True
-        email = session["email"]
-        out = Applications.find({"Email": email})
-        if out:
-            payload["msg"]="Applications present"
-            for i in out:
-                del i['Email']
-                i['_id']=str(i['_id'])
-                payload["Applications"].append(i)
+@app.route("/view_applications", methods=["GET"])
+def view_applications():
+    try:
+        if "email" in session:
+            email = session["email"]
+            out = Applications.find({"Email": email})
+            if out:
+                applications_list = []
+                # payload["msg"]="Applications present"
+                for i in out:
+                    del i['Email']
+                    i['_id']=str(i['_id'])
+                    applications_list.append(i)
+                return jsonify({'message': 'Applications found', 'applications': applications_list}), 200
+            else:
+                return jsonify({'message': 'You have no applications'}), 200
         else:
-            payload["msg"]="No Applications"
-    else:
-        payload["msg"]="Session timed out"
-    return jsonify(payload),200
+            return jsonify({'error': "Not Logged in"}), 400
+            
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
-@app.route("/add_application", methods=["POST", "GET"])
+@app.route("/add_application", methods=["POST"])
 def add_application():
-    if "email" in session:
-        email = session["email"]
-        company = request.form.get("company")
-        title = request.form.get("title")
-        jobid = request.form.get("jobid")
-        url = request.form.get("url")
-        date = request.form.get("date")
-        status = request.form.get("status")
-        application = {
-            "Email": email,
-            "Company": company,
-            "Job Title": title,
-            "Job ID": jobid,
-            "URL / Application Link": url,
-            # "Details": {
-            #     "Industry": "Software Development",
-            #     "Employment Type": "Full-time",
-            #     "Seniority": "Entry Level",
-            #     "Posted Date": datetime.datetime(2022, 7, 23),
-            #     "Location": {
-            #         "City": "Seattle",
-            #         "State": "WA"
-            #     },
-            # },
-            "Date": date,
-            "Status": status
-        }
-        Applications.insert_one(application)
-        res={"msg":"Addition successful"}
-        return jsonify(res),200
-        # return render_template("home.html", email=email)
-    else:
-        res={"msg":"Session timed out"}
-        return jsonify(res),200
-
-
-@app.route("/delete", methods=["POST"])
-def delete_application():
-    payload = {"status":False,"msg":""}
-
-    #Use this if not using session
-
-    # application_id = request.form["_id"]
-    # email = request.form["email"]
-    # delete_document = Applications.find_one_and_delete({"_id":ObjectId(application_id), "Email":email})
-    # if delete_document == None:
-    #     payload["msg"] = "No such application id or email"
-    # else:
-    #     payload["status"] = True
-    #     payload["msg"] = "Deleted application"
-    # return jsonify(payload),200
-
-
-    #IF using session, use this:
-    if "email" in session:
-        email = session["email"]
-        jobid = request.form["jobid"]
-        delete_document = Applications.find_one_and_delete({"Job ID":jobid, "Email":email})
-        if delete_document == None:
-            payload["msg"] = "No such application id or email"
+    try:
+        if "email" in session:
+            email = session["email"]
+            req = request.get_json()
+            company = req["company"]
+            title = req["title"]
+            jobid = req["jobid"]
+            url = req["url"]
+            date = req["date"]
+            status = req["status"]
+            application = {
+                "Email": email,
+                "Company": company,
+                "Job Title": title,
+                "Job ID": jobid,
+                "URL / Application Link": url,
+                # "Details": {
+                #     "Industry": "Software Development",
+                #     "Employment Type": "Full-time",
+                #     "Seniority": "Entry Level",
+                #     "Posted Date": datetime.datetime(2022, 7, 23),
+                #     "Location": {
+                #         "City": "Seattle",
+                #         "State": "WA"
+                #     },
+                # },
+                "Date": date,
+                "Status": status
+            }
+            try:
+                Applications.insert_one(application)
+                return jsonify({"message": "Application added successfully"}),200
+            except Exception as e:
+                return jsonify({"error": "Unable to add Application"}),400
         else:
-            payload["status"] = True
-            payload["msg"] = "Deleted application"
-    else:
-        payload["msg"] = "Session timed out"
+            return jsonify({'error': "Not Logged in"}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
-    return jsonify(payload),200
+
+@app.route("/delete_application", methods=["POST"])
+def delete_application():
+    try:
+        if "email" in session:
+            email = session["email"]
+            req = request.get_json()
+            jobid = req["jobid"]
+            delete_document = Applications.find_one_and_delete({"Job ID":jobid, "Email":email})
+            if delete_document == None:
+                return jsonify({"error": "No such Job ID found for this user's email"}), 400
+            else:
+                return jsonify({"message": "Job Application deleted successfully"}), 200
+        else:
+            return jsonify({'error': "Not Logged in"}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
 
 @app.route("/modify", methods=["POST"])
