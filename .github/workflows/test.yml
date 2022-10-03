@@ -13,3 +13,9 @@ jobs:
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: test
+      - uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/clover.xml
+          flags: uitests # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
