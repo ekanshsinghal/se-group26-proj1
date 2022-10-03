@@ -2,11 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 import './LoginPage.scss';
 
 export default function LoginPage() {
-	const onFinish = (values) => console.log(values);
+	const onFinish = async (values) => {
+		await axios
+			.post('/api/login', values)
+			.then(({ data }) => console.log(data))
+			.catch((err) => console.error(err));
+	};
 
 	return (
 		<div className="LoginPage">

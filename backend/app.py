@@ -13,34 +13,26 @@ UserRecords = db.register
 Applications = db.Applications
 UserProfiles = db.Profiles
 
-@app.route("/", methods=["post", "get"])
-def register():
-    message = ""
-    if "email" in session:
-        return redirect(url_for("home"))
-    if request.method == "POST":
-        firstname = request.form.get("firstname")
-        lastname = request.form.get("lastname")
-        print(firstname, lastname)
-        name = {"First Name": firstname, "Last Name": lastname}
-        email = request.form.get("email")
-        password1 = request.form.get("password1")
-        password2 = request.form.get("password2")
 
-        # user_found = UserRecords.find_one({"Name": name})
+@app.route("/register", methods=["post"])
+def register():
+    try:
+        req = request.get_json()
+        firstName = req["firstName"]
+        lastName = req["lastName"]
+        name = {"First Name": firstName, "Last Name": lastName}
+        email = req["email"]
+        password = req["password"]
+        confirmPassword = req["confirmPassword"]
+
         email_found = UserRecords.find_one({"Email": email})
-        # if user_found:
-        #     message = "There already is a user by that name"
-        #     return render_template("register.html", message=message)
         if email_found:
-            message = "This email already exists in database"
-            return render_template("register.html", message=message)
-        if password1 != password2:
-            message = "Passwords should match!"
-            return render_template("register.html", message=message)
+            return jsonify({'error': "This email already exists in database"}), 400
+        if password != confirmPassword:
+            return jsonify({'error': "Passwords should match!"}), 400
         
         else:
-            hashed = bcrypt.hashpw(password2.encode("utf-8"), bcrypt.gensalt())
+            hashed = bcrypt.hashpw(confirmPassword.encode("utf-8"), bcrypt.gensalt())
             user_input = {"Name": name, "Email": email, "Password": hashed}
             UserRecords.insert_one(user_input)
             
@@ -49,18 +41,21 @@ def register():
             new_email = user_data["Email"]
             #if registered redirect to logged in as the registered user
             session["email"] = new_email
-            return render_template("home.html", email=new_email)
-    return render_template("register.html")
+            return jsonify({'message': 'Login successful'}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
-@app.route("/login", methods=["POST", "GET"])
+
+@app.route("/login", methods=["POST"])
 def login():
-    message = "Please login to your account"
     if "email" in session:
-        return redirect(url_for("home"))
+        return jsonify({'message': 'Login successful'}), 200
 
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+    try:
+        req = request.get_json()
+        email = req["email"]
+        password = req["password"]
 
         #check if email exists in database
         email_found = UserRecords.find_one({"Email": email})
@@ -70,32 +65,23 @@ def login():
             #encode the password and check if it matches
             if bcrypt.checkpw(password.encode("utf-8"), passwordcheck):
                 session["email"] = email_val
-                return redirect(url_for("home"))
+                return jsonify({'message': 'Login successful'}), 200
             else:
                 if "email" in session:
-                    return redirect(url_for("home"))
-                message = "Wrong password"
-                return render_template("login.html", message=message)
+                    return jsonify({'message': 'Login successful'}), 200
+                return jsonify({'error': "Wrong password"}), 400
         else:
-            message = "Email not found"
-            return render_template("login.html", message=message)
-    return render_template("login.html", message=message)
+            return jsonify({'error': "Email not found"}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
-@app.route("/home")
-def home():
-    if "email" in session:
-        email = session["email"]
-        return render_template("home.html", email=email)
-    else:
-        return redirect(url_for("login"))
 
-@app.route("/logout", methods=["POST", "GET"])
+@app.route("/logout", methods=["POST"])
 def logout():
     if "email" in session:
         session.pop("email", None)
-        return render_template("signout.html")
-    else:
-        return render_template("register.html")
+    return jsonify({'message': 'Logout successful'}), 200
 
 
 @app.route("/add")

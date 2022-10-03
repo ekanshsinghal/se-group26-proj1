@@ -1,12 +1,16 @@
-import { Button, Card, Form, Input, Typography } from 'antd';
 import React from 'react';
+import { Button, Card, Form, Input, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import './RegisterPage.scss';
 
 export default function RegisterPage() {
 	const onFinish = (values) => {
-		console.log(values);
+		axios
+			.post('/api/register', values)
+			.then(({ data }) => console.log(data))
+			.catch((err) => console.error(err));
 	};
 
 	return (
@@ -21,7 +25,7 @@ export default function RegisterPage() {
 				>
 					<Form.Item
 						label="First Name"
-						name="fname"
+						name="firstName"
 						rules={[
 							{
 								required: true,
@@ -33,7 +37,7 @@ export default function RegisterPage() {
 					</Form.Item>
 					<Form.Item
 						label="Last Name"
-						name="lname"
+						name="lastName"
 						rules={[
 							{
 								required: true,
