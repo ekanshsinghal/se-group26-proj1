@@ -227,92 +227,92 @@ def modify_application():
         return jsonify({'error': "Something went wrong"}), 400
 
 
-@app.route("/profile", methods=["post"])
-def createProfile():
-    message = ""
-    if "email" in session:
-        email = session["email"]
-        email_found = UserProfiles.find_one({"Email": email})
-        if email_found:
-            message = "This email already has a profile"
-            print(message)
-            return render_template("home.html", message=message)
+@app.route("/create_profile", methods=["post"])
+def create_profile():
+    try:
+        if "email" in session:
+            email = session["email"]
+            email_found = UserProfiles.find_one({"Email": email})
+            if email_found:
+                return jsonify({"error": "Profile already created."}),400
+            else:
+                req = request.get_json()
+                firstname = req["firstName"]
+                lastname = req["lastName"]
+                name = {"First Name": firstname, "Last Name": lastname}
+                email = req["email"]
+                phone = req["phone"]
+                city = req["city"]
+                state = req["state"]
+                location = {"City": city, "State": state}
+                resume = req["resume"]
+                github = req["gitHub"]
+                linkedin = req["linkedin"]
+                skills = req["skills"].split(",")
+                about = req["about"]
+                interests = req["interests"].split(",")
+                company = req["company"]
+                job_title = req["jobTitle"]
+                description = req["jobDescription"]
+                city = req["jobCity"]
+                state = req["jobState"]
+                job_location = {"City": city, "State": state}
+                job_from_date = req["jobFrom"]
+                job_to_date = req["toFrom"]
+                curent_job = req["curentJob"]
+                experience = {
+                    "Company": company,
+                    "Job Title": job_title,
+                    "Description": description,
+                    "Location": job_location,
+                    "From": job_from_date,
+                    "To": job_to_date,
+                    "Current Job": curent_job
+                }
+                institution = req["institution"]
+                major = req["major"]
+                degree = req["degree"]
+                courses = req["courses"].split(",")
+                city = req["universityCity"]
+                state = req["universityState"]
+                university_location = {"City": city, "State": state}
+                university_from_date = req["universityFromDate"]
+                university_to_date = req["universityToDate"]
+                curent_university = req["curentUniversity"]
+                education = {
+                    "Institution": institution,
+                    "Major": major,
+                    "Degree": degree,
+                    "Courses": courses,
+                    "Location": university_location,
+                    "From": university_from_date,
+                    "To": university_to_date,
+                    "Currently Attending": curent_university
+                }
+                user_profile = {
+                    "Name": name, 
+                    "Email": email, 
+                    "Phone": phone,
+                    "Location": location,
+                    "Resume": resume,
+                    "GitHub": github,
+                    "LinkedIn": linkedin,
+                    "Skills": skills,
+                    "About": about,
+                    "Interests": interests,
+                    "Experience": experience,
+                    "Education": education
+                }
+                try:
+                    UserProfiles.insert_one(user_profile)
+                    return jsonify({"message": "Profile created successfully"}),200
+                except Exception as e:
+                    return jsonify({"error": "Unable to create profile"}),400
         else:
-            firstname = request.form.get("firstname")
-            lastname = request.form.get("lastname")
-            name = {"First Name": firstname, "Last Name": lastname}
-            email = request.form.get("email")
-            phone = request.form.get("phone")
-            city = request.form.get("city")
-            state = request.form.get("state")
-            location = {"City": city, "State": state}
-            resume = request.form.get("resume")
-            github = request.form.get("gitHub")
-            linkedin = request.form.get("linkedin")
-            skills = request.form.get("skills").split(",")
-            about = request.form.get("about")
-            interests = request.form.get("interests").split(",")
-            company = request.form.get("company")
-            job_title = request.form.get("job_title")
-            description = request.form.get("job_description")
-            city = request.form.get("job_city")
-            state = request.form.get("job_state")
-            job_location = {"City": city, "State": state}
-            job_from_date = request.form.get("job_from")
-            job_to_date = request.form.get("to_from")
-            curent_job = request.form.get("curent_job")
-            experience = {
-                "Company": company,
-                "Job Title": job_title,
-                "Description": description,
-                "Location": job_location,
-                "From": job_from_date,
-                "To": job_to_date,
-                "Current Job": curent_job
-            }
-            institution = request.form.get("institution")
-            major = request.form.get("major")
-            degree = request.form.get("degree")
-            courses = request.form.get("courses").split(",")
-            city = request.form.get("university_city")
-            state = request.form.get("university_state")
-            university_location = {"City": city, "State": state}
-            university_from_date = request.form.get("university_from_date")
-            university_to_date = request.form.get("university_to_date")
-            curent_university = request.form.get("curent_university")
-            education = {
-                "Institution": institution,
-                "Major": major,
-                "Degree": degree,
-                "Courses": courses,
-                "Location": university_location,
-                "From": university_from_date,
-                "To": university_to_date,
-                "Currently Attending": curent_university
-            }
-
-            user_profile = {
-                "Name": name, 
-                "Email": email, 
-                "Phone": phone,
-                "Location": location,
-                "Resume": resume,
-                "GitHub": github,
-                "LinkedIn": linkedin,
-                "Skills": skills,
-                "About": about,
-                "Interests": interests,
-                "Experience": experience,
-                "Education": education
-            }
-            UserProfiles.insert_one(user_profile)
-            
-            #find the new created account and its email
-            user_data = UserProfiles.find_one({"Email": email})
-            new_email = user_data["Email"]
-            #if registered redirect to logged in as the registered user
-            return render_template("home.html", email=new_email)
-    return render_template("login.html")
+            return jsonify({'error': "Not Logged in"}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
 
 @app.route("/view_profile", methods=["GET"])
@@ -338,107 +338,120 @@ def view_profile():
 
 
 @app.route("/modify_profile", methods=["POST"])
-def modify_profile():
-    payload = {"status":False,"msg":""}
+def modify_profile(): 
+    try:
+        if "email" in session:
+            email = session["email"]
+            email_found = UserProfiles.find_one({"Email": email})
+            if not email_found:
+                return jsonify({"error": "Profile not found."}),400
+            else:
+                req = request.get_json()
+                firstname = req["firstName"]
+                lastname = req["lastName"]
+                name = {"First Name": firstname, "Last Name": lastname}
+                email = req["email"]
+                phone = req["phone"]
+                city = req["city"]
+                state = req["state"]
+                location = {"City": city, "State": state}
+                resume = req["resume"]
+                github = req["gitHub"]
+                linkedin = req["linkedin"]
+                skills = req["skills"].split(",")
+                about = req["about"]
+                interests = req["interests"].split(",")
+                company = req["company"]
+                job_title = req["jobTitle"]
+                description = req["jobDescription"]
+                city = req["jobCity"]
+                state = req["jobState"]
+                job_location = {"City": city, "State": state}
+                job_from_date = req["jobFrom"]
+                job_to_date = req["toFrom"]
+                curent_job = req["curentJob"]
+                experience = {
+                    "Company": company,
+                    "Job Title": job_title,
+                    "Description": description,
+                    "Location": job_location,
+                    "From": job_from_date,
+                    "To": job_to_date,
+                    "Current Job": curent_job
+                }
+                institution = req["institution"]
+                major = req["major"]
+                degree = req["degree"]
+                courses = req["courses"].split(",")
+                city = req["universityCity"]
+                state = req["universityState"]
+                university_location = {"City": city, "State": state}
+                university_from_date = req["universityFromDate"]
+                university_to_date = req["universityToDate"]
+                curent_university = req["curentUniversity"]
+                education = {
+                    "Institution": institution,
+                    "Major": major,
+                    "Degree": degree,
+                    "Courses": courses,
+                    "Location": university_location,
+                    "From": university_from_date,
+                    "To": university_to_date,
+                    "Currently Attending": curent_university
+                }
+                user_profile = {
+                    "Name": name, 
+                    "Email": email, 
+                    "Phone": phone,
+                    "Location": location,
+                    "Resume": resume,
+                    "GitHub": github,
+                    "LinkedIn": linkedin,
+                    "Skills": skills,
+                    "About": about,
+                    "Interests": interests,
+                    "Experience": experience,
+                    "Education": education
+                }
 
-    #IF using session, use this:
-    
-    if "email" in session:
-        email = request.form["email"]
-        filter = {"Email": email}
-        
-        firstname = request.form.get("firstname")
-        lastname = request.form.get("lastname")
-        name = {"First Name": firstname, "Last Name": lastname}
-        email = request.form.get("email")
-        phone = request.form.get("phone")
-        city = request.form.get("city")
-        state = request.form.get("state")
-        location = {"City": city, "State": state}
-        resume = request.form.get("resume")
-        github = request.form.get("gitHub")
-        linkedin = request.form.get("linkedin")
-        skills = request.form.get("skills").split(",")
-        about = request.form.get("about")
-        interests = request.form.get("interests").split(",")
-        company = request.form.get("company")
-        job_title = request.form.get("job_title")
-        description = request.form.get("job_description")
-        city = request.form.get("job_city")
-        state = request.form.get("job_state")
-        job_location = {"City": city, "State": state}
-        job_from_date = request.form.get("job_from")
-        job_to_date = request.form.get("to_from")
-        curent_job = request.form.get("curent_job")
-        experience = {
-            "Company": company,
-            "Job Title": job_title,
-            "Description": description,
-            "Location": job_location,
-            "From": job_from_date,
-            "To": job_to_date,
-            "Current Job": curent_job
-        }
-        institution = request.form.get("institution")
-        major = request.form.get("major")
-        degree = request.form.get("degree")
-        courses = request.form.get("courses").split(",")
-        city = request.form.get("university_city")
-        state = request.form.get("university_state")
-        university_location = {"City": city, "State": state}
-        university_from_date = request.form.get("university_from_date")
-        university_to_date = request.form.get("university_to_date")
-        curent_university = request.form.get("curent_university")
-        education = {
-            "Institution": institution,
-            "Major": major,
-            "Degree": degree,
-            "Courses": courses,
-            "Location": university_location,
-            "From": university_from_date,
-            "To": university_to_date,
-            "Currently Attending": curent_university
-        }
-
-        user_profile = {
-            "Name": name, 
-            "Email": email, 
-            "Phone": phone,
-            "Location": location,
-            "Resume": resume,
-            "GitHub": github,
-            "LinkedIn": linkedin,
-            "Skills": skills,
-            "About": about,
-            "Interests": interests,
-            "Experience": experience,
-            "Education": education
-        }
-
-        set_values = {"$set":user_profile}
-
-        modify_document = UserProfiles.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
-        
-
-@app.route("/delete_profile", methods=["POST"])
-def delete_profile():
-    payload = {"status":False,"msg":""}
-
-    #IF using session, use this:
-    if "email" in session:
-        email = session["email"]
-        delete_profile = UserProfiles.find_one_and_delete({"Email":email})
-        delete_user = UserRecords.find_one_and_delete({"Email":email})
-        if delete_user == None:
-            payload["msg"] = "No such profile or email"
+                set_values = {"$set":user_profile}
+                filter = {"Email": email}
+                modify_document = UserProfiles.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
+                if modify_document == None:
+                    return jsonify({"error": "Unable to modify profile"}),400
+                else:
+                    return jsonify({"message": "Profile modified successfully"}),200    
         else:
-            payload["status"] = True
-            payload["msg"] = "Deleted application"
-    else:
-        payload["msg"] = "Session timed out"
+            return jsonify({'error': "Not Logged in"}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400    
 
-    return jsonify(payload),200
+@app.route("/clear_profile", methods=["POST"])
+def clear_profile():
+    
+    try:
+            
+        if "email" in session:
+            email = session["email"]
+            req = request.get_json()
+            email_to_delete = req["email"]
+            if email != email_to_delete:
+                return jsonify({'error': "Email not matching"}), 400
+            delete_user = UserRecords.find_one({"Email":email_to_delete})
+            if delete_user == None:
+                return jsonify({'error': "User email not found"}), 400
+            delete_profile = UserProfiles.find_one_and_delete({"Email":email_to_delete})
+            if delete_profile == None:
+                return jsonify({'error': "Profile not found"}), 400
+            else:
+                return jsonify({"message": "User Profile cleared successfully"}), 200
+        else:
+            return jsonify({'error': "Not Logged in"}), 400
 
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Something went wrong"}), 400
 
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=8000)
