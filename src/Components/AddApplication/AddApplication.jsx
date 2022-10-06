@@ -6,7 +6,7 @@ import axios from 'axios';
 const statuses = {
 	applied: 'Applied',
 	inReview: 'In Review',
-	offer: 'Offer',
+	interview: 'Interview',
 	rejected: 'Rejected',
 	accepted: 'Accepted',
 };

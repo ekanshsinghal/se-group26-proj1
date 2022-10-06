@@ -7,7 +7,7 @@ import axios from 'axios';
 const statuses = {
 	applied: 'Applied',
 	inReview: 'In Review',
-	offer: 'Offer',
+	interview: 'Interview',
 	rejected: 'Rejected',
 	accepted: 'Accepted',
 };
@@ -23,24 +23,27 @@ export default function EditApplication({ application, onClose, updateApplicatio
 	const onOk = () => {
 		form.validateFields()
 			.then((values) => {
+				console.log(values);
 				axios
-					.post('/api/modify_application', values)
+					.post('/api/modify_application', { ...values, _id: application._id })
 					.then(({ data }) => {
 						message.success(data.message);
-						closeForm();
+						updateApplications();
 					})
 					.catch((err) => message.error(err.response.data.error));
 			})
 			.catch(({ errorFields }) => console.log(errorFields));
-		updateApplications();
+		closeForm();
 	};
 
 	const deleteApplication = () => {
 		axios
 			.post('/api/delete_application', application)
-			.then(({ data }) => message.success(data.message))
+			.then(({ data }) => {
+				message.success(data.message);
+				updateApplications();
+			})
 			.catch((err) => message.error(err.response.data.error));
-		updateApplications();
 		closeForm();
 	};
 
