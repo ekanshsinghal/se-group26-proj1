@@ -111,6 +111,7 @@ def add_application():
                 "email": session["email"],
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
+                "jobId": req["jobId"],
                 "url": req["url"],
                 # "details": {
                 #     "Industry": "Software Development",
@@ -172,6 +173,7 @@ def modify_application():
                 "email": session["email"],
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
+                "jobId": req["jobId"],
                 "url": req["url"],
                 # "Details": {
                 #     "Industry": "Software Development",

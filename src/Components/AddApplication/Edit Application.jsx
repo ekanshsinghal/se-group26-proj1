@@ -20,20 +20,23 @@ export default function EditApplication({ application, onClose, updateApplicatio
 		onClose();
 	};
 
-	const onOk = () => {
+	const updateApplication = () => {
 		form.validateFields()
 			.then((values) => {
-				console.log(values);
+				const loading = message.loading('Saving...', 0);
 				axios
 					.post('/api/modify_application', { ...values, _id: application._id })
 					.then(({ data }) => {
 						message.success(data.message);
 						updateApplications();
 					})
-					.catch((err) => message.error(err.response.data.error));
+					.catch((err) => message.error(err.response.data.error))
+					.finally(() => {
+						loading();
+						closeForm();
+					});
 			})
 			.catch(({ errorFields }) => console.log(errorFields));
-		closeForm();
 	};
 
 	const deleteApplication = () => {
@@ -49,17 +52,16 @@ export default function EditApplication({ application, onClose, updateApplicatio
 
 	return (
 		<Modal
-			title="Add Application"
+			title="Edit Application"
 			open={true}
-			onOk={onOk}
 			onCancel={closeForm}
 			width={700}
 			centered
 			footer={[
-				<Button type="primary" danger onClick={deleteApplication} key="cancel">
+				<Button type="primary" danger onClick={deleteApplication} id="delete" key="delete">
 					Delete
 				</Button>,
-				<Button type="primary" onClick={onOk} id="add-submit" key="save">
+				<Button type="primary" onClick={() => form.submit()} id="save" key="save">
 					Save
 				</Button>,
 			]}
@@ -76,6 +78,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 					status: application.status,
 					date: moment(application.date),
 				}}
+				onFinish={updateApplication}
 			>
 				<Form.Item
 					label="Company Name"

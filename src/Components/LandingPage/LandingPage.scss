@@ -1,53 +1,28 @@
 .LandingPage {
-	header {
-		position: fixed;
-		width: 100%;
-		z-index: 1;
+	background-color: #fafafa;
+	.SubHeader {
 		display: flex;
-		padding: 0 1.5rem;
-
-		.logo {
-			width: 120px;
-			height: 31px;
-			margin: 1rem 1rem 1rem 0;
-			background-color: rgba(255, 255, 255, 0.2);
-		}
-
-		button {
-			margin: 1rem 0;
-		}
+		padding: 0.7rem;
 	}
 
-	.Content {
-		padding: 0 2rem 1rem;
-		margin-top: 64px;
-		min-height: calc(100vh - 64px);
-		background-color: #fafafa;
+	.MainContent {
+		display: flex;
+		justify-content: space-between;
 
-		.SubHeader {
-			display: flex;
-			padding: 0.7rem;
-		}
+		.Status {
+			background-color: #e7f3f2;
+			border-radius: 0.5rem;
+			flex: 1;
+			margin: 0.5rem;
+			padding: 0.75rem 1rem;
 
-		.MainContent {
-			display: flex;
-			justify-content: space-between;
+			.ant-typography {
+				display: flex;
+				justify-content: center;
+			}
 
-			.Status {
-				background-color: #e7f3f2;
-				border-radius: 0.5rem;
-				flex: 1;
-				margin: 0.5rem;
-				padding: 0.75rem 1rem;
-
-				.ant-typography {
-					display: flex;
-					justify-content: center;
-				}
-
-				.Job {
-					margin: 1rem 0;
-				}
+			.Job {
+				margin: 1rem 0;
 			}
 		}
 	}

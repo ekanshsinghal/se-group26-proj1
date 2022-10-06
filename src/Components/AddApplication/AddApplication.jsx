@@ -26,12 +26,12 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 					.post('/api/add_application', values)
 					.then(({ data }) => {
 						message.success(data.message);
+						updateApplications();
 						closeForm();
 					})
 					.catch((err) => message.error(err.response.data.error));
 			})
 			.catch(({ errorFields }) => console.log(errorFields));
-		updateApplications();
 	};
 
 	return (

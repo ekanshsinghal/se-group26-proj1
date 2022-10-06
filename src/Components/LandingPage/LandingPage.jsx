@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Layout, Menu, message, Typography } from 'antd';
+import { Button, Card, Typography } from 'antd';
 import { EditFilled, PlusOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,8 +7,6 @@ import axios from 'axios';
 import AddApplication from '../AddApplication/AddApplication';
 import EditApplication from '../AddApplication/Edit Application';
 import './LandingPage.scss';
-
-const { Header, Content } = Layout;
 
 const columns = {
 	applied: 'Applied',
@@ -49,96 +47,77 @@ export default function LandingPage() {
 	};
 
 	return (
-		<Layout className="LandingPage">
-			<Header>
-				<div className="logo" />
-				<Menu
-					theme="dark"
-					mode="horizontal"
-					items={['My Applications', 'Saved Jobs', 'Recommended'].map((i) => ({
-						key: i,
-						label: i,
-					}))}
-				/>
+		<div className="LandingPage">
+			<div className="SubHeader">
 				<div className="flex" />
-				<Button type="primary" danger onClick={logout}>
-					Logout
+				<Button
+					id="Add Application"
+					type="primary"
+					size="large"
+					icon={<PlusOutlined />}
+					onClick={toggleAddApplication}
+				>
+					Add Application
 				</Button>
-			</Header>
-			<Content className="Content">
-				<div className="SubHeader">
-					<div className="flex" />
-					<Button
-						id="Add Application"
-						type="primary"
-						size="large"
-						icon={<PlusOutlined />}
-						onClick={toggleAddApplication}
-					>
-						Add Application
-					</Button>
-					<AddApplication
-						isOpen={addApplicationOpen}
-						onClose={toggleAddApplication}
-						updateApplications={updateApplications}
-					/>
-				</div>
+				<AddApplication
+					isOpen={addApplicationOpen}
+					onClose={toggleAddApplication}
+					updateApplications={updateApplications}
+				/>
+			</div>
 
-				<div className="MainContent">
-					{Object.keys(columns).map((col) => (
-						<div className="Status" key={col}>
-							<Typography.Title level={5}>{columns[col]}</Typography.Title>
-							{loading ? (
-								<>
-									<Card loading bordered={false} />
-									<Card loading bordered={false} />
-									<Card loading bordered={false} />
-								</>
-							) : (
-								applications.map(
-									(application, index) =>
-										(application.status === col ||
-											(col === 'decision' &&
-												['rejected', 'accepted'].includes(
-													application.status
-												))) && (
-											<Card
-												key={col + index}
-												title={application.companyName}
-												extra={
-													<Button
-														type="text"
-														icon={<EditFilled />}
-														onClick={() =>
-															setEditApplication(application)
-														}
-													/>
-												}
-												className="Job"
-												bordered={false}
-											>
-												ID: {application.jobId}
-												<br />
-												Title: {application.jobTitle}
-												<br />
-												URL: {application.url}
-												<br />
-											</Card>
-										)
-								)
-							)}
-							{applications.length === 0 && 'No applications found.'}
-						</div>
-					))}
-				</div>
-				{editApplication && (
-					<EditApplication
-						application={editApplication}
-						onClose={() => setEditApplication(false)}
-						updateApplications={updateApplications}
-					/>
-				)}
-			</Content>
-		</Layout>
+			<div className="MainContent">
+				{Object.keys(columns).map((col) => (
+					<div className="Status" key={col}>
+						<Typography.Title level={5}>{columns[col]}</Typography.Title>
+						{loading ? (
+							<>
+								<Card loading bordered={false} />
+								<Card loading bordered={false} />
+								<Card loading bordered={false} />
+							</>
+						) : (
+							applications.map(
+								(application, index) =>
+									(application.status === col ||
+										(col === 'decision' &&
+											['rejected', 'accepted'].includes(
+												application.status
+											))) && (
+										<Card
+											key={col + index}
+											title={application.companyName}
+											extra={
+												<Button
+													type="text"
+													icon={<EditFilled />}
+													onClick={() => setEditApplication(application)}
+												/>
+											}
+											className="Job"
+											bordered={false}
+										>
+											ID: {application.jobId}
+											<br />
+											Title: {application.jobTitle}
+											<br />
+											URL: {application.url}
+											<br />
+										</Card>
+									)
+							)
+						)}
+						{applications.length === 0 && 'No applications found.'}
+					</div>
+				))}
+			</div>
+			{editApplication && (
+				<EditApplication
+					application={editApplication}
+					onClose={() => setEditApplication(false)}
+					updateApplications={updateApplications}
+				/>
+			)}
+		</div>
 	);
 }
