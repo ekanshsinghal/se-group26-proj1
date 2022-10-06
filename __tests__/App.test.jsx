@@ -41,13 +41,34 @@ describe('App', () => {
 	});
 
 	test('renders LandingPage Component & Add Application', async () => {
-		const registerRoute = '/home';
 		const { container } = render(
-			<MemoryRouter initialEntries={[registerRoute]}>
+			<MemoryRouter
+				initialEntries={[{ pathname: '/home', state: { email: 'test@abc.com' } }]}
+			>
 				<App />
 			</MemoryRouter>
 		);
 		await user.click(getById(container, 'Add Application'));
 		await user.click(getById(container, 'add-submit'));
+	});
+
+	test('renders Saved Jobs Component ', async () => {
+		render(
+			<MemoryRouter
+				initialEntries={[{ pathname: '/interested', state: { email: 'test@abc.com' } }]}
+			>
+				<App />
+			</MemoryRouter>
+		);
+	});
+
+	test('renders Recommended Jobs Component ', async () => {
+		render(
+			<MemoryRouter
+				initialEntries={[{ pathname: '/recommended', state: { email: 'test@abc.com' } }]}
+			>
+				<App />
+			</MemoryRouter>
+		);
 	});
 });
