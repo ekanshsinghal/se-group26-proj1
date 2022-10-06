@@ -110,7 +110,6 @@ def add_application():
                 "email": session["email"],
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
-                "jobId": req["jobId"],
                 "url": req["url"],
                 # "details": {
                 #     "Industry": "Software Development",
@@ -143,8 +142,9 @@ def delete_application():
         if "email" in session:
             email = session["email"]
             req = request.get_json()
-            jobId = req["jobId"]
-            delete_document = Applications.find_one_and_delete({"jobId":jobId, "email":email})
+            jobId = req["_id"]
+            # delete_document = Applications.find_one_and_delete({"_id":jobId, "email":email})
+            delete_document = Applications.find_one_and_delete({"_id":ObjectId(jobId), "email":email})
             if delete_document == None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
@@ -163,16 +163,14 @@ def modify_application():
         if "email" in session:
             email = session["email"]
             req = request.get_json()
-            # filter = {'_id':ObjectId(application_id), "email": email}
-            jobId = req["jobId"]
-            
-            filter = {"jobId": jobId, "email": email}
+            jobId = req["_id"]
+            filter = {'_id':ObjectId(jobId), "email": email}
+            # filter = {"_id": jobId, "email": email}
 
             application = {
                 "email": session["email"],
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
-                "jobId": jobId,
                 "url": req["url"],
                 # "Details": {
                 #     "Industry": "Software Development",
