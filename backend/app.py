@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Flask, request, session, jsonify
 from pymongo import MongoClient, ReturnDocument
 import bcrypt
@@ -142,9 +143,9 @@ def delete_application():
         if "email" in session:
             email = session["email"]
             req = request.get_json()
-            jobId = req["_id"]
+            _id = req["_id"]
             # delete_document = Applications.find_one_and_delete({"_id":jobId, "email":email})
-            delete_document = Applications.find_one_and_delete({"_id":ObjectId(jobId), "email":email})
+            delete_document = Applications.find_one_and_delete({"_id":ObjectId(_id), "email":email})
             if delete_document == None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
@@ -163,8 +164,8 @@ def modify_application():
         if "email" in session:
             email = session["email"]
             req = request.get_json()
-            jobId = req["_id"]
-            filter = {'_id':ObjectId(jobId), "email": email}
+            _id = req["_id"]
+            filter = {'_id':ObjectId(_id), "email": email}
             # filter = {"_id": jobId, "email": email}
 
             application = {
@@ -283,8 +284,9 @@ def modify_profile():
     try:
         if "email" in session:
             req = request.get_json()
+            _id = req["_id"]
             email = req["email"]
-            email_found = UserProfiles.find_one({"email": email})
+            email_found = UserProfiles.find_one({"_id": _id, "email": email})
             if not email_found:
                 return jsonify({"error": "Profile not found."}),400
             else:
@@ -344,12 +346,13 @@ def clear_profile():
             email = session["email"]
             req = request.get_json()
             email_to_delete = req["email"]
+            _id = req["_id"]
             if email != email_to_delete:
                 return jsonify({'error': "Email not matching"}), 400
             delete_user = UserRecords.find_one({"email":email_to_delete})
             if delete_user == None:
                 return jsonify({'error': "User email not found"}), 400
-            delete_profile = UserProfiles.find_one_and_delete({"email":email_to_delete})
+            delete_profile = UserProfiles.find_one_and_delete({"_id": _id, "email":email_to_delete})
             if delete_profile == None:
                 return jsonify({'error': "Profile not found"}), 400
             else:
