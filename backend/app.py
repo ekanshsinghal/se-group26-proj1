@@ -1,9 +1,6 @@
-import re
-from flask import Flask, render_template, request, url_for, redirect, session, jsonify
+from flask import Flask, request, session, jsonify
 from pymongo import MongoClient, ReturnDocument
 import bcrypt
-import datetime
-from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -19,14 +16,12 @@ UserProfiles = db.Profiles
 def register():
     try:
         req = request.get_json()
-        firstName = req["firstName"]
-        lastName = req["lastName"]
-        name = {"First Name": firstName, "Last Name": lastName}
+        name = {"firstName": req["firstName"], "lastName": req["lastName"]}
         email = req["email"]
         password = req["password"]
         confirmPassword = req["confirmPassword"]
 
-        email_found = UserRecords.find_one({"Email": email})
+        email_found = UserRecords.find_one({"email": email})
         if email_found:
             return jsonify({'error': "This email already exists in database"}), 400
         if password != confirmPassword:
@@ -34,12 +29,12 @@ def register():
         
         else:
             hashed = bcrypt.hashpw(confirmPassword.encode("utf-8"), bcrypt.gensalt())
-            user_input = {"Name": name, "Email": email, "Password": hashed}
+            user_input = {"name": name, "email": email, "password": hashed}
             UserRecords.insert_one(user_input)
             
             #find the new created account and its email
-            user_data = UserRecords.find_one({"Email": email})
-            new_email = user_data["Email"]
+            user_data = UserRecords.find_one({"email": email})
+            new_email = user_data["email"]
             #if registered redirect to logged in as the registered user
             session["email"] = new_email
             return jsonify({'message': 'Login successful'}), 200
@@ -56,11 +51,11 @@ def login():
         password = req["password"]
 
         #check if email exists in database
-        email_found = UserRecords.find_one({"Email": email})
+        email_found = UserRecords.find_one({"email": email})
         print(email, password, email_found)
         if email_found:
-            email_val = email_found["Email"]
-            passwordcheck = email_found["Password"]
+            email_val = email_found["email"]
+            passwordcheck = email_found["password"]
             #encode the password and check if it matches
             if bcrypt.checkpw(password.encode("utf-8"), passwordcheck):
                 session["email"] = email_val
@@ -83,26 +78,17 @@ def logout():
     return jsonify({'message': 'Logout successful'}), 200
 
 
-# @app.route("/add")
-# def add():
-#     if "email" in session:
-#         email = session["email"]
-#         return render_template("new_application.html", email=email)
-#     else:
-#         return redirect(url_for("login"))
-
-
 @app.route("/view_applications", methods=["GET"])
 def view_applications():
     try:
         if "email" in session:
             email = session["email"]
-            out = Applications.find({"Email": email})
+            out = Applications.find({"email": email})
             if out:
                 applications_list = []
                 # payload["msg"]="Applications present"
                 for i in out:
-                    del i['Email']
+                    del i['email']
                     i['_id']=str(i['_id'])
                     applications_list.append(i)
                 return jsonify({'message': 'Applications found', 'applications': applications_list}), 200
@@ -119,21 +105,14 @@ def view_applications():
 def add_application():
     try:
         if "email" in session:
-            email = session["email"]
             req = request.get_json()
-            company = req["company"]
-            title = req["title"]
-            jobid = req["jobid"]
-            url = req["url"]
-            date = req["date"]
-            status = req["status"]
             application = {
-                "Email": email,
-                "Company": company,
-                "Job Title": title,
-                "Job ID": jobid,
-                "URL / Application Link": url,
-                # "Details": {
+                "email": session["email"],
+                "companyName": req["companyName"],
+                "jobTitle": req["jobTitle"],
+                "jobId": req["jobId"],
+                "url": req["url"],
+                # "details": {
                 #     "Industry": "Software Development",
                 #     "Employment Type": "Full-time",
                 #     "Seniority": "Entry Level",
@@ -143,8 +122,8 @@ def add_application():
                 #         "State": "WA"
                 #     },
                 # },
-                "Date": date,
-                "Status": status
+                "date": req["date"],
+                "status": req["status"]
             }
             try:
                 Applications.insert_one(application)
@@ -164,8 +143,8 @@ def delete_application():
         if "email" in session:
             email = session["email"]
             req = request.get_json()
-            jobid = req["jobid"]
-            delete_document = Applications.find_one_and_delete({"Job ID":jobid, "Email":email})
+            jobId = req["jobId"]
+            delete_document = Applications.find_one_and_delete({"jobId":jobId, "email":email})
             if delete_document == None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
@@ -185,21 +164,16 @@ def modify_application():
             email = session["email"]
             req = request.get_json()
             # filter = {'_id':ObjectId(application_id), "email": email}
-            company = req["company"]
-            title = req["title"]
-            jobid = req["jobid"]
-            url = req["url"]
-            date = req["date"]
-            status = req["status"]
+            jobId = req["jobId"]
             
-            filter = {"Job ID": jobid, "Email": email}
+            filter = {"jobId": jobId, "email": email}
 
             application = {
-                "Email": email,
-                "Company": company,
-                "Job Title": title,
-                "Job ID": jobid,
-                "URL / Application Link": url,
+                "email": session["email"],
+                "companyName": req["companyName"],
+                "jobTitle": req["jobTitle"],
+                "jobId": jobId,
+                "url": req["url"],
                 # "Details": {
                 #     "Industry": "Software Development",
                 #     "Employment Type": "Full-time",
@@ -210,8 +184,8 @@ def modify_application():
                 #         "State": "WA"
                 #     },
                 # },
-                "Date": date,
-                "Status": status
+                "date": req["date"],
+                "status": req["status"]
             }
             set_values = {"$set": application}
             modify_document = Applications.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
@@ -231,77 +205,46 @@ def modify_application():
 def create_profile():
     try:
         if "email" in session:
-            email = session["email"]
-            email_found = UserProfiles.find_one({"Email": email})
+            req = request.get_json()
+            email = req["email"]
+            email_found = UserProfiles.find_one({"email": email})
             if email_found:
                 return jsonify({"error": "Profile already created."}),400
             else:
-                req = request.get_json()
-                firstname = req["firstName"]
-                lastname = req["lastName"]
-                name = {"First Name": firstname, "Last Name": lastname}
-                email = req["email"]
-                phone = req["phone"]
-                city = req["city"]
-                state = req["state"]
-                location = {"City": city, "State": state}
-                resume = req["resume"]
-                github = req["gitHub"]
-                linkedin = req["linkedin"]
-                skills = req["skills"].split(",")
-                about = req["about"]
-                interests = req["interests"].split(",")
-                company = req["company"]
-                job_title = req["jobTitle"]
-                description = req["jobDescription"]
-                city = req["jobCity"]
-                state = req["jobState"]
-                job_location = {"City": city, "State": state}
-                job_from_date = req["jobFrom"]
-                job_to_date = req["toFrom"]
-                curent_job = req["curentJob"]
+                job_location = {"jobCity": req["jobCity"], "jobState": req["jobState"]}
                 experience = {
-                    "Company": company,
-                    "Job Title": job_title,
-                    "Description": description,
-                    "Location": job_location,
-                    "From": job_from_date,
-                    "To": job_to_date,
-                    "Current Job": curent_job
+                    "companyName": req["companyName"],
+                    "jobTitle": req["jobTitle"],
+                    "description": req["description"],
+                    "jobLocation": job_location,
+                    "jobFrom": req["jobFrom"],
+                    "toFrom": req["toFrom"],
+                    "curentJob": req["curentJob"]
                 }
-                institution = req["institution"]
-                major = req["major"]
-                degree = req["degree"]
-                courses = req["courses"].split(",")
-                city = req["universityCity"]
-                state = req["universityState"]
-                university_location = {"City": city, "State": state}
-                university_from_date = req["universityFromDate"]
-                university_to_date = req["universityToDate"]
-                curent_university = req["curentUniversity"]
+                university_location = {"city": req["universityCity"], "state": req["universityState"]}
                 education = {
-                    "Institution": institution,
-                    "Major": major,
-                    "Degree": degree,
-                    "Courses": courses,
-                    "Location": university_location,
-                    "From": university_from_date,
-                    "To": university_to_date,
-                    "Currently Attending": curent_university
+                    "institution": req["institution"],
+                    "major": req["major"],
+                    "degree": req["degree"],
+                    "courses": req["courses"].split(","),
+                    "university_location": university_location,
+                    "universityFromDate": req["universityFromDate"],
+                    "universityToDate": req["universityToDate"],
+                    "curentUniversity": req["curentUniversity"]
                 }
                 user_profile = {
-                    "Name": name, 
-                    "Email": email, 
-                    "Phone": phone,
-                    "Location": location,
-                    "Resume": resume,
-                    "GitHub": github,
-                    "LinkedIn": linkedin,
-                    "Skills": skills,
-                    "About": about,
-                    "Interests": interests,
-                    "Experience": experience,
-                    "Education": education
+                    "name": {"firstName": req["firstName"], "lastName": req["lastName"]}, 
+                    "email": req["email"], 
+                    "phone": req["phone"],
+                    "location": {"city": req["city"], "state": req["state"]},
+                    "resume": req["resume"],
+                    "gitHub": req["gitHub"],
+                    "linkedIn": req["linkedin"],
+                    "skills": req["skills"].split(","),
+                    "about": req["about"],
+                    "interests": req["interests"].split(","),
+                    "experience": experience,
+                    "education": education
                 }
                 try:
                     UserProfiles.insert_one(user_profile)
@@ -320,7 +263,7 @@ def view_profile():
     payload = {"status":False,"msg":""}
     if "email" in session:
         email = session["email"]
-        filter = {"Email": email}
+        filter = {"email": email}
         profile = UserProfiles.find(filter)
         if profile == None:
             payload["msg"] = "No such user profile or email found"
@@ -341,81 +284,48 @@ def view_profile():
 def modify_profile(): 
     try:
         if "email" in session:
-            email = session["email"]
-            email_found = UserProfiles.find_one({"Email": email})
+            req = request.get_json()
+            email = req["email"]
+            email_found = UserProfiles.find_one({"email": email})
             if not email_found:
                 return jsonify({"error": "Profile not found."}),400
             else:
-                req = request.get_json()
-                firstname = req["firstName"]
-                lastname = req["lastName"]
-                name = {"First Name": firstname, "Last Name": lastname}
-                email = req["email"]
-                phone = req["phone"]
-                city = req["city"]
-                state = req["state"]
-                location = {"City": city, "State": state}
-                resume = req["resume"]
-                github = req["gitHub"]
-                linkedin = req["linkedin"]
-                skills = req["skills"].split(",")
-                about = req["about"]
-                interests = req["interests"].split(",")
-                company = req["company"]
-                job_title = req["jobTitle"]
-                description = req["jobDescription"]
-                city = req["jobCity"]
-                state = req["jobState"]
-                job_location = {"City": city, "State": state}
-                job_from_date = req["jobFrom"]
-                job_to_date = req["toFrom"]
-                curent_job = req["curentJob"]
                 experience = {
-                    "Company": company,
-                    "Job Title": job_title,
-                    "Description": description,
-                    "Location": job_location,
-                    "From": job_from_date,
-                    "To": job_to_date,
-                    "Current Job": curent_job
+                    "companyName": req["companyName"],
+                    "jobTitle": req["jobTitle"],
+                    "description": req["description"],
+                    "job_location": {"jobCity": req["jobCity"], "jobState": req["jobState"]},
+                    "jobFrom": req["jobFrom"],
+                    "toFrom": req["toFrom"],
+                    "curentJob": req["curentJob"]
                 }
-                institution = req["institution"]
-                major = req["major"]
-                degree = req["degree"]
-                courses = req["courses"].split(",")
-                city = req["universityCity"]
-                state = req["universityState"]
-                university_location = {"City": city, "State": state}
-                university_from_date = req["universityFromDate"]
-                university_to_date = req["universityToDate"]
-                curent_university = req["curentUniversity"]
                 education = {
-                    "Institution": institution,
-                    "Major": major,
-                    "Degree": degree,
-                    "Courses": courses,
-                    "Location": university_location,
-                    "From": university_from_date,
-                    "To": university_to_date,
-                    "Currently Attending": curent_university
+                    "institution": req["institution"],
+                    "major": req["major"],
+                    "degree": req["degree"],
+                    "courses": req["courses"].split(","),
+                    "location": {"universityCity": req["universityCity"], "universityState": req["universityState"]},
+                    "universityFromDate": req["universityFromDate"],
+                    "universityToDate": req["universityToDate"],
+                    "curentUniversity": req["curentUniversity"]
                 }
                 user_profile = {
-                    "Name": name, 
-                    "Email": email, 
-                    "Phone": phone,
-                    "Location": location,
-                    "Resume": resume,
-                    "GitHub": github,
-                    "LinkedIn": linkedin,
-                    "Skills": skills,
-                    "About": about,
-                    "Interests": interests,
-                    "Experience": experience,
-                    "Education": education
+                    "name": {"firstName": req["firstName"], "lastName": req["lastName"]}, 
+                    "email": req["email"], 
+                    "phone": req["phone"],
+                    "location": {"city": req["city"], "state": req["state"]},
+                    "resume": req["resume"],
+                    "gitHub": req["gitHub"],
+                    "linkedin": req["linkedin"],
+                    "skills": req["skills"].split(","),
+                    "about": req["about"],
+                    "interests": req["interests"].split(","),
+                    "experience": experience,
+                    "education": education
                 }
 
                 set_values = {"$set":user_profile}
-                filter = {"Email": email}
+                filter = {"email": email}
                 modify_document = UserProfiles.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
                 if modify_document == None:
                     return jsonify({"error": "Unable to modify profile"}),400
@@ -429,7 +339,7 @@ def modify_profile():
 
 @app.route("/clear_profile", methods=["POST"])
 def clear_profile():
-    
+
     try:
             
         if "email" in session:
@@ -438,10 +348,10 @@ def clear_profile():
             email_to_delete = req["email"]
             if email != email_to_delete:
                 return jsonify({'error': "Email not matching"}), 400
-            delete_user = UserRecords.find_one({"Email":email_to_delete})
+            delete_user = UserRecords.find_one({"email":email_to_delete})
             if delete_user == None:
                 return jsonify({'error': "User email not found"}), 400
-            delete_profile = UserProfiles.find_one_and_delete({"Email":email_to_delete})
+            delete_profile = UserProfiles.find_one_and_delete({"email":email_to_delete})
             if delete_profile == None:
                 return jsonify({'error': "Profile not found"}), 400
             else:

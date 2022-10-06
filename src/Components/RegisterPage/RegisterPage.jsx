@@ -13,8 +13,7 @@ export default function RegisterPage() {
 			.post('/api/register', values)
 			.then(({ data }) => {
 				loading();
-				console.log(data);
-				navigate('/home');
+				navigate('/home', { state: { email: values.email } });
 			})
 			.catch((err) => {
 				loading();
@@ -97,10 +96,7 @@ export default function RegisterPage() {
 							},
 							({ getFieldValue }) => ({
 								validator(_, value) {
-									if (
-										!value ||
-										getFieldValue('password') === value
-									) {
+									if (!value || getFieldValue('password') === value) {
 										return Promise.resolve();
 									}
 									return Promise.reject(
@@ -121,8 +117,7 @@ export default function RegisterPage() {
 					</Form.Item>
 				</Form>
 				<Typography>
-					Already have an account? <Link to="/login">Click here</Link>{' '}
-					to login.
+					Already have an account? <Link to="/login">Click here</Link> to login.
 				</Typography>
 			</Card>
 		</div>

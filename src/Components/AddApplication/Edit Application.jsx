@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import moment from 'moment';
 import axios from 'axios';
 
 const statuses = {
@@ -11,7 +12,7 @@ const statuses = {
 	accepted: 'Accepted',
 };
 
-export default function AddApplication({ isOpen, onClose, updateApplications }) {
+export default function EditApplication({ application, onClose, updateApplications }) {
 	const [form] = Form.useForm();
 
 	const closeForm = () => {
@@ -23,7 +24,7 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 		form.validateFields()
 			.then((values) => {
 				axios
-					.post('/api/add_application', values)
+					.post('/api/modify_application', values)
 					.then(({ data }) => {
 						message.success(data.message);
 						closeForm();
@@ -34,24 +35,45 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 		updateApplications();
 	};
 
+	const deleteApplication = () => {
+		axios
+			.post('/api/delete_application', application)
+			.then(({ data }) => message.success(data.message))
+			.catch((err) => message.error(err.response.data.error));
+		updateApplications();
+		closeForm();
+	};
+
 	return (
 		<Modal
 			title="Add Application"
-			open={isOpen}
+			open={true}
 			onOk={onOk}
 			onCancel={closeForm}
 			width={700}
 			centered
 			footer={[
-				<Button onClick={closeForm} key="cancel">
-					Cancel
+				<Button type="primary" danger onClick={deleteApplication} key="cancel">
+					Delete
 				</Button>,
-				<Button type="primary" onClick={onOk} id="add-submit" key="ok">
-					Add
+				<Button type="primary" onClick={onOk} id="add-submit" key="save">
+					Save
 				</Button>,
 			]}
 		>
-			<Form form={form} layout="vertical" requiredMark={false}>
+			<Form
+				form={form}
+				layout="vertical"
+				requiredMark={false}
+				initialValues={{
+					companyName: application.companyName,
+					jobId: application.jobId,
+					jobTitle: application.jobTitle,
+					url: application.url,
+					status: application.status,
+					date: moment(application.date),
+				}}
+			>
 				<Form.Item
 					label="Company Name"
 					name="companyName"

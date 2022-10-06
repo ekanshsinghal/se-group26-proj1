@@ -9,14 +9,13 @@ import './LoginPage.scss';
 export default function LoginPage() {
 	const navigate = useNavigate();
 
-	const onFinish = async (values) => {
+	const onFinish = (values) => {
 		const loading = message.loading('Loading...', 0);
-		await axios
+		axios
 			.post('/api/login', values)
-			.then(({ data }) => {
+			.then(() => {
 				loading();
-				console.log(data);
-				navigate('/home');
+				navigate('/home', { state: { email: values.email } });
 			})
 			.catch((err) => {
 				loading();
@@ -74,8 +73,7 @@ export default function LoginPage() {
 						</Button>
 					</Form.Item>
 				</Form>
-				Don&#39;t have a account? <Link to="/register">Click here</Link>{' '}
-				to register.
+				Don&#39;t have a account? <Link to="/register">Click here</Link> to register.
 			</Card>
 		</div>
 	);

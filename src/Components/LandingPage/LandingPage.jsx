@@ -1,20 +1,51 @@
-import React, { useState } from 'react';
-import { Button, Card, Layout, Menu, Typography } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Layout, Menu, message, Typography } from 'antd';
+import { EditFilled, PlusOutlined } from '@ant-design/icons';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import EditDropDown from './EditDropDown';
 import AddApplication from '../AddApplication/AddApplication';
+import EditApplication from '../AddApplication/Edit Application';
 import './LandingPage.scss';
-import { Link } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 
-const columns = ['Applied', 'In Consideration', 'Offer', 'Rejected'];
-export default function LandingPage() {
-	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
+const columns = {
+	applied: 'Applied',
+	inReview: 'In Review',
+	interview: 'Interview',
+	decision: 'Decision',
+};
 
-	const toggleAddApplication = () => {
-		setAddApplicationOpen(!addApplicationOpen);
+export default function LandingPage() {
+	const [applications, setApplications] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
+	const [editApplication, setEditApplication] = useState(false);
+	const { state } = useLocation();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!state || !state.email) {
+			navigate('/login');
+		} else {
+			updateApplications();
+		}
+	}, []);
+
+	const updateApplications = () => {
+		axios
+			.get('/api/view_applications')
+			.then(({ data }) => setApplications(data.applications))
+			.catch((err) => console.error(err))
+			.finally(() => setLoading(false));
+	};
+
+	const toggleAddApplication = () => setAddApplicationOpen(!addApplicationOpen);
+
+	const logout = () => {
+		axios.post('/api/logout');
+		navigate('/login', { state: { email: undefined } });
 	};
 
 	return (
@@ -24,19 +55,15 @@ export default function LandingPage() {
 				<Menu
 					theme="dark"
 					mode="horizontal"
-					items={['My Applications', 'Saved Jobs', 'Recommended'].map(
-						(i) => ({
-							key: i,
-							label: i,
-						})
-					)}
+					items={['My Applications', 'Saved Jobs', 'Recommended'].map((i) => ({
+						key: i,
+						label: i,
+					}))}
 				/>
 				<div className="flex" />
-				<Link to="/login">
-					<Button type="primary" danger>
-						Logout
-					</Button>
-				</Link>
+				<Button type="primary" danger onClick={logout}>
+					Logout
+				</Button>
 			</Header>
 			<Content className="Content">
 				<div className="SubHeader">
@@ -53,28 +80,64 @@ export default function LandingPage() {
 					<AddApplication
 						isOpen={addApplicationOpen}
 						onClose={toggleAddApplication}
+						updateApplications={updateApplications}
 					/>
 				</div>
 
 				<div className="MainContent">
-					{columns.map((col) => (
+					{Object.keys(columns).map((col) => (
 						<div className="Status" key={col}>
-							<Typography.Title level={5}>{col}</Typography.Title>
-							{new Array(2).fill(null).map((_, index) => (
-								<Card
-									key={col + index}
-									title={`Job ${index}`}
-									extra={<EditDropDown />}
-									className="Job"
-									bordered={false}
-								>
-									{col}
-								</Card>
-							))}
-							<Card loading bordered={false} />
+							<Typography.Title level={5}>{columns[col]}</Typography.Title>
+							{loading ? (
+								<>
+									<Card loading bordered={false} />
+									<Card loading bordered={false} />
+									<Card loading bordered={false} />
+								</>
+							) : (
+								applications.map(
+									(application, index) =>
+										(application.status === col ||
+											(col === 'decision' &&
+												['rejected', 'accepted'].includes(
+													application.status
+												))) && (
+											<Card
+												key={col + index}
+												title={application.companyName}
+												extra={
+													<Button
+														type="text"
+														icon={<EditFilled />}
+														onClick={() =>
+															setEditApplication(application)
+														}
+													/>
+												}
+												className="Job"
+												bordered={false}
+											>
+												ID: {application.jobId}
+												<br />
+												Title: {application.jobTitle}
+												<br />
+												URL: {application.url}
+												<br />
+											</Card>
+										)
+								)
+							)}
+							{applications.length === 0 && 'No applications found.'}
 						</div>
 					))}
 				</div>
+				{editApplication && (
+					<EditApplication
+						application={editApplication}
+						onClose={() => setEditApplication(false)}
+						updateApplications={updateApplications}
+					/>
+				)}
 			</Content>
 		</Layout>
 	);
