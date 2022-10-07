@@ -18,6 +18,9 @@
 -   `babel 7.19.x`
 -   `webpack cli 4.x`
 -   `sass` (Dart Sass)
+-   `Python 3.8+`
+-   `Flask`
+-   `MongoDB`
 
 Note: This repository is configured with [Dart-sass](https://github.com/sass/dart-sass) and not [Node Sass].
 
@@ -27,6 +30,7 @@ Note: This repository is configured with [Dart-sass](https://github.com/sass/dar
 
 -   npm 8.x (8.9 recommended)
 -   yarn 1.22.x
+-   Python 3.8+
 
 ### Installation
 
