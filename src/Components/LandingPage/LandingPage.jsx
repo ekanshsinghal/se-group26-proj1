@@ -4,7 +4,7 @@ import { EditFilled, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import AddApplication from '../AddApplication/AddApplication';
-import EditApplication from '../AddApplication/Edit Application';
+import EditApplication from '../AddApplication/EditApplication';
 import './LandingPage.scss';
 
 const columns = {

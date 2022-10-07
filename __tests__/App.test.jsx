@@ -2,9 +2,11 @@ import React from 'react';
 import { render, queryByAttribute } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import App from '../src/App';
+import EditApplication from '../src/Components/AddApplication/EditApplication';
+import moment from 'moment';
 
 const getById = queryByAttribute.bind(null, 'id');
 
@@ -52,26 +54,41 @@ describe('App', () => {
 	});
 
 	test('renders LandingPage Component & Add Application', async () => {
-		const { container } = render(
+		const { baseElement } = render(
 			<MemoryRouter
 				initialEntries={[{ pathname: '/home', state: { email: 'test@abc.com' } }]}
 			>
 				<App />
 			</MemoryRouter>
 		);
-		await user.click(getById(container, 'add-application'));
-		await user.click(getById(container, 'cancel'));
+		await user.click(getById(baseElement, 'add-application'));
+		await user.click(getById(baseElement, 'cancel'));
+		await user.click(getById(baseElement, 'add-application'));
+		await user.type(getById(baseElement, 'companyName'), 'companyName');
+		await user.type(getById(baseElement, 'jobTitle'), 'jobTitle');
+		await user.type(getById(baseElement, 'jobId'), 'jobId');
+		await user.type(getById(baseElement, 'url'), 'www.google.com');
+		await user.type(getById(baseElement, 'date'), '2022-10-07');
+		await user.type(getById(baseElement, 'status'), 'applied');
+		await user.click(getById(baseElement, 'add-submit'));
 	});
 
 	test('renders Saved Jobs Component ', async () => {
-		const { container } = render(
+		const { baseElement } = render(
 			<MemoryRouter
 				initialEntries={[{ pathname: '/interested', state: { email: 'test@abc.com' } }]}
 			>
 				<App />
 			</MemoryRouter>
 		);
-		await user.click(getById(container, 'Add Application'));
+		await user.click(getById(baseElement, 'add-application'));
+		await user.type(getById(baseElement, 'companyName'), 'companyName');
+		await user.type(getById(baseElement, 'jobTitle'), 'jobTitle');
+		await user.type(getById(baseElement, 'jobId'), 'jobId');
+		await user.type(getById(baseElement, 'url'), 'www.google.com');
+		await user.click(getById(baseElement, 'add-submit'));
+		await user.click(getById(baseElement, 'add-application'));
+		await user.click(getById(baseElement, 'cancel'));
 	});
 
 	test('renders Recommended Jobs Component ', async () => {
@@ -114,5 +131,37 @@ describe('App', () => {
 				<App />
 			</MemoryRouter>
 		);
+	});
+
+	test('render edit application component', async () => {
+		const { baseElement } = render(
+			<EditApplication
+				application={{
+					_id: '123',
+					companyName: 'companyName',
+					jobId: 'jobId',
+					jobTitle: 'jobTitle',
+					url: 'www.google.com',
+					status: 'applied',
+					date: moment(),
+				}}
+				onClose={jest.fn()}
+				updateApplications={jest.fn()}
+			/>
+		);
+		await user.click(getById(baseElement, 'save'));
+	});
+
+	test('render edit application component and delete', async () => {
+		const { baseElement } = render(
+			<EditApplication
+				application={{
+					_id: '123',
+				}}
+				onClose={jest.fn()}
+				updateApplications={jest.fn()}
+			/>
+		);
+		await user.click(getById(baseElement, 'delete'));
 	});
 });

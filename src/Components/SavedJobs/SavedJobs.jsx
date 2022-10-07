@@ -32,7 +32,7 @@ export default function SavedJobs() {
 			<div className="SubHeader">
 				<div className="flex" />
 				<Button
-					id="Add Application"
+					id="add-application"
 					type="primary"
 					size="large"
 					icon={<PlusOutlined />}

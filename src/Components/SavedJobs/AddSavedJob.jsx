@@ -11,39 +11,34 @@ export default function AddSavedJob({ isOpen, onClose, updateApplications }) {
 		onClose();
 	};
 
-	const onOk = () => {
-		form.validateFields()
-			.then((values) => {
-				axios
-					.post('/api/add_application', { ...values, status: 'saved' })
-					.then(({ data }) => {
-						message.success(data.message);
-						updateApplications();
-						closeForm();
-					})
-					.catch((err) => message.error(err.response.data.error));
+	const onOk = (values) => {
+		axios
+			.post('/api/add_application', { ...values, status: 'saved' })
+			.then(({ data }) => {
+				message.success(data.message);
+				updateApplications();
+				closeForm();
 			})
-			.catch((err) => message.error(err));
+			.catch((err) => message.error(err.response.data?.error));
 	};
 
 	return (
 		<Modal
 			title="Add Application"
 			open={isOpen}
-			onOk={onOk}
 			onCancel={closeForm}
 			width={700}
 			centered
 			footer={[
-				<Button onClick={closeForm} key="cancel">
+				<Button onClick={closeForm} key="cancel" id="cancel">
 					Cancel
 				</Button>,
-				<Button type="primary" onClick={onOk} id="add-submit" key="ok">
+				<Button type="primary" onClick={() => form.submit()} id="add-submit" key="ok">
 					Add
 				</Button>,
 			]}
 		>
-			<Form form={form} layout="vertical" requiredMark={false}>
+			<Form form={form} layout="vertical" requiredMark={false} onFinish={onOk}>
 				<Form.Item
 					label="Company Name"
 					name="companyName"

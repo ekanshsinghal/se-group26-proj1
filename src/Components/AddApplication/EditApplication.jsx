@@ -46,7 +46,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 				message.success(data.message);
 				updateApplications();
 			})
-			.catch((err) => message.error(err.response.data.error));
+			.catch((err) => message.error(err.response.data?.error));
 		closeForm();
 	};
 
