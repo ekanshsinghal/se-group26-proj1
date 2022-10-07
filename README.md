@@ -1,4 +1,4 @@
-# se-group26-proj1
+# JobTrackr Application
 
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/badge/Language-JavaScript-blue.svg)
