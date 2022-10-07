@@ -66,6 +66,40 @@ It bundles React in production mode and optimizes the build for the best perform
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+3. Install Backend requirements
+
+Open a new terminal inside the backend directory.
+
+```cd se-group26-proj1\backend```
+
+## For Windwos
+Create a virtual environment called `venv`
+-   python -m venv venv
+
+Activate the virtual environment
+-   venv\Scripts\activate.bat
+
+Install required packages for the Flask server
+-   pip install -r requirements.txt
+
+Run the flask server.
+-   python app.py
+
+## For Mac OS
+
+Create a virtual environment called `venv`
+-   python -m venv venv
+
+Activate the virtual environment
+-   source venv\bin\activate
+
+Install required packages for the Flask server
+-   pip install -r requirements.txt
+
+Run the flask server.
+-   python app.py
+
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
