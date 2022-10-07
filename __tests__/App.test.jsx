@@ -3,14 +3,66 @@ import { render, queryByAttribute } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import moment from 'moment';
+import axios from 'axios';
 
 import App from '../src/App';
 import EditApplication from '../src/Components/AddApplication/EditApplication';
-import moment from 'moment';
 
 const getById = queryByAttribute.bind(null, 'id');
 const getByClass = queryByAttribute.bind(null, 'class');
 const getByTitle = queryByAttribute.bind(null, 'title');
+
+const viewApplications = {
+	applications: [
+		{
+			_id: '633e921b0b9d8a49ec012cd6',
+			companyName: 'IBM',
+			date: '2022-10-06T08:30:13.491Z',
+			jobId: '567',
+			jobTitle: 'Test Engineer',
+			status: 'accepted',
+			url: 'www.ibm.com',
+		},
+		{
+			_id: '633e96b7122eee8718c6147d',
+			companyName: 'Google',
+			date: '2022-10-06T07:35:10.809Z',
+			jobId: '123',
+			jobTitle: 'SDE',
+			status: 'rejected',
+			url: 'www.google.co.in',
+		},
+		{
+			_id: '633e9ce5a378a7e365e2d1f4',
+			companyName: 'Apple inc',
+			date: '2022-10-06T09:16:16.253Z',
+			jobId: '12345',
+			jobTitle: 'ASIC Engineer',
+			status: 'inReview',
+			url: 'www.apple.com',
+		},
+		{
+			_id: '633e9d05a378a7e365e2d1f5',
+			companyName: 'Netflix',
+			date: '2022-10-06T09:16:48.119Z',
+			jobId: '890',
+			jobTitle: 'SDE2',
+			status: 'applied',
+			url: 'www.netflix.com',
+		},
+		{
+			_id: '633f1fb073d88feae28078b9',
+			companyName: 'Apple',
+			date: '2022-10-31T18:34:20.660Z',
+			jobId: '123',
+			jobTitle: 'SDE 1',
+			status: 'interview',
+			url: 'www.apple.com',
+		},
+	],
+	message: 'Applications found',
+};
 
 describe('App', () => {
 	beforeAll(() => {
@@ -29,7 +81,15 @@ describe('App', () => {
 		});
 	});
 
+	// mock user events
 	const user = userEvent.setup();
+
+	// mock axios response
+	jest.mock('axios');
+	let data = { data: {} };
+	axios.post = jest.fn(() => Promise.resolve(data));
+	axios.get = jest.fn(() => Promise.resolve({ data: viewApplications }));
+
 	test('renders LoginPage Component', async () => {
 		const { container } = render(
 			<MemoryRouter initialEntries={['/login']}>
