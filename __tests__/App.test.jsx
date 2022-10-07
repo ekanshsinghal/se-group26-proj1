@@ -9,6 +9,8 @@ import EditApplication from '../src/Components/AddApplication/EditApplication';
 import moment from 'moment';
 
 const getById = queryByAttribute.bind(null, 'id');
+const getByClass = queryByAttribute.bind(null, 'class');
+const getByTitle = queryByAttribute.bind(null, 'title');
 
 describe('App', () => {
 	beforeAll(() => {
@@ -68,8 +70,14 @@ describe('App', () => {
 		await user.type(getById(baseElement, 'jobTitle'), 'jobTitle');
 		await user.type(getById(baseElement, 'jobId'), 'jobId');
 		await user.type(getById(baseElement, 'url'), 'www.google.com');
-		await user.type(getById(baseElement, 'date'), '2022-10-07');
-		await user.type(getById(baseElement, 'status'), 'applied');
+
+		const date = getByClass(baseElement, 'ant-picker');
+		await user.click(date);
+		await user.click(getByClass(baseElement, 'ant-picker-today-btn'));
+
+		await user.click(getByClass(baseElement, 'ant-select-selector'));
+		await user.click(getByTitle(baseElement, 'Applied'));
+
 		await user.click(getById(baseElement, 'add-submit'));
 	});
 

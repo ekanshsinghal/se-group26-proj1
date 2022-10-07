@@ -27,7 +27,7 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 				updateApplications();
 				closeForm();
 			})
-			.catch((err) => message.error(err.response.data.error));
+			.catch((err) => message.error(err.response.data?.error));
 	};
 
 	return (
