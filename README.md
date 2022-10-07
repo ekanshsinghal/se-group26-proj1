@@ -2,9 +2,10 @@
 
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/badge/Language-JavaScript-blue.svg)
-![Yarn](https://img.shields.io/badge/Yarn-v1.22.19-yellow.svg)
-![npm](https://img.shields.io/badge/npm-v8.9.0-yellow.svg)
-![Node](https://img.shields.io/badge/node-v16.15.1-yellow.svg)
+![Yarn](https://img.shields.io/badge/Yarn-v1.22.19-green.svg)
+![npm](https://img.shields.io/badge/npm-v8.9.0-green.svg)
+![Node](https://img.shields.io/badge/node-v16.15.1-green.svg)
+![Python](https://img.shields.io/badge/python-v3.8-green.svg)
 ![GitHub issues](https://img.shields.io/github/issues/ekanshsinghal/se-group26-proj1)
 ![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
