@@ -36,7 +36,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 						closeForm();
 					});
 			})
-			.catch(({ errorFields }) => console.log(errorFields));
+			.catch((err) => message.error(err));
 	};
 
 	const deleteApplication = () => {

@@ -26,8 +26,15 @@ describe('App', () => {
 	});
 
 	const user = userEvent.setup();
-	test('renders LoginPage Component', () => {
-		render(<App />, { wrapper: BrowserRouter });
+	test('renders LoginPage Component', async () => {
+		const { container } = render(
+			<MemoryRouter initialEntries={['/login']}>
+				<App />
+			</MemoryRouter>
+		);
+		await user.type(getById(container, 'email'), 'abc@abc.com');
+		await user.type(getById(container, 'password'), 'password123');
+		await user.click(getById(container, 'login-button'));
 	});
 
 	test('renders RegisterPage Component', async () => {
@@ -36,8 +43,12 @@ describe('App', () => {
 				<App />
 			</MemoryRouter>
 		);
+		await user.type(getById(container, 'firstName'), 'firstName');
+		await user.type(getById(container, 'lastName'), 'lastName');
+		await user.type(getById(container, 'email'), 'abc@abc.com');
 		await user.type(getById(container, 'password'), 'password123');
 		await user.type(getById(container, 'confirmPassword'), 'password123');
+		await user.click(getById(container, 'register-button'));
 	});
 
 	test('renders LandingPage Component & Add Application', async () => {
@@ -48,24 +59,57 @@ describe('App', () => {
 				<App />
 			</MemoryRouter>
 		);
-		await user.click(getById(container, 'Add Application'));
-		await user.click(getById(container, 'add-submit'));
+		await user.click(getById(container, 'add-application'));
+		await user.click(getById(container, 'cancel'));
 	});
 
 	test('renders Saved Jobs Component ', async () => {
-		render(
+		const { container } = render(
 			<MemoryRouter
 				initialEntries={[{ pathname: '/interested', state: { email: 'test@abc.com' } }]}
 			>
 				<App />
 			</MemoryRouter>
 		);
+		await user.click(getById(container, 'Add Application'));
 	});
 
 	test('renders Recommended Jobs Component ', async () => {
-		render(
+		const { container } = render(
 			<MemoryRouter
 				initialEntries={[{ pathname: '/recommended', state: { email: 'test@abc.com' } }]}
+			>
+				<App />
+			</MemoryRouter>
+		);
+		await user.click(getById(container, '/home'));
+	});
+
+	test('renders Profile Component ', async () => {
+		const { container } = render(
+			<MemoryRouter
+				initialEntries={[{ pathname: '/profile', state: { email: 'test@abc.com' } }]}
+			>
+				<App />
+			</MemoryRouter>
+		);
+		await user.type(getById(container, 'firstName'), 'firstName');
+		await user.type(getById(container, 'lastName'), 'lastName');
+		await user.click(getById(container, 'save-profile'));
+	});
+
+	test('Should logout if email not in state', async () => {
+		render(
+			<MemoryRouter initialEntries={[{ pathname: '/recommended' }]}>
+				<App />
+			</MemoryRouter>
+		);
+	});
+
+	test('Should redirect to home if email set in state', async () => {
+		render(
+			<MemoryRouter
+				initialEntries={[{ pathname: '/login', state: { email: 'test@abc.com' } }]}
 			>
 				<App />
 			</MemoryRouter>

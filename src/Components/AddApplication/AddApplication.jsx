@@ -43,7 +43,7 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 			width={700}
 			centered
 			footer={[
-				<Button onClick={closeForm} key="cancel">
+				<Button onClick={closeForm} key="cancel" id="cancel">
 					Cancel
 				</Button>,
 				<Button type="primary" onClick={onOk} id="add-submit" key="ok">

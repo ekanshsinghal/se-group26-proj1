@@ -23,7 +23,7 @@ export default function AddSavedJob({ isOpen, onClose, updateApplications }) {
 					})
 					.catch((err) => message.error(err.response.data.error));
 			})
-			.catch(({ errorFields }) => console.log(errorFields));
+			.catch((err) => message.error(err));
 	};
 
 	return (

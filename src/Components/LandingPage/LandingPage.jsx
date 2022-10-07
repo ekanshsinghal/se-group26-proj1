@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Anchor, Button, Card, Tag, Typography } from 'antd';
+import { Button, Card, Tag, Typography } from 'antd';
 import { EditFilled, PlusOutlined } from '@ant-design/icons';
-import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import AddApplication from '../AddApplication/AddApplication';
@@ -20,15 +19,9 @@ export default function LandingPage() {
 	const [loading, setLoading] = useState(true);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
 	const [editApplication, setEditApplication] = useState(false);
-	const { state } = useLocation();
-	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!state || !state.email) {
-			navigate('/login');
-		} else {
-			updateApplications();
-		}
+		updateApplications();
 	}, []);
 
 	const updateApplications = () => {
@@ -41,17 +34,12 @@ export default function LandingPage() {
 
 	const toggleAddApplication = () => setAddApplicationOpen(!addApplicationOpen);
 
-	const logout = () => {
-		axios.post('/api/logout');
-		navigate('/login', { state: { email: undefined } });
-	};
-
 	return (
 		<div className="LandingPage">
 			<div className="SubHeader">
 				<div className="flex" />
 				<Button
-					id="Add Application"
+					id="add-application"
 					type="primary"
 					size="large"
 					icon={<PlusOutlined />}
