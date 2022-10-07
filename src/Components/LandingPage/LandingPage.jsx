@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Typography } from 'antd';
+import { Anchor, Button, Card, Tag, Typography } from 'antd';
 import { EditFilled, PlusOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -35,7 +35,7 @@ export default function LandingPage() {
 		axios
 			.get('/api/view_applications')
 			.then(({ data }) => setApplications(data.applications))
-			.catch((err) => console.error(err))
+			.catch((err) => console.log(err))
 			.finally(() => setLoading(false));
 	};
 
@@ -96,13 +96,28 @@ export default function LandingPage() {
 											}
 											className="Job"
 											bordered={false}
+											actions={
+												['rejected', 'accepted'].includes(
+													application.status
+												) && [
+													application.status === 'accepted' ? (
+														<Tag color="#87d068">Accepted</Tag>
+													) : (
+														application.status === 'rejected' && (
+															<Tag color="#f50">Rejected</Tag>
+														)
+													),
+												]
+											}
 										>
 											ID: {application.jobId}
 											<br />
 											Title: {application.jobTitle}
 											<br />
-											URL: {application.url}
-											<br />
+											{'URL: '}
+											<a href={'//' + application.url} target={'_blank'}>
+												{application.url}
+											</a>
 										</Card>
 									)
 							)
