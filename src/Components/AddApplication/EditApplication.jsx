@@ -20,23 +20,19 @@ export default function EditApplication({ application, onClose, updateApplicatio
 		onClose();
 	};
 
-	const updateApplication = () => {
-		form.validateFields()
-			.then((values) => {
-				const loading = message.loading('Saving...', 0);
-				axios
-					.post('/api/modify_application', { ...values, _id: application._id })
-					.then(({ data }) => {
-						message.success(data.message);
-						updateApplications();
-					})
-					.catch((err) => message.error(err.response.data?.error))
-					.finally(() => {
-						loading();
-						closeForm();
-					});
+	const updateApplication = (values) => {
+		const loading = message.loading('Saving...', 0);
+		axios
+			.post('/api/modify_application', { ...values, _id: application._id })
+			.then(({ data }) => {
+				message.success(data.message);
+				updateApplications();
 			})
-			.catch((err) => message.error(err));
+			.catch((err) => message.error(err.response.data?.error))
+			.finally(() => {
+				loading();
+				closeForm();
+			});
 	};
 
 	const deleteApplication = () => {

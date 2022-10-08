@@ -80,6 +80,7 @@ export default function LandingPage() {
 													type="text"
 													icon={<EditFilled />}
 													onClick={() => setEditApplication(application)}
+													id={application.jobId + 'edit'}
 												/>
 											}
 											className="Job"

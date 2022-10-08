@@ -60,6 +60,15 @@ const viewApplications = {
 			status: 'interview',
 			url: 'www.apple.com',
 		},
+		{
+			_id: '633f1fb073d88feae28008b9',
+			companyName: 'Apple',
+			date: '2022-10-31T18:34:20.660Z',
+			jobId: '123',
+			jobTitle: 'SDE 2',
+			status: 'saved',
+			url: 'www.apple.com',
+		},
 	],
 	message: 'Applications found',
 };
@@ -139,6 +148,9 @@ describe('App', () => {
 		await user.click(getByTitle(baseElement, 'Applied'));
 
 		await user.click(getById(baseElement, 'add-submit'));
+
+		await user.click(getById(baseElement, '567edit'));
+		await user.click(getById(baseElement, 'delete'));
 	});
 
 	test('renders Saved Jobs Component ', async () => {
