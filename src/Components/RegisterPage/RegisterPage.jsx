@@ -11,14 +11,9 @@ export default function RegisterPage() {
 		const loading = message.loading('Loading...', 0);
 		axios
 			.post('/api/register', values)
-			.then(({ data }) => {
-				loading();
-				navigate('/home', { state: { email: values.email } });
-			})
-			.catch((err) => {
-				loading();
-				message.error(err.response.data.error);
-			});
+			.then(() => navigate('/home', { state: { email: values.email } }))
+			.catch((err) => message.error(err.response.data?.error))
+			.finally(() => loading());
 	};
 
 	return (
@@ -111,7 +106,7 @@ export default function RegisterPage() {
 						<Input.Password />
 					</Form.Item>
 					<Form.Item wrapperCol={{ span: 24 }}>
-						<Button type="primary" htmlType="submit" block>
+						<Button type="primary" htmlType="submit" block id="register-button">
 							Sign Up!
 						</Button>
 					</Form.Item>

@@ -14,13 +14,12 @@ export default function LoginPage() {
 		axios
 			.post('/api/login', values)
 			.then(() => {
-				loading();
 				navigate('/home', { state: { email: values.email } });
 			})
 			.catch((err) => {
-				loading();
-				message.error(err.response.data.error);
-			});
+				message.error(err.response.data?.error);
+			})
+			.finally(() => loading());
 	};
 
 	return (
@@ -68,7 +67,7 @@ export default function LoginPage() {
 						<Checkbox>Remember me</Checkbox>
 					</Form.Item>
 					<Form.Item>
-						<Button type="primary" htmlType="submit" block>
+						<Button type="primary" htmlType="submit" block id="login-button">
 							Log In
 						</Button>
 					</Form.Item>

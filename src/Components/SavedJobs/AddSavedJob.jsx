@@ -1,17 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
+import { Button, Form, Input, message, Modal } from 'antd';
 import axios from 'axios';
 
-const statuses = {
-	applied: 'Applied',
-	inReview: 'In Review',
-	interview: 'Interview',
-	rejected: 'Rejected',
-	accepted: 'Accepted',
-};
-
-export default function AddApplication({ isOpen, onClose, updateApplications }) {
+export default function AddSavedJob({ isOpen, onClose, updateApplications }) {
 	const [form] = Form.useForm();
 
 	const closeForm = () => {
@@ -21,7 +13,7 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 
 	const onOk = (values) => {
 		axios
-			.post('/api/add_application', values)
+			.post('/api/add_application', { ...values, status: 'saved' })
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();
@@ -98,36 +90,6 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 					]}
 				>
 					<Input placeholder="Enter URL / Application Link" />
-				</Form.Item>
-				<Form.Item
-					label="Applied Date"
-					name="date"
-					rules={[
-						{
-							required: true,
-							message: 'Please enter Applied Date!',
-						},
-					]}
-				>
-					<DatePicker />
-				</Form.Item>
-				<Form.Item
-					label="Status"
-					name="status"
-					rules={[
-						{
-							required: true,
-							message: 'Please enter Status!',
-						},
-					]}
-				>
-					<Select>
-						{Object.keys(statuses).map((key) => (
-							<Select.Option value={key} key={key}>
-								{statuses[key]}
-							</Select.Option>
-						))}
-					</Select>
 				</Form.Item>
 			</Form>
 		</Modal>

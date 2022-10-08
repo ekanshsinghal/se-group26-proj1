@@ -218,8 +218,8 @@ def create_profile():
                     "jobTitle": req["jobTitle"],
                     "description": req["description"],
                     "jobLocation": job_location,
-                    "jobFrom": req["jobFrom"],
-                    "toFrom": req["toFrom"],
+                    "jobFrom": req["jobDate"][0],
+                    "toFrom": req["jobDate"][1],
                     "curentJob": req["curentJob"]
                 }
                 university_location = {"city": req["universityCity"], "state": req["universityState"]}
@@ -229,8 +229,8 @@ def create_profile():
                     "degree": req["degree"],
                     "courses": req["courses"].split(","),
                     "university_location": university_location,
-                    "universityFromDate": req["universityFromDate"],
-                    "universityToDate": req["universityToDate"],
+                    "universityFromDate": req["universityDate"][0],
+                    "universityToDate": req["universityDate"][1],
                     "curentUniversity": req["curentUniversity"]
                 }
                 user_profile = {
@@ -297,8 +297,8 @@ def modify_profile():
                     "jobTitle": req["jobTitle"],
                     "description": req["description"],
                     "job_location": {"jobCity": req["jobCity"], "jobState": req["jobState"]},
-                    "jobFrom": req["jobFrom"],
-                    "toFrom": req["toFrom"],
+                    "jobFrom": req["jobDate"][0],
+                    "toFrom": req["jobDate"][1],
                     "curentJob": req["curentJob"]
                 }
                 education = {
@@ -307,8 +307,8 @@ def modify_profile():
                     "degree": req["degree"],
                     "courses": req["courses"].split(","),
                     "location": {"universityCity": req["universityCity"], "universityState": req["universityState"]},
-                    "universityFromDate": req["universityFromDate"],
-                    "universityToDate": req["universityToDate"],
+                    "universityFromDate": req["universityDate"][0],
+                    "universityToDate": req["universityDate"][1],
                     "curentUniversity": req["curentUniversity"]
                 }
                 user_profile = {
