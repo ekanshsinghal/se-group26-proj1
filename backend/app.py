@@ -367,5 +367,6 @@ def clear_profile():
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
+
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=8000)
