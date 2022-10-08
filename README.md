@@ -1,5 +1,7 @@
 # JobTrackr Application
 
+![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
+
 [![DOI](https://zenodo.org/badge/543812642.svg)](https://zenodo.org/badge/latestdoi/543812642)
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/badge/Language-JavaScript-blue.svg)
