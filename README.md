@@ -1,6 +1,5 @@
 # JobTrackr Application
 
-![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
 
 [![DOI](https://zenodo.org/badge/543812642.svg)](https://zenodo.org/badge/latestdoi/543812642)
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
@@ -14,6 +13,22 @@
 ![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
+
+![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
+
+## Screenshots
+
+- Register Page
+  
+  ![image](https://user-images.githubusercontent.com/30636208/194688086-ba40502a-e58b-441d-855d-585fecde3ec9.png)
+  
+- Login Page 
+  
+  ![image](https://user-images.githubusercontent.com/30636208/194688064-d40566de-dcc4-424c-8059-14d655fb7109.png)
+  
+
+
+
 
 ## Built With
 
