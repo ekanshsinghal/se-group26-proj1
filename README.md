@@ -41,7 +41,7 @@
 
 ## Application Demo
 
-https://user-images.githubusercontent.com/30636208/194689096-64ece52c-b4e1-4903-b6f8-d294911fb08a.mp4
+https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
 
 
 
@@ -111,7 +111,7 @@ Open a new terminal inside the backend directory.
 
 `cd se-group26-proj1\backend`
 
-### For Windwos
+### For Windows
 
 Create a virtual environment called `venv`
 
