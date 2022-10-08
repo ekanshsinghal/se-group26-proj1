@@ -121,6 +121,13 @@ Run the flask server.
 python app.py
 ```
 
+### Backend Test
+
+Run this command to test the backend APIs
+```
+python backend\tests.py
+```
+
 
 ## License
 
