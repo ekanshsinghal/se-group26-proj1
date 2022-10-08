@@ -53,7 +53,6 @@ def login():
 
         #check if email exists in database
         email_found = UserRecords.find_one({"email": email})
-        print(email, password, email_found)
         if email_found:
             email_val = email_found["email"]
             passwordcheck = email_found["password"]
