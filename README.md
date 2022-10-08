@@ -13,6 +13,7 @@
 ![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
 ![Frontend build](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
 ![Backend Build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/build.yml/badge.svg?maxAge=10000)
+![Backend Test](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/test.yml/badge.svg?maxAge=10000)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
 
 ## Goal
