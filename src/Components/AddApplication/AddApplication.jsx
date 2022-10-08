@@ -83,8 +83,8 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 				>
 					<Input placeholder="Enter Job Id" />
 				</Form.Item>
-				<Form.Item label="Description" name="description">
-					<Input.TextArea placeholder="Enter Job Description" />
+				<Form.Item label="Notes" name="description">
+					<Input.TextArea placeholder="Enter Notes" />
 				</Form.Item>
 				<Form.Item
 					label="URL / Application Link"

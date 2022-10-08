@@ -70,6 +70,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 					companyName: application.companyName,
 					jobId: application.jobId,
 					jobTitle: application.jobTitle,
+					description: application.description,
 					url: application.url,
 					status: application.status,
 					date: moment(application.date),
@@ -111,6 +112,9 @@ export default function EditApplication({ application, onClose, updateApplicatio
 					]}
 				>
 					<Input placeholder="Enter Job Id" />
+				</Form.Item>
+				<Form.Item label="Notes" name="description">
+					<Input.TextArea placeholder="Enter Notes" />
 				</Form.Item>
 				<Form.Item
 					label="URL / Application Link"

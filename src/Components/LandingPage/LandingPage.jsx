@@ -107,6 +107,8 @@ export default function LandingPage() {
 											<a href={'//' + application.url} target={'_blank'}>
 												{application.url}
 											</a>
+											<br />
+											Notes: {application.description}
 										</Card>
 									)
 							)
