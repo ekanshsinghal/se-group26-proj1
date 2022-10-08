@@ -17,6 +17,12 @@
 ![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
 
 
+## Built using
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/30636208/194690148-8e3dbe93-2ede-4da8-a44a-e4ee165b6b3b.png" width="150"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="150"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width="150"> <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" width ="150"/> 
+</p>
+
 ## Screenshots
 
 - Register Page
