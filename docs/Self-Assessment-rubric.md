@@ -30,8 +30,6 @@
 |Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|3
 |Evidence that the members of the team are working across multiple places in the code base|3
 |Short release cycles |3|https://github.com/ekanshsinghal/se-group26-proj1/commits/main|
-
-
 |Question 1.1: Does your website and documentation provide a clear, high-level overview of your software?||Yes|
 |Question 1.2: Does your website and documentation clearly describe the type of user who should use your software?||Yes|
 |Question 1.3: Do you publish case studies to show how your software has been used by yourself and others?||Yes|
