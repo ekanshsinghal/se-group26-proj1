@@ -18,6 +18,15 @@ class FlaskTest(unittest.TestCase):
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
         # print(statuscode)
+    
+    def testWrongLogin(self):
+        tester = app.test_client(self)
+        response = tester.post("/login", json={"email": "xyz@ncsu.edu", "password": "jytfyjtyj"})
+        statuscode = response.status_code
+        # User account not found
+        self.assertEqual(statuscode, 400)
+        # print(statuscode)
+
 
 
 if __name__=="__main__":
