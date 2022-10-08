@@ -14,6 +14,12 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
 
+## Goal
+Your personalized JobTracker application in one place!
+
+## Description
+Excel sheets that are complex and disorganized must go! Every job-related data can be managed by our JobTrackr Application, including your job profile, applications, status, important dates, notes, saved applications, job descriptions, recruiter details, compensation and offer package, and more.
+
 ![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
 
 
