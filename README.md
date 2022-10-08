@@ -26,7 +26,17 @@
   
   ![image](https://user-images.githubusercontent.com/30636208/194688064-d40566de-dcc4-424c-8059-14d655fb7109.png)
   
+- My Applications Page
+  
+  ![My Applications page](https://user-images.githubusercontent.com/30636208/194687994-0ed3a4ac-3856-4ba9-a3af-9acf9d79ca08.png)
+  
+- Add Application Page
 
+  ![image](https://user-images.githubusercontent.com/30636208/194688445-78b7d7b2-6af5-48f1-9197-ba65924660e1.png)
+
+- Profile Page
+
+  ![image](https://user-images.githubusercontent.com/30636208/194688372-b01a8cb5-b87d-40e3-95af-2cee42fc8de3.png)
 
 
 
