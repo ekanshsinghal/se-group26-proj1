@@ -12,6 +12,14 @@ backend.app module
     :undoc-members:
     :show-inheritance:
 
+backend.tests module
+--------------------
+
+.. automodule:: backend.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
