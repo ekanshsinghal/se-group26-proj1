@@ -10,3 +10,4 @@ pycparser==2.21
 pymongo==4.2.0
 Werkzeug==2.2.2
 bson
+requests
