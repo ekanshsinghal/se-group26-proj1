@@ -27,6 +27,23 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(statuscode, 400)
         # print(statuscode)
 
+    def testRegister(self):
+        tester = app.test_client(self)
+        req = {}
+        req["firstName"] = "Rahul"
+        req["lastName"] = "RK"
+        req["email"] = "rrangar@ncsu.edu"
+        req["password"] = "12345678"
+        req["confirmPassword"] = "12345678"
+        urlToSend = "/register"
+        response = tester.post(urlToSend, json = req)
+        statuscode = response.status_code
+        if statuscode == 200:
+            # New user created
+            self.assertEqual(statuscode, 200)
+        if statuscode == 400:
+            # User already present
+            self.assertEqual(statuscode, 400)
 
 
 if __name__=="__main__":
