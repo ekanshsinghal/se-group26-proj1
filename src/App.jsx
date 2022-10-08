@@ -49,17 +49,19 @@ export default function App() {
 			<Layout className="App">
 				<Header>
 					<div className="logo" />
-					<Menu
-						theme="dark"
-						mode="horizontal"
-						items={Object.keys(signedInPages).map((i) => ({
-							key: i,
-							label: signedInPages[i],
-							id: i,
-						}))}
-						selectedKeys={[selectedMenu]}
-						onSelect={browsePage}
-					/>
+					<div style={{ minWidth: 400 }}>
+						<Menu
+							theme="dark"
+							mode="horizontal"
+							items={Object.keys(signedInPages).map((i) => ({
+								key: i,
+								label: signedInPages[i],
+								id: i,
+							}))}
+							selectedKeys={[selectedMenu]}
+							onSelect={browsePage}
+						/>
+					</div>
 					<div className="flex" />
 
 					<Dropdown
