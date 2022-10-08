@@ -186,6 +186,14 @@ Run this command to test the backend APIs
 python backend\tests.py
 ```
 
+## Tools
+- Preetier Code Formatter
+- PyLint with Flake8
+
+## Third-Party Tools
+
+- [MongoDB Cloud](https://www.mongodb.com/)
+
 ## Contributors 👨‍🏭
 
 <table>
