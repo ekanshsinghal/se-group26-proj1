@@ -112,6 +112,7 @@ def add_application():
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
                 "jobId": req["jobId"],
+                "description": req["description"],
                 "url": req["url"],
                 # "details": {
                 #     "Industry": "Software Development",
@@ -174,6 +175,7 @@ def modify_application():
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
                 "jobId": req["jobId"],
+                "description": req["description"],
                 "url": req["url"],
                 # "Details": {
                 #     "Industry": "Software Development",
