@@ -30,6 +30,7 @@
 |Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|3
 |Evidence that the members of the team are working across multiple places in the code base|3
 |Short release cycles |3|https://github.com/ekanshsinghal/se-group26-proj1/commits/main|
+||||
 |Question 1.1: Does your website and documentation provide a clear, high-level overview of your software?||Yes|
 |Question 1.2: Does your website and documentation clearly describe the type of user who should use your software?||Yes|
 |Question 1.3: Do you publish case studies to show how your software has been used by yourself and others?||Yes|
@@ -53,7 +54,6 @@
 |Question 5.4: Are e-mails to your support e-mail address received by more than one person?||N/A|
 |Question 5.5: Does your project have a ticketing system to manage bug reports and feature requests?||Yes|
 |Question 5.6: Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?||Yes|
-
 |Question 6.1: Is your software’s architecture and design modular?||Yes|
 |Question 6.2: Does your software use an accepted coding standard or convention?||Yes|
 |Question 7.1: Does your software allow data to be imported and exported using open data formats?||Yes|
@@ -74,7 +74,6 @@
 |Question 11.6: Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?||N/A|
 |Question 11.7: Can you download dependencies using a dependency management tool or package manager?||Yes|
 |Question 11.8: Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?||Yes|
-
 |Question 12.1: Do you have an automated test suite for your software?||Yes|
 |Question 12.2: Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?||No|
 |Question 12.3: Do you use continuous integration, automatically running tests whenever changes are made to your source code?||Yes|
@@ -92,7 +91,6 @@
 |Question 14.2: Do you have a contributions policy?||Yes|
 |Question 14.3: Is your contributions' policy publicly available?||Yes|
 |Question 14.4: Do contributors keep the copyright/IP of their contributions?||Yes|
-
 |Question 15.1: Does your website and documentation clearly state the copyright owners of your software and documentation?||Yes|
 |Question 15.2: Does each of your source code files include a copyright statement?||Yes|
 |Question 15.3: Does your website and documentation clearly state the licence of your software?||Yes|
