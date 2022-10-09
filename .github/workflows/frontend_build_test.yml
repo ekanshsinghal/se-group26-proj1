@@ -1,8 +1,8 @@
-name: frontend-tests
+name: frontend-build
 on: [push]
 jobs:
   build:
-    name: Run test cases
+    name: build
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
@@ -12,6 +12,9 @@ jobs:
           cmd: install
       - uses: borales/actions-yarn@v3.0.0
         with:
+          cmd: build
+      - uses: borales/actions-yarn@v3.0.0
+        with:
           cmd: test
       - uses: codecov/codecov-action@v3
         with:
@@ -19,3 +22,6 @@ jobs:
           flags: uitests # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: generate-docs

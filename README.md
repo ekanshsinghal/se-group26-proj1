@@ -1,6 +1,5 @@
 # JobTrackr Application
 
-
 [![DOI](https://zenodo.org/badge/543812642.svg)](https://zenodo.org/badge/latestdoi/543812642)
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/badge/Language-JavaScript-blue.svg)
@@ -8,22 +7,26 @@
 ![npm](https://img.shields.io/badge/npm-v8.9.0-green.svg)
 ![Node](https://img.shields.io/badge/node-v16.15.1-green.svg)
 ![Python](https://img.shields.io/badge/python-v3.8-green.svg)
+
 ![Open issues](https://img.shields.io/github/issues/ekanshsinghal/se-group26-proj1)
 ![Closed issues](https://img.shields.io/github/issues-closed/ekanshsinghal/se-group26-proj1?color=bright-green)
-![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
 ![Frontend build](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
 ![Backend Build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_build.yml/badge.svg?maxAge=10000)
 ![Backend Test](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_test.yml/badge.svg?maxAge=10000)
+
+![Lines of code](https://img.shields.io/tokei/lines/github/ekanshsinghal/se-group26-proj1)
+![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
 
 ## Goal
+
 Your personalized JobTracker application in one place!
 
 ## Description
+
 Excel sheets that are complex and disorganized must go! Every job-related data can be managed by our JobTrackr Application, including your job profile, applications, status, important dates, notes, saved applications, job descriptions, recruiter details, compensation and offer package, and more.
 
 ![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
-
 
 ## Built using
 
@@ -33,32 +36,29 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 
 ## Screenshots
 
-- Register Page
-  
-  ![image](https://user-images.githubusercontent.com/30636208/194688086-ba40502a-e58b-441d-855d-585fecde3ec9.png)
-  
-- Login Page 
-  
-  ![image](https://user-images.githubusercontent.com/30636208/194688064-d40566de-dcc4-424c-8059-14d655fb7109.png)
-  
-- My Applications Page
-  
-  ![My Applications page](https://user-images.githubusercontent.com/30636208/194687994-0ed3a4ac-3856-4ba9-a3af-9acf9d79ca08.png)
-  
-- Add Application Page
+-   Register Page
 
-  ![image](https://user-images.githubusercontent.com/30636208/194688445-78b7d7b2-6af5-48f1-9197-ba65924660e1.png)
+    ![image](https://user-images.githubusercontent.com/30636208/194688086-ba40502a-e58b-441d-855d-585fecde3ec9.png)
 
-- Profile Page
+-   Login Page
 
-  ![image](https://user-images.githubusercontent.com/30636208/194688372-b01a8cb5-b87d-40e3-95af-2cee42fc8de3.png)
+    ![image](https://user-images.githubusercontent.com/30636208/194688064-d40566de-dcc4-424c-8059-14d655fb7109.png)
 
+-   My Applications Page
+
+    ![My Applications page](https://user-images.githubusercontent.com/30636208/194687994-0ed3a4ac-3856-4ba9-a3af-9acf9d79ca08.png)
+
+-   Add Application Page
+
+    ![image](https://user-images.githubusercontent.com/30636208/194688445-78b7d7b2-6af5-48f1-9197-ba65924660e1.png)
+
+-   Profile Page
+
+    ![image](https://user-images.githubusercontent.com/30636208/194688372-b01a8cb5-b87d-40e3-95af-2cee42fc8de3.png)
 
 ## Application Demo
 
 https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
-
-
 
 ## Built With
 
@@ -187,12 +187,13 @@ python backend\tests.py
 ```
 
 ## Tools
-- Preetier Code Formatter
-- PyLint with Flake8
+
+-   Preetier Code Formatter
+-   PyLint with Flake8
 
 ## Third-Party Tools
 
-- [MongoDB Cloud](https://www.mongodb.com/)
+-   [MongoDB Cloud](https://www.mongodb.com/)
 
 ## Contributors 👨‍🏭
 
