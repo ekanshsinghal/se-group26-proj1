@@ -1,47 +1,47 @@
 {
-  "src/Components/AddApplication/AddApplication.jsx": {
-    "description": "",
-    "displayName": "AddApplication",
-    "methods": []
-  },
-  "src/Components/AddApplication/EditApplication.jsx": {
-    "description": "",
-    "displayName": "EditApplication",
-    "methods": []
-  },
-  "src/Components/LandingPage/LandingPage.jsx": {
-    "description": "",
-    "displayName": "LandingPage",
-    "methods": []
-  },
-  "src/Components/LoginPage/LoginPage.jsx": {
-    "description": "",
-    "displayName": "LoginPage",
-    "methods": []
-  },
-  "src/Components/Profile/Profile.jsx": {
-    "description": "",
-    "displayName": "Profile",
-    "methods": []
-  },
-  "src/Components/RecommendedJobs/RecommendedJobs.jsx": {
-    "description": "",
-    "displayName": "RecommendedJobs",
-    "methods": []
-  },
-  "src/Components/RegisterPage/RegisterPage.jsx": {
-    "description": "",
-    "displayName": "RegisterPage",
-    "methods": []
-  },
-  "src/Components/SavedJobs/AddSavedJob.jsx": {
-    "description": "",
-    "displayName": "AddSavedJob",
-    "methods": []
-  },
-  "src/Components/SavedJobs/SavedJobs.jsx": {
-    "description": "",
-    "displayName": "SavedJobs",
-    "methods": []
-  }
+	"src/Components/AddApplication/AddApplication.jsx": {
+		"description": "Add Job application popup.",
+		"displayName": "AddApplication",
+		"methods": []
+	},
+	"src/Components/AddApplication/EditApplication.jsx": {
+		"description": "Edit existing job application by user.",
+		"displayName": "EditApplication",
+		"methods": []
+	},
+	"src/Components/LandingPage/LandingPage.jsx": {
+		"description": "Home page after login with tracking view.",
+		"displayName": "LandingPage",
+		"methods": []
+	},
+	"src/Components/LoginPage/LoginPage.jsx": {
+		"description": "User login page.",
+		"displayName": "LoginPage",
+		"methods": []
+	},
+	"src/Components/Profile/Profile.jsx": {
+		"description": "User Profile page.",
+		"displayName": "Profile",
+		"methods": []
+	},
+	"src/Components/RecommendedJobs/RecommendedJobs.jsx": {
+		"description": "To do.",
+		"displayName": "RecommendedJobs",
+		"methods": []
+	},
+	"src/Components/RegisterPage/RegisterPage.jsx": {
+		"description": "User registration page.",
+		"displayName": "RegisterPage",
+		"methods": []
+	},
+	"src/Components/SavedJobs/AddSavedJob.jsx": {
+		"description": "Add a job to saved jobs popup.",
+		"displayName": "AddSavedJob",
+		"methods": []
+	},
+	"src/Components/SavedJobs/SavedJobs.jsx": {
+		"description": "Saved jobs page.",
+		"displayName": "SavedJobs",
+		"methods": []
+	}
 }

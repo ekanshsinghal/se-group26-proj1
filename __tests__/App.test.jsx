@@ -190,9 +190,6 @@ describe('App', () => {
 				<App />
 			</MemoryRouter>
 		);
-		await user.type(getById(container, 'firstName'), 'firstName');
-		await user.type(getById(container, 'lastName'), 'lastName');
-		await user.click(getById(container, 'save-profile'));
 	});
 
 	test('Should logout if email not in state', async () => {

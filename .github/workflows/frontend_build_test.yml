@@ -6,14 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "Checkout latest code."
       - uses: actions/checkout@v3
       - run: echo "Installing dependencies using yarn"
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install
-      - uses: borales/actions-yarn@v3.0.0
       - run: echo "Creating production optimised build"
+      - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: build
       - run: echo "Running Test Cases."
