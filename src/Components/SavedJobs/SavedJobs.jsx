@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 import AddSavedJob from './AddSavedJob';
 import './SavedJobs.scss';
@@ -10,6 +11,7 @@ export default function SavedJobs() {
 	const [applications, setApplications] = useState([]);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const { state } = useLocation();
 
 	useEffect(() => {
 		updateApplications();
@@ -19,7 +21,7 @@ export default function SavedJobs() {
 
 	const updateApplications = () => {
 		axios
-			.get('/api/view_applications')
+			.get('/api/view_applications?email=' + state.email)
 			.then(({ data }) =>
 				setApplications(data.applications.filter((app) => app.status == 'saved'))
 			)

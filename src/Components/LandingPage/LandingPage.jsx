@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Tag, Typography } from 'antd';
 import { EditFilled, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 import AddApplication from '../AddApplication/AddApplication';
 import EditApplication from '../AddApplication/EditApplication';
@@ -19,6 +20,7 @@ export default function LandingPage() {
 	const [loading, setLoading] = useState(true);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
 	const [editApplication, setEditApplication] = useState(false);
+	const { state } = useLocation();
 
 	useEffect(() => {
 		updateApplications();
@@ -26,7 +28,7 @@ export default function LandingPage() {
 
 	const updateApplications = () => {
 		axios
-			.get('/api/view_applications')
+			.get('/api/view_applications?email=' + state.email)
 			.then(({ data }) => setApplications(data.applications))
 			.catch((err) => console.log(err))
 			.finally(() => setLoading(false));
@@ -122,6 +124,7 @@ export default function LandingPage() {
 					application={editApplication}
 					onClose={() => setEditApplication(false)}
 					updateApplications={updateApplications}
+					email={state.email}
 				/>
 			)}
 		</div>

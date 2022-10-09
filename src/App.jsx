@@ -40,7 +40,7 @@ export default function App() {
 	};
 
 	const logout = () => {
-		axios.post('/api/logout');
+		axios.post('/api/logout', { email: state.email });
 		navigate('/login', { state: { email: undefined } });
 	};
 

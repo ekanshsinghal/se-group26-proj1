@@ -12,7 +12,7 @@ const statuses = {
 	accepted: 'Accepted',
 };
 
-export default function EditApplication({ application, onClose, updateApplications }) {
+export default function EditApplication({ application, onClose, updateApplications, email }) {
 	const [form] = Form.useForm();
 
 	const closeForm = () => {
@@ -23,7 +23,11 @@ export default function EditApplication({ application, onClose, updateApplicatio
 	const updateApplication = (values) => {
 		const loading = message.loading('Saving...', 0);
 		axios
-			.post('/api/modify_application', { ...values, _id: application._id })
+			.post('/api/modify_application', {
+				...values,
+				_id: application._id,
+				email,
+			})
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();
@@ -37,7 +41,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 
 	const deleteApplication = () => {
 		axios
-			.post('/api/delete_application', application)
+			.post('/api/delete_application', { ...application, email })
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();

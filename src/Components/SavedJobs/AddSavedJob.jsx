@@ -2,9 +2,11 @@
 import React from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 export default function AddSavedJob({ isOpen, onClose, updateApplications }) {
 	const [form] = Form.useForm();
+	const { state } = useLocation();
 
 	const closeForm = () => {
 		form.resetFields();
@@ -13,7 +15,7 @@ export default function AddSavedJob({ isOpen, onClose, updateApplications }) {
 
 	const onOk = (values) => {
 		axios
-			.post('/api/add_application', { ...values, status: 'saved' })
+			.post('/api/add_application', { ...values, status: 'saved', email: state.email })
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();
