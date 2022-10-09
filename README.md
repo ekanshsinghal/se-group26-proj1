@@ -10,7 +10,7 @@
 
 ![Open issues](https://img.shields.io/github/issues/ekanshsinghal/se-group26-proj1)
 ![Closed issues](https://img.shields.io/github/issues-closed/ekanshsinghal/se-group26-proj1?color=bright-green)
-![Frontend build](https://img.shields.io/github/workflow/status/ekanshsinghal/se-group26-proj1/frontend-build)
+[![frontend-build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/frontend_build_test.yml/badge.svg?branch=main)](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/frontend_build_test.yml)
 ![Backend Build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_build.yml/badge.svg?maxAge=10000)
 ![Backend Test](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_test.yml/badge.svg?maxAge=10000)
 
