@@ -29,6 +29,11 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 
 ![get a job](https://user-images.githubusercontent.com/30636208/194686221-a4300703-2745-4fbb-b59f-81528896040a.gif)
 
+## Introduction
+
+https://user-images.githubusercontent.com/30636208/194798331-9338219d-cdbd-4ff1-96fa-b1425dfc9504.mp4
+
+
 ## Built using
 
 <p align="center">
