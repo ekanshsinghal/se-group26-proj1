@@ -11,7 +11,7 @@
 |Docs: what: point descriptions of each class/function (in isolation) |3|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs
 |Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z|3|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs|
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing|3|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs
-|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|3|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs
+|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|0|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs
 |Use of version control tools|3| git
 |Use of style checkers |3| pycodestyle
 |Use of code formatters. |1|Pretty code formatter used
