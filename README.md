@@ -113,7 +113,6 @@ Open a new terminal inside the backend directory.
 
 `cd se-group26-proj1\backend`
 
-### For Windows
 
 Create a virtual environment called `venv`
 
@@ -121,34 +120,13 @@ Create a virtual environment called `venv`
 python -m venv venv
 ```
 
-Activate the virtual environment
+For Windows - Activate the virtual environment
 
 ```
 venv\Scripts\activate.bat
 ```
 
-Install required packages for the Flask server
-
-```
-pip install -r requirements.txt
-```
-
-Run the flask server.
-
-```
-python app.py
-```
-
-### For Mac OS
-
-Create a virtual environment called `venv`
-
-```
-python -m venv venv
-```
-
-Activate the virtual environment
-
+For Mac OS - Activate the virtual environment
 ```
 source venv/bin/activate
 ```
@@ -164,6 +142,7 @@ Run the flask server.
 ```
 python app.py
 ```
+The flask server runs in [http://localhost:8000](http://localhost:8000)
 
 ## Available Scripts
 
