@@ -14,7 +14,7 @@
 |Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|0|https://github.com/ekanshsinghal/se-group26-proj1/tree/main/docs
 |Use of version control tools|3| git
 |Use of style checkers |3| pycodestyle, flake8
-|Use of code formatters. |1|Prettier code formatter used
+|Use of code formatters. |3|Prettier code formatter used
 |Use of syntax checkers. |3|pylint, eslint used to check the code syntax
 |Use of code coverage |3|https://github.com/ekanshsinghal/se-group26-proj1
 |Other automated analysis tools|3|https://github.com/ekanshsinghal/se-group26-proj1
