@@ -35,6 +35,18 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 <img src="https://user-images.githubusercontent.com/30636208/194690148-8e3dbe93-2ede-4da8-a44a-e4ee165b6b3b.png" width="150"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="150"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width="150"> <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" width ="150"/> <img src="https://camo.githubusercontent.com/36ecb78d148678488fa43e5916e131906c15ea485b30232739d5633b2e0ce18c/68747470733a2f2f6b6576696e2d62726f776e2e636f6d2f696d616765732f666c61736b2d6c6f676f2e737667" width ="150"/> 
 </p>
 
+
+## Basic Design
+![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Design.png)
+
+## Roadmap
+![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Features.png)
+
+
+## Application Demo
+
+https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
+
 ## Screenshots
 
 -   Register Page
@@ -57,15 +69,6 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 
     ![image](https://user-images.githubusercontent.com/30636208/194688372-b01a8cb5-b87d-40e3-95af-2cee42fc8de3.png)
 
-## Application Demo
-
-https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
-
-## Basic Design
-![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Design.png)
-
-## Roadmap
-![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Features.png)
 
 
 ## Built With
@@ -103,30 +106,6 @@ cd se-group26-proj1
 yarn
 ```
 
-## Available Scripts
-
-### Development Mode
-
-In the project directory, you can run:
-
-```
-yarn start
-```
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### Production Optimised Build
-
-```
-yarn build
-```
-
-Builds the app for production to the `build` folder.\
-It bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
 ## Install Backend requirements
 
@@ -185,6 +164,32 @@ Run the flask server.
 ```
 python app.py
 ```
+
+## Available Scripts
+
+### Development Mode
+
+In the project directory, you can run:
+
+```
+yarn start
+```
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### Production Optimised Build
+
+```
+yarn build
+```
+
+Builds the app for production to the `build` folder.\
+It bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
 
 ### Backend Test
 
