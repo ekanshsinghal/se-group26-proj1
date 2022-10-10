@@ -183,6 +183,7 @@ describe('App', () => {
 	});
 
 	test('renders Profile Component ', async () => {
+		axios.get = jest.fn(() => Promise.resolve({ data: { profile: {} } }));
 		const { container } = render(
 			<MemoryRouter
 				initialEntries={[{ pathname: '/profile', state: { email: 'test@abc.com' } }]}
@@ -190,6 +191,26 @@ describe('App', () => {
 				<App />
 			</MemoryRouter>
 		);
+		await user.click(getById(container, 'save-profile'));
+		await user.type(getById(container, 'firstName'), 'firstName');
+		await user.type(getById(container, 'lastName'), 'lastName');
+		await user.click(getById(container, 'save-profile'));
+	});
+
+	test('renders Profile Component with existing profile', async () => {
+		axios.get = jest.fn(() =>
+			Promise.resolve({ data: { profile: { email: 'test@abc.com' } } })
+		);
+		const { container } = render(
+			<MemoryRouter
+				initialEntries={[{ pathname: '/profile', state: { email: 'test@abc.com' } }]}
+			>
+				<App />
+			</MemoryRouter>
+		);
+		await user.click(getById(container, 'delete-profile'));
+		await user.click(getById(container, 'delete-profile'));
+		await user.click(getById(container, 'modify-profile'));
 	});
 
 	test('Should logout if email not in state', async () => {
