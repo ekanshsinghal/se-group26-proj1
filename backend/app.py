@@ -1,7 +1,10 @@
+import re
 from bson import ObjectId
 from flask import Flask, request, session, jsonify
 from pymongo import MongoClient, ReturnDocument
 import bcrypt
+from urllib.parse import urlparse, parse_qs
+
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -33,11 +36,11 @@ def register():
             user_input = {"name": name, "email": email, "password": hashed}
             UserRecords.insert_one(user_input)
             
-            #find the new created account and its email
-            user_data = UserRecords.find_one({"email": email})
-            new_email = user_data["email"]
-            #if registered redirect to logged in as the registered user
-            session["email"] = new_email
+            # #find the new created account and its email
+            # user_data = UserRecords.find_one({"email": email})
+            # new_email = user_data["email"]
+            # #if registered redirect to logged in as the registered user
+            # session["email"] = new_email
             return jsonify({'message': 'Login successful'}), 200
     except Exception as e:
         print(e)
@@ -54,11 +57,11 @@ def login():
         #check if email exists in database
         email_found = UserRecords.find_one({"email": email})
         if email_found:
-            email_val = email_found["email"]
+            # email_val = email_found["email"]
             passwordcheck = email_found["password"]
             #encode the password and check if it matches
             if bcrypt.checkpw(password.encode("utf-8"), passwordcheck):
-                session["email"] = email_val
+                # session["email"] = email_val
                 return jsonify({'message': 'Login successful'}), 200
             else:
                 if "email" in session:
@@ -73,16 +76,18 @@ def login():
 
 @app.route("/logout", methods=["POST", "GET"])
 def logout():
-    if "email" in session:
-        session.pop("email", None)
+    # if "email" in session:
+    #     session.pop("email", None)
     return jsonify({'message': 'Logout successful'}), 200
 
 
 @app.route("/view_applications", methods=["GET"])
 def view_applications():
     try:
-        if "email" in session:
-            email = session["email"]
+        # if "email" in session:
+        if request:
+            # email = session["email"]
+            email = request.args.get("email")
             out = Applications.find({"email": email})
             if out:
                 applications_list = []
@@ -94,8 +99,8 @@ def view_applications():
                 return jsonify({'message': 'Applications found', 'applications': applications_list}), 200
             else:
                 return jsonify({'message': 'You have no applications'}), 200
-        else:
-            return jsonify({'error': "Not Logged in"}), 400
+        # else:
+        #     return jsonify({'error': "Not Logged in"}), 400
             
     except Exception as e:
         print(e)
@@ -104,10 +109,11 @@ def view_applications():
 @app.route("/add_application", methods=["POST"])
 def add_application():
     try:
-        if "email" in session:
+        # if "email" in session:
+        if request:
             req = request.get_json()
             application = {
-                "email": session["email"],
+                "email": req["email"],
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
                 "jobId": req["jobId"],
@@ -131,8 +137,8 @@ def add_application():
                 return jsonify({"message": "Application added successfully"}),200
             except Exception as e:
                 return jsonify({"error": "Unable to add Application"}),400
-        else:
-            return jsonify({'error': "Not Logged in"}), 400
+        # else:
+        #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
@@ -141,9 +147,10 @@ def add_application():
 @app.route("/delete_application", methods=["POST"])
 def delete_application():
     try:
-        if "email" in session:
-            email = session["email"]
+        # if "email" in session:
+        if request:
             req = request.get_json()
+            email = req["email"]
             _id = req["_id"]
             # delete_document = Applications.find_one_and_delete({"_id":jobId, "email":email})
             delete_document = Applications.find_one_and_delete({"_id":ObjectId(_id), "email":email})
@@ -151,8 +158,8 @@ def delete_application():
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
                 return jsonify({"message": "Job Application deleted successfully"}), 200
-        else:
-            return jsonify({'error': "Not Logged in"}), 400
+        # else:
+        #     return jsonify({'error': "Not Logged in"}), 400
 
     except Exception as e:
         print(e)
@@ -162,9 +169,10 @@ def delete_application():
 @app.route("/modify_application", methods=["POST"])
 def modify_application():
     try:
-        if "email" in session:
-            email = session["email"]
+        # if "email" in session:
+        if request:
             req = request.get_json()
+            email = req["email"]
             _id = req["_id"]
             filter = {'_id':ObjectId(_id), "email": email}
             # filter = {"_id": jobId, "email": email}
@@ -195,8 +203,8 @@ def modify_application():
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
                 return jsonify({"message": "Job Application modified successfully"}), 200
-        else:
-            return jsonify({'error': "Not Logged in"}), 400
+        # else:
+        #     return jsonify({'error': "Not Logged in"}), 400
     
     except Exception as e:
         print(e)
@@ -206,7 +214,8 @@ def modify_application():
 @app.route("/create_profile", methods=["post"])
 def create_profile():
     try:
-        if "email" in session:
+        # if "email" in session:
+        if request:
             req = request.get_json()
             email = req["email"]
             email_found = UserProfiles.find_one({"email": email})
@@ -253,8 +262,8 @@ def create_profile():
                     return jsonify({"message": "Profile created successfully"}),200
                 except Exception as e:
                     return jsonify({"error": "Unable to create profile"}),400
-        else:
-            return jsonify({'error': "Not Logged in"}), 400
+        # else:
+        #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
