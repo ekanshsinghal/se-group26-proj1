@@ -8,14 +8,15 @@
 ![Node](https://img.shields.io/badge/node-v16.15.1-green.svg)
 ![Python](https://img.shields.io/badge/python-v3.8-green.svg)
 
-![Open issues](https://img.shields.io/github/issues/ekanshsinghal/se-group26-proj1)
-![Closed issues](https://img.shields.io/github/issues-closed/ekanshsinghal/se-group26-proj1?color=bright-green)
+![Open issues](https://img.shields.io/github/issues-raw/ekanshsinghal/se-group26-proj1)
+![Closed issues](https://img.shields.io/github/issues-closed-raw/ekanshsinghal/se-group26-proj1?color=bright-green)
 [![frontend-build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/frontend_build_test.yml/badge.svg?branch=main)](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/frontend_build_test.yml)
 [![Backend-build](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_build.yml/badge.svg)](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_build.yml)
 [![Backend-Test](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_test.yml/badge.svg)](https://github.com/ekanshsinghal/se-group26-proj1/actions/workflows/backend_test.yml)
 
-![Lines of code](https://img.shields.io/tokei/lines/github.com/ekanshsinghal/se-group26-proj1)
+<!-- ![Lines of code](https://img.shields.io/tokei/lines-raw/github.com/ekanshsinghal/se-group26-proj1) -->
 ![Repo Size](https://img.shields.io/github/repo-size/ekanshsinghal/se-group26-proj1?color=brightgreen)
+[![GitHub Release](https://img.shields.io/github/release/ekanshsinghal/se-group26-proj1)](https://github.com/ekanshsinghal/se-group26-proj1/releases/)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
 
 ## Goal
