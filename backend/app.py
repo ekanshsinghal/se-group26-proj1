@@ -302,7 +302,7 @@ def modify_profile():
             req = request.get_json()
             _id = req["_id"]
             email = req["email"]
-            email_found = UserProfiles.find_one({"_id": _id, "email": email})
+            email_found = UserProfiles.find_one({"_id": ObjectId(_id), "email": email})
             if not email_found:
                 return jsonify({"error": "Profile not found."}),400
             else:
@@ -310,34 +310,35 @@ def modify_profile():
                     "firstName": req["firstName"],
                     "lastName": req["lastName"],
                     "email": req["email"], 
-                    "phone": req["phone"],
-                    "city": req["city"],
-                    "state": req["state"],
-                    "resume": req["resume"],
-                    "gitHub": req["gitHub"],
-                    "linkedin": req["linkedin"],
-                    "skills": req["skills"].split(","),
-                    "about": req["about"],
-                    "interests": req["interests"].split(","),
+                    "phone": req.get("phone"),
+                    "city": req.get("city"),
+                    "state": req.get("state"),
+                    "resume": req.get("resume"),
+                    "gitHub": req.get("gitHub"),
+                    "linkedIn": req.get("linkedin"),
+                    "skills": req.get("skills", '').split(","),
+                    "about": req.get("about"),
+                    "interests": req.get("interests", '').split(","),
                     "experience": {
-                        "companyName": req["companyName"],
-                        "jobTitle": req["jobTitle"],
-                        "description": req["description"],
-                        "jobCity": req["jobCity"],
-                        "jobState": req["jobState"],
-                        "jobFrom": req["jobDate"][0],
-                        "toFrom": req["jobDate"][1],
-                        "curentJob": req["curentJob"]
+                        "companyName": req.get("companyName"),
+                        "jobTitle": req.get("jobTitle"),
+                        "description": req.get("description"),
+                        "jobCity": req.get("jobCity"),
+                        "jobState": req.get("jobState"),
+                        "jobFrom": req.get("jobDate"),
+                        "toFrom": req.get("jobDate"),
+                        "curentJob": req.get("curentJob")
                     },
                     "education": {
-                        "institution": req["institution"],
-                        "major": req["major"],
-                        "degree": req["degree"],
-                        "courses": req["courses"].split(","),
-                        "location": {"universityCity": req["universityCity"], "universityState": req["universityState"]},
-                        "universityFromDate": req["universityDate"][0],
-                        "universityToDate": req["universityDate"][1],
-                        "curentUniversity": req["curentUniversity"]
+                        "institution": req.get("institution"),
+                        "major": req.get("major"),
+                        "degree": req.get("degree"),
+                        "courses": req.get("courses", '').split(","),
+                        "universityCity": req.get("universityCity"),
+                        "universityState": req.get("universityState"),
+                        "universityFromDate": req.get("universityDate"),
+                        "universityToDate": req.get("universityDate"),
+                        "curentUniversity": req.get("curentUniversity")
                     }
                 }
 
@@ -364,7 +365,7 @@ def clear_profile():
             delete_user = UserRecords.find_one({"email":email_to_delete})
             if delete_user == None:
                 return jsonify({'error': "User email not found"}), 400
-            delete_profile = UserProfiles.find_one_and_delete({"_id": _id, "email":email_to_delete})
+            delete_profile = UserProfiles.find_one_and_delete({"_id": ObjectId(_id), "email":email_to_delete})
             if delete_profile == None:
                 return jsonify({'error': "Profile not found"}), 400
             else:
