@@ -35,22 +35,22 @@
 |Question 1.3: Do you publish case studies to show how your software has been used by yourself and others?|3|Yes|
 |Question 2.1: Is the name of your project/software unique?|3|Yes|
 |Question 2.2: Is your project/software name free from trademark violations?|3|Yes|
-|Question 3.1: Is your software available as a package that can be deployed without building it?|0|No|
+|Question 3.1: Is your software available as a package that can be deployed without building it?||No|
 |Question 3.2: Is your software available for free?|3|Yes|
 |Question 3.3: Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository?|3|Yes|
 |Question 3.4: Is your software hosted in an established, third-party repository likeGitHub (https://github.com), BitBucket (https://bitbucket.org),LaunchPad (https://launchpad.net) orSourceForge (https://sourceforge.net)?|3|Yes|
 |Question 4.1: Is your documentation clearly available on your website or within your software?|3|Yes|
 |Question 4.2: Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use?|3|Yes|
-|Question 4.3: If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software?||Yes|
+|Question 4.3: If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software?|3|Yes|
 |Question 4.4: Do you provide a comprehensive guide to all your software’s commands, functions and options?|3|Yes|
 |Question 4.5: Do you provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages?|3|Yes|
 |Question 4.6: If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation?|-|N/A|
-|Question 4.7: Do you store your documentation under revision control with your source code?||Yes|
-|Question 4.8: Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation?|0|No|
+|Question 4.7: Do you store your documentation under revision control with your source code?|3|Yes|
+|Question 4.8: Do you publish your release history e.g. release data, version numbers, key features of each release etc. on your web site or in your documentation?|3|Release version badge|
 |Question 5.1: Does your software describe how a user can get help with using your software?|3|Yes|
 |Question 5.2: Does your website and documentation describe what support, if any, you provide to users and developers?|3|Yes|
-|Question 5.3: Does your project have an e-mail address or forum that is solely for supporting users?|0|No|
-|Question 5.4: Are e-mails to your support e-mail address received by more than one person?|-|N/A|
+|Question 5.3: Does your project have an e-mail address or forum that is solely for supporting users?|3|Yes|
+|Question 5.4: Are e-mails to your support e-mail address received by more than one person?|2|Reviewed by multiple people|
 |Question 5.5: Does your project have a ticketing system to manage bug reports and feature requests?|3|Yes|
 |Question 5.6: Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests?||Yes|
 |Question 6.1: Is your software’s architecture and design modular?|3|Yes|
@@ -70,11 +70,11 @@
 |Question 11.3: Do you provide publicly-available instructions for deploying your software?|3|Yes|
 |Question 11.4: Does your documentation list all third-party dependencies?|3|Yes|
 |Question 11.5: Does your documentation list the version number for all third-party dependencies?|3|Yes|
-|Question 11.6: Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?|-|N/A|
+|Question 11.6: Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?|3|Yes|
 |Question 11.7: Can you download dependencies using a dependency management tool or package manager?|3|Yes|
 |Question 11.8: Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?|3|Yes|
 |Question 12.1: Do you have an automated test suite for your software?|3|Yes|
-|Question 12.2: Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?|0|No|
+|Question 12.2: Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?|3|GitHub Actions|
 |Question 12.3: Do you use continuous integration, automatically running tests whenever changes are made to your source code?|3|Yes|
 |Question 12.4: Are your test results publicly visible?|3|Yes|
 |Question 12.5: Are all manually-run tests documented?|3|Yes|
@@ -84,7 +84,7 @@
 |Question 13.4: Do you list your important partners and collaborators on your website?|0|No|
 |Question 13.5: Do you list your project's publications on your website or link to a resource where these are available?|0|No|
 |Question 13.6: Do you list third-party publications that refer to your software on your website or link to a resource where these are available?|0|No|
-|Question 13.7: Can users subscribe to notifications to changes to your source code repository?|0|No|
+|Question 13.7: Can users subscribe to notifications to changes to your source code repository?|3|Watch|
 |Question 13.8: If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?|0|No|
 |Question 14.1: Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?|3|Yes|
 |Question 14.2: Do you have a contributions policy?|3|Yes|
