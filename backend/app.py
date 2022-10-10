@@ -235,27 +235,23 @@ def create_profile():
                     "skills": req.get("skills", '').split(","),
                     "about": req.get("about"),
                     "interests": req.get("interests", '').split(","),
-                    "experience": {
-                        "companyName": req.get("companyName"),
-                        "jobTitle": req.get("jobTitle"),
-                        "description": req.get("description"),
-                        "jobCity": req.get("jobCity"),
-                        "jobState": req.get("jobState"),
-                        "jobFrom": req.get("jobDate"),
-                        "toFrom": req.get("jobDate"),
-                        "curentJob": req.get("curentJob")
-                    },
-                    "education": {
-                        "institution": req.get("institution"),
-                        "major": req.get("major"),
-                        "degree": req.get("degree"),
-                        "courses": req.get("courses", '').split(","),
-                        "universityCity": req.get("universityCity"),
-                        "universityState": req.get("universityState"),
-                        "universityFromDate": req.get("universityDate"),
-                        "universityToDate": req.get("universityDate"),
-                        "curentUniversity": req.get("curentUniversity")
-                    }
+                    "companyName": req.get("companyName"),
+                    "jobTitle": req.get("jobTitle"),
+                    "description": req.get("description"),
+                    "jobCity": req.get("jobCity"),
+                    "jobState": req.get("jobState"),
+                    "jobFrom": req.get("jobDate"),
+                    "toFrom": req.get("jobDate"),
+                    "curentJob": req.get("curentJob"),
+                    "institution": req.get("institution"),
+                    "major": req.get("major"),
+                    "degree": req.get("degree"),
+                    "courses": req.get("courses", '').split(","),
+                    "universityCity": req.get("universityCity"),
+                    "universityState": req.get("universityState"),
+                    "universityFromDate": req.get("universityDate"),
+                    "universityToDate": req.get("universityDate"),
+                    "curentUniversity": req.get("curentUniversity")
                 }
                 try:
                     UserProfiles.insert_one(user_profile)
@@ -319,27 +315,23 @@ def modify_profile():
                     "skills": req.get("skills", '').split(","),
                     "about": req.get("about"),
                     "interests": req.get("interests", '').split(","),
-                    "experience": {
-                        "companyName": req.get("companyName"),
-                        "jobTitle": req.get("jobTitle"),
-                        "description": req.get("description"),
-                        "jobCity": req.get("jobCity"),
-                        "jobState": req.get("jobState"),
-                        "jobFrom": req.get("jobDate"),
-                        "toFrom": req.get("jobDate"),
-                        "curentJob": req.get("curentJob")
-                    },
-                    "education": {
-                        "institution": req.get("institution"),
-                        "major": req.get("major"),
-                        "degree": req.get("degree"),
-                        "courses": req.get("courses", '').split(","),
-                        "universityCity": req.get("universityCity"),
-                        "universityState": req.get("universityState"),
-                        "universityFromDate": req.get("universityDate"),
-                        "universityToDate": req.get("universityDate"),
-                        "curentUniversity": req.get("curentUniversity")
-                    }
+                    "companyName": req.get("companyName"),
+                    "jobTitle": req.get("jobTitle"),
+                    "description": req.get("description"),
+                    "jobCity": req.get("jobCity"),
+                    "jobState": req.get("jobState"),
+                    "jobFrom": req.get("jobDate"),
+                    "toFrom": req.get("jobDate"),
+                    "curentJob": req.get("curentJob"),
+                    "institution": req.get("institution"),
+                    "major": req.get("major"),
+                    "degree": req.get("degree"),
+                    "courses": req.get("courses", '').split(","),
+                    "universityCity": req.get("universityCity"),
+                    "universityState": req.get("universityState"),
+                    "universityFromDate": req.get("universityDate"),
+                    "universityToDate": req.get("universityDate"),
+                    "curentUniversity": req.get("curentUniversity")
                 }
 
                 set_values = {"$set":user_profile}
