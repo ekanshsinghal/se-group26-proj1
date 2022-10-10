@@ -1,30 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, message, Skeleton, Typography } from 'antd';
 import { useLocation } from 'react-router-dom';
-
-import './Profile.scss';
 import axios from 'axios';
 
+import './Profile.scss';
+
 export default function Profile() {
+	const [form] = Form.useForm();
 	const [loading, setloading] = useState(true);
+	const [profileExists, setProfileExists] = useState(false);
 	const { state } = useLocation();
-	const [initialValues, setInitialValues] = useState({ email: state.email });
+	const [initialValues, setInitialValues] = useState();
 
 	useEffect(() => {
 		axios
 			.get('/api/view_profile?email=' + state.email)
-			.then(({ data }) => setInitialValues({ ...initialValues, ...data }))
-			.catch((err) => message.error(err.response.data?.error))
+			.then(({ data }) => {
+				if (Object.keys(data.profile).length === 0) {
+					setInitialValues({ email: state.email });
+					setProfileExists(false);
+				} else {
+					setInitialValues(data.profile);
+					setProfileExists(true);
+				}
+			})
+			.catch((err) => message.error(err.response?.data?.error))
 			.finally(() => setloading(false));
 	}, []);
 
 	const saveProfile = (values) => {
 		const loading = message.loading('Loading...', 0);
 		axios
-			.post('/api/modify_profile', values)
-			.then(({ data }) => console.log(data))
+			.post('/api/create_profile', values)
+			.then(() => message.success('Profile created.'))
 			.catch((err) => message.error(err.response.data?.error))
 			.finally(() => loading());
+	};
+
+	const modifyProfile = () => {
+		form.validateFields()
+			.then((values) =>
+				axios
+					.post('/api/modify_profile', { ...values, _id: initialValues._id })
+					.then(() => message.success('Profile Updated.'))
+					.catch(() => message.error('Failed to update the profile.'))
+			)
+			.catch((err) => console.log(err));
+	};
+
+	const deleteProfile = () => {
+		axios
+			.post('/api/clear_profile', { email: initialValues.email, _id: initialValues._id })
+			.then(() => message.success('Profile Deleted.'))
+			.catch(() => message.error('Failed to delete the profile.'));
 	};
 
 	return (
@@ -34,10 +62,11 @@ export default function Profile() {
 				<Skeleton active />
 			) : (
 				<Form
+					form={form}
 					size="large"
 					requiredMark={false}
-					labelCol={{ span: 3 }}
-					wrapperCol={{ span: 9 }}
+					labelCol={{ span: 4 }}
+					wrapperCol={{ span: 10 }}
 					onFinish={saveProfile}
 					initialValues={initialValues}
 				>
@@ -144,11 +173,33 @@ export default function Profile() {
 					<Form.Item label="Start/End Date" name="universityDate">
 						<DatePicker.RangePicker />
 					</Form.Item>
-					<Form.Item wrapperCol={{ span: 4, offset: 4 }}>
-						<Button type="primary" htmlType="submit" block id="save-profile">
-							Save
-						</Button>
-					</Form.Item>
+					{profileExists ? (
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'space-around',
+								width: '60%',
+							}}
+						>
+							<Button
+								type="primary"
+								id="delete-profile"
+								danger
+								onClick={deleteProfile}
+							>
+								Delete Profile
+							</Button>
+							<Button type="primary" id="modify-profile" onClick={modifyProfile}>
+								Update Profile
+							</Button>
+						</div>
+					) : (
+						<Form.Item wrapperCol={{ span: 4, offset: 4 }}>
+							<Button type="primary" htmlType="submit" block id="save-profile">
+								Save Profile
+							</Button>
+						</Form.Item>
+					)}
 				</Form>
 			)}
 		</div>

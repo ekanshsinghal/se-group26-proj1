@@ -222,40 +222,40 @@ def create_profile():
             if email_found:
                 return jsonify({"error": "Profile already created."}),400
             else:
-                job_location = {"jobCity": req["jobCity"], "jobState": req["jobState"]}
-                experience = {
-                    "companyName": req["companyName"],
-                    "jobTitle": req["jobTitle"],
-                    "description": req["description"],
-                    "jobLocation": job_location,
-                    "jobFrom": req["jobDate"][0],
-                    "toFrom": req["jobDate"][1],
-                    "curentJob": req["curentJob"]
-                }
-                university_location = {"city": req["universityCity"], "state": req["universityState"]}
-                education = {
-                    "institution": req["institution"],
-                    "major": req["major"],
-                    "degree": req["degree"],
-                    "courses": req["courses"].split(","),
-                    "university_location": university_location,
-                    "universityFromDate": req["universityDate"][0],
-                    "universityToDate": req["universityDate"][1],
-                    "curentUniversity": req["curentUniversity"]
-                }
                 user_profile = {
-                    "name": {"firstName": req["firstName"], "lastName": req["lastName"]}, 
+                    "firstName": req["firstName"],
+                    "lastName": req["lastName"],
                     "email": req["email"], 
-                    "phone": req["phone"],
-                    "location": {"city": req["city"], "state": req["state"]},
-                    "resume": req["resume"],
-                    "gitHub": req["gitHub"],
-                    "linkedIn": req["linkedin"],
-                    "skills": req["skills"].split(","),
-                    "about": req["about"],
-                    "interests": req["interests"].split(","),
-                    "experience": experience,
-                    "education": education
+                    "phone": req.get("phone"),
+                    "city": req.get("city"),
+                    "state": req.get("state"),
+                    "resume": req.get("resume"),
+                    "gitHub": req.get("gitHub"),
+                    "linkedIn": req.get("linkedin"),
+                    "skills": req.get("skills", '').split(","),
+                    "about": req.get("about"),
+                    "interests": req.get("interests", '').split(","),
+                    "experience": {
+                        "companyName": req.get("companyName"),
+                        "jobTitle": req.get("jobTitle"),
+                        "description": req.get("description"),
+                        "jobCity": req.get("jobCity"),
+                        "jobState": req.get("jobState"),
+                        "jobFrom": req.get("jobDate"),
+                        "toFrom": req.get("jobDate"),
+                        "curentJob": req.get("curentJob")
+                    },
+                    "education": {
+                        "institution": req.get("institution"),
+                        "major": req.get("major"),
+                        "degree": req.get("degree"),
+                        "courses": req.get("courses", '').split(","),
+                        "universityCity": req.get("universityCity"),
+                        "universityState": req.get("universityState"),
+                        "universityFromDate": req.get("universityDate"),
+                        "universityToDate": req.get("universityDate"),
+                        "curentUniversity": req.get("curentUniversity")
+                    }
                 }
                 try:
                     UserProfiles.insert_one(user_profile)
@@ -306,38 +306,39 @@ def modify_profile():
             if not email_found:
                 return jsonify({"error": "Profile not found."}),400
             else:
-                experience = {
-                    "companyName": req["companyName"],
-                    "jobTitle": req["jobTitle"],
-                    "description": req["description"],
-                    "job_location": {"jobCity": req["jobCity"], "jobState": req["jobState"]},
-                    "jobFrom": req["jobDate"][0],
-                    "toFrom": req["jobDate"][1],
-                    "curentJob": req["curentJob"]
-                }
-                education = {
-                    "institution": req["institution"],
-                    "major": req["major"],
-                    "degree": req["degree"],
-                    "courses": req["courses"].split(","),
-                    "location": {"universityCity": req["universityCity"], "universityState": req["universityState"]},
-                    "universityFromDate": req["universityDate"][0],
-                    "universityToDate": req["universityDate"][1],
-                    "curentUniversity": req["curentUniversity"]
-                }
                 user_profile = {
-                    "name": {"firstName": req["firstName"], "lastName": req["lastName"]}, 
+                    "firstName": req["firstName"],
+                    "lastName": req["lastName"],
                     "email": req["email"], 
                     "phone": req["phone"],
-                    "location": {"city": req["city"], "state": req["state"]},
+                    "city": req["city"],
+                    "state": req["state"],
                     "resume": req["resume"],
                     "gitHub": req["gitHub"],
                     "linkedin": req["linkedin"],
                     "skills": req["skills"].split(","),
                     "about": req["about"],
                     "interests": req["interests"].split(","),
-                    "experience": experience,
-                    "education": education
+                    "experience": {
+                        "companyName": req["companyName"],
+                        "jobTitle": req["jobTitle"],
+                        "description": req["description"],
+                        "jobCity": req["jobCity"],
+                        "jobState": req["jobState"],
+                        "jobFrom": req["jobDate"][0],
+                        "toFrom": req["jobDate"][1],
+                        "curentJob": req["curentJob"]
+                    },
+                    "education": {
+                        "institution": req["institution"],
+                        "major": req["major"],
+                        "degree": req["degree"],
+                        "courses": req["courses"].split(","),
+                        "location": {"universityCity": req["universityCity"], "universityState": req["universityState"]},
+                        "universityFromDate": req["universityDate"][0],
+                        "universityToDate": req["universityDate"][1],
+                        "curentUniversity": req["curentUniversity"]
+                    }
                 }
 
                 set_values = {"$set":user_profile}
