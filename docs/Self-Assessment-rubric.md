@@ -24,10 +24,10 @@
 |Issues are discussed before they are closed, even if you discuss in slack, need a sumamry statement here|3|Yes. We have a WhatsApp group where we discuss issues. We also use github issues to keep track of the issues found in the application(https://github.com/ekanshsinghal/se-group26-proj1/issues)
 |Chat channel: exists|3|Yes. We have a WhatsApp group to discuss the projects.
 |Test cases: a large proportion of the issues related to handling failing cases.|3|https://github.com/ekanshsinghal/se-group26-proj1/issues
-|Evidence that the whole team is using the same tools: everyone can get to all tools and files|3|
-|Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|3|
-|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|3
-|Evidence that the members of the team are working across multiple places in the code base|3
+|Evidence that the whole team is using the same tools: everyone can get to all tools and files|3|github, VSCode
+|Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)|3|.prettierrc, .eslintrc, .babelrc, .pylintrc
+|Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)|3|Everyone can demostrate the project
+|Evidence that the members of the team are working across multiple places in the code base|3|frontend, backend, database, documentation, Github Actions, Tests
 |Short release cycles |3|https://github.com/ekanshsinghal/se-group26-proj1/commits/main|
 ||||
 |Question 1.1: Does your website and documentation provide a clear, high-level overview of your software?|3|Yes|
