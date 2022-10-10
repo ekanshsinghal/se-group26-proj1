@@ -60,6 +60,9 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 
 https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
 
+## Basic Design
+![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Design.png)
+
 ## Roadmap
 ![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Features.png)
 
