@@ -19,6 +19,10 @@
 [![GitHub Release](https://img.shields.io/github/release/ekanshsinghal/se-group26-proj1)](https://github.com/ekanshsinghal/se-group26-proj1/releases/)
 [![codecov](https://codecov.io/github/ekanshsinghal/se-group26-proj1/branch/main/graph/badge.svg?token=fHCWUMUXXr)](https://codecov.io/github/ekanshsinghal/se-group26-proj1)
 
+## Poster
+![Job Trackr X Large Poster-page-001](https://user-images.githubusercontent.com/30636208/197045427-8a170133-5468-42d4-a10e-2b9de0ada1fc.jpg)
+
+
 ## Goal
 
 Your personalized JobTracker application in one place!
