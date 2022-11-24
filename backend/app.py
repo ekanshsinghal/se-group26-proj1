@@ -9,8 +9,9 @@ from urllib.parse import urlparse, parse_qs
 app = Flask(__name__)
 app.secret_key = "testing"
 
-client = MongoClient("mongodb+srv://se_test_user:se_test_user123@cluster0.npdziph.mongodb.net/?retryWrites=true&w=majority")
-db = client.get_database("Test")
+client = MongoClient(
+    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tls=False)
+db = client.get_database("development")
 UserRecords = db.register
 Applications = db.Applications
 UserProfiles = db.Profiles
@@ -30,12 +31,13 @@ def register():
             return jsonify({'error': "This email already exists in database"}), 400
         if password != confirmPassword:
             return jsonify({'error': "Passwords should match!"}), 400
-        
+
         else:
-            hashed = bcrypt.hashpw(confirmPassword.encode("utf-8"), bcrypt.gensalt())
+            hashed = bcrypt.hashpw(
+                confirmPassword.encode("utf-8"), bcrypt.gensalt())
             user_input = {"name": name, "email": email, "password": hashed}
             UserRecords.insert_one(user_input)
-            
+
             # #find the new created account and its email
             # user_data = UserRecords.find_one({"email": email})
             # new_email = user_data["email"]
@@ -54,12 +56,12 @@ def login():
         email = req["email"]
         password = req["password"]
 
-        #check if email exists in database
+        # check if email exists in database
         email_found = UserRecords.find_one({"email": email})
         if email_found:
             # email_val = email_found["email"]
             passwordcheck = email_found["password"]
-            #encode the password and check if it matches
+            # encode the password and check if it matches
             if bcrypt.checkpw(password.encode("utf-8"), passwordcheck):
                 # session["email"] = email_val
                 return jsonify({'message': 'Login successful'}), 200
@@ -94,17 +96,18 @@ def view_applications():
                 # payload["msg"]="Applications present"
                 for i in out:
                     del i['email']
-                    i['_id']=str(i['_id'])
+                    i['_id'] = str(i['_id'])
                     applications_list.append(i)
                 return jsonify({'message': 'Applications found', 'applications': applications_list}), 200
             else:
                 return jsonify({'message': 'You have no applications'}), 200
         # else:
         #     return jsonify({'error': "Not Logged in"}), 400
-            
+
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
+
 
 @app.route("/add_application", methods=["POST"])
 def add_application():
@@ -134,9 +137,9 @@ def add_application():
             }
             try:
                 Applications.insert_one(application)
-                return jsonify({"message": "Application added successfully"}),200
+                return jsonify({"message": "Application added successfully"}), 200
             except Exception as e:
-                return jsonify({"error": "Unable to add Application"}),400
+                return jsonify({"error": "Unable to add Application"}), 400
         # else:
         #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
@@ -153,7 +156,8 @@ def delete_application():
             email = req["email"]
             _id = req["_id"]
             # delete_document = Applications.find_one_and_delete({"_id":jobId, "email":email})
-            delete_document = Applications.find_one_and_delete({"_id":ObjectId(_id), "email":email})
+            delete_document = Applications.find_one_and_delete(
+                {"_id": ObjectId(_id), "email": email})
             if delete_document == None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
@@ -174,7 +178,7 @@ def modify_application():
             req = request.get_json()
             email = req["email"]
             _id = req["_id"]
-            filter = {'_id':ObjectId(_id), "email": email}
+            filter = {'_id': ObjectId(_id), "email": email}
             # filter = {"_id": jobId, "email": email}
 
             application = {
@@ -198,14 +202,15 @@ def modify_application():
                 "status": req["status"]
             }
             set_values = {"$set": application}
-            modify_document = Applications.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
+            modify_document = Applications.find_one_and_update(
+                filter, set_values, return_document=ReturnDocument.AFTER)
             if modify_document == None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
                 return jsonify({"message": "Job Application modified successfully"}), 200
         # else:
         #     return jsonify({'error': "Not Logged in"}), 400
-    
+
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
@@ -220,12 +225,12 @@ def create_profile():
             email = req["email"]
             email_found = UserProfiles.find_one({"email": email})
             if email_found:
-                return jsonify({"error": "Profile already created."}),400
+                return jsonify({"error": "Profile already created."}), 400
             else:
                 user_profile = {
                     "firstName": req["firstName"],
                     "lastName": req["lastName"],
-                    "email": req["email"], 
+                    "email": req["email"],
                     "phone": req.get("phone"),
                     "city": req.get("city"),
                     "state": req.get("state"),
@@ -255,9 +260,9 @@ def create_profile():
                 }
                 try:
                     UserProfiles.insert_one(user_profile)
-                    return jsonify({"message": "Profile created successfully"}),200
+                    return jsonify({"message": "Profile created successfully"}), 200
                 except Exception as e:
-                    return jsonify({"error": "Unable to create profile"}),400
+                    return jsonify({"error": "Unable to create profile"}), 400
         # else:
         #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
@@ -291,21 +296,22 @@ def view_profile():
 
 
 @app.route("/modify_profile", methods=["POST"])
-def modify_profile(): 
+def modify_profile():
     try:
         # if "email" in session:
         if request:
             req = request.get_json()
             _id = req["_id"]
             email = req["email"]
-            email_found = UserProfiles.find_one({"_id": ObjectId(_id), "email": email})
+            email_found = UserProfiles.find_one(
+                {"_id": ObjectId(_id), "email": email})
             if not email_found:
-                return jsonify({"error": "Profile not found."}),400
+                return jsonify({"error": "Profile not found."}), 400
             else:
                 user_profile = {
                     "firstName": req["firstName"],
                     "lastName": req["lastName"],
-                    "email": req["email"], 
+                    "email": req["email"],
                     "phone": req.get("phone"),
                     "city": req.get("city"),
                     "state": req.get("state"),
@@ -334,18 +340,20 @@ def modify_profile():
                     "curentUniversity": req.get("curentUniversity")
                 }
 
-                set_values = {"$set":user_profile}
+                set_values = {"$set": user_profile}
                 filter = {"email": email}
-                modify_document = UserProfiles.find_one_and_update(filter, set_values, return_document = ReturnDocument.AFTER)
+                modify_document = UserProfiles.find_one_and_update(
+                    filter, set_values, return_document=ReturnDocument.AFTER)
                 if modify_document == None:
-                    return jsonify({"error": "Unable to modify profile"}),400
+                    return jsonify({"error": "Unable to modify profile"}), 400
                 else:
-                    return jsonify({"message": "Profile modified successfully"}),200    
+                    return jsonify({"message": "Profile modified successfully"}), 200
         # else:
         #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
         print(e)
-        return jsonify({'error': "Something went wrong"}), 400    
+        return jsonify({'error': "Something went wrong"}), 400
+
 
 @app.route("/clear_profile", methods=["POST"])
 def clear_profile():
@@ -354,10 +362,11 @@ def clear_profile():
             req = request.get_json()
             email_to_delete = req["email"]
             _id = req["_id"]
-            delete_user = UserRecords.find_one({"email":email_to_delete})
+            delete_user = UserRecords.find_one({"email": email_to_delete})
             if delete_user == None:
                 return jsonify({'error': "User email not found"}), 400
-            delete_profile = UserProfiles.find_one_and_delete({"_id": ObjectId(_id), "email":email_to_delete})
+            delete_profile = UserProfiles.find_one_and_delete(
+                {"_id": ObjectId(_id), "email": email_to_delete})
             if delete_profile == None:
                 return jsonify({'error': "Profile not found"}), 400
             else:
@@ -371,4 +380,4 @@ def clear_profile():
 
 
 if __name__ == "__main__":
-  app.run(debug=True, host="0.0.0.0", port=8000)
+    app.run(debug=True, host="0.0.0.0", port=8000)
