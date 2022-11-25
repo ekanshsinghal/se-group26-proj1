@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "testing"
 
 client = MongoClient(
-    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tls=False)
+    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tlsAllowInvalidCertificates=True)
 db = client.get_database("development")
 UserRecords = db.register
 Applications = db.Applications
