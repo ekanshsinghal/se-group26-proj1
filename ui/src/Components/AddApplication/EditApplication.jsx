@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
-
+import config from '../../config';
 const statuses = {
 	applied: 'Applied',
 	inReview: 'In Review',
@@ -23,7 +23,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 	const updateApplication = (values) => {
 		const loading = message.loading('Saving...', 0);
 		axios
-			.post('/api/modify_application', {
+			.post(`${config.base_url}/modify_application`, {
 				...values,
 				_id: application._id,
 				email,

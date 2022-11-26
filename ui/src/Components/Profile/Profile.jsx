@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, message, Skeleton, Typography } from 'antd';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-
+import config from '../../config';
 import './Profile.scss';
 
 export default function Profile() {
@@ -14,7 +14,7 @@ export default function Profile() {
 
 	useEffect(() => {
 		axios
-			.get('/api/view_profile?email=' + state.email)
+			.get(`${config.base_url}/view_profile?email=` + state.email)
 			.then(({ data }) => {
 				if (Object.keys(data.profile).length === 0) {
 					setInitialValues({ email: state.email });

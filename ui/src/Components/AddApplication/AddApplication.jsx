@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, DatePicker, Form, Input, message, Modal, Select } from 'antd';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import config from '../../config';
 
 const statuses = {
 	applied: 'Applied',
@@ -23,7 +24,7 @@ export default function AddApplication({ isOpen, onClose, updateApplications }) 
 
 	const onOk = (values) => {
 		axios
-			.post('/api/add_application', { ...values, email: state.email })
+			.post(`${config.base_url}/add_application`, { ...values, email: state.email })
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();

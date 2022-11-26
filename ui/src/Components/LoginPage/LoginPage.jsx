@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Checkbox, Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
-
+import config from '../../config';
 import './LoginPage.scss';
 
 export default function LoginPage() {
@@ -12,7 +12,7 @@ export default function LoginPage() {
 	const onFinish = (values) => {
 		const loading = message.loading('Loading...', 0);
 		axios
-			.post('/api/login', values)
+			.post(`${config.base_url}/login`, values)
 			.then(() => {
 				navigate('/home', { state: { email: values.email } });
 			})

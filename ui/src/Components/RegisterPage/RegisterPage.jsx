@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Form, Input, message, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import config from '../../config';
 import './RegisterPage.scss';
 
 export default function RegisterPage() {
@@ -10,7 +10,7 @@ export default function RegisterPage() {
 	const onFinish = (values) => {
 		const loading = message.loading('Loading...', 0);
 		axios
-			.post('/api/register', values)
+			.post(`${config.base_url}/register`, values)
 			.then(() => navigate('/home', { state: { email: values.email } }))
 			.catch((err) => message.error(err.response.data?.error))
 			.finally(() => loading());

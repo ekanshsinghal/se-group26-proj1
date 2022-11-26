@@ -1,0 +1,23 @@
+---
+- name: Deploying the application
+  hosts: all
+  tasks:
+    - name: Start docker service
+      service:
+        name: docker
+        state: started
+
+    - name: Copy docker compose file
+      become: false
+      copy:
+        src: ./docker-compose.yml
+        dest: ./
+        owner: ec2-user
+        group: ec2-user
+        mode: 0777
+
+    - name: clean the docker compose workspace
+      shell: docker-compose down
+
+    - name: Start the application
+      shell: docker-compose up -d

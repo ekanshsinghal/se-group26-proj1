@@ -3,7 +3,7 @@ import { Button, Card, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-
+import config from '../../config';
 import AddSavedJob from './AddSavedJob';
 import './SavedJobs.scss';
 
@@ -21,7 +21,7 @@ export default function SavedJobs() {
 
 	const updateApplications = () => {
 		axios
-			.get('/api/view_applications?email=' + state.email)
+			.get(`${config.base_url}/view_applications?email` + state.email)
 			.then(({ data }) =>
 				setApplications(data.applications.filter((app) => app.status == 'saved'))
 			)

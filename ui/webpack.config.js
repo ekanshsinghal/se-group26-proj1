@@ -20,12 +20,12 @@ module.exports = (_, argv) => {
 			historyApiFallback: true,
 			hot: true,
 			port: 3000,
-			proxy: {
-				'/api': {
-					target: 'http://127.0.0.1:8000',
-					pathRewrite: { '^/api': '' },
-				},
-			},
+			// proxy: {
+			// 	'/api': {
+			// 		target: 'http://172.18.0.2:8000',
+			// 		pathRewrite: { '^/api': '' },
+			// 	},
+			// },
 		},
 		module: {
 			rules: [

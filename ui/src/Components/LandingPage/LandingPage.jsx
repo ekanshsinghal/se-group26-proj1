@@ -3,7 +3,7 @@ import { Button, Card, Tag, Typography } from 'antd';
 import { EditFilled, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-
+import config from '../../config';
 import AddApplication from '../AddApplication/AddApplication';
 import EditApplication from '../AddApplication/EditApplication';
 import './LandingPage.scss';
@@ -28,7 +28,7 @@ export default function LandingPage() {
 
 	const updateApplications = () => {
 		axios
-			.get('/api/view_applications?email=' + state.email)
+			.get(`${config.base_url}/view_applications?email=` + state.email)
 			.then(({ data }) => setApplications(data.applications))
 			.catch((err) => console.log(err))
 			.finally(() => setLoading(false));
