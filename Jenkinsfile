@@ -6,34 +6,6 @@ pipeline {
                 git url: 'https://github.com/jayrajmulani/se-group1-project2', branch: 'main'
             }
         }
-        stage("Prerequisite") {
-            steps{
-                dir('ui'){
-                    sh 'npm install'
-                }
-            }
-        }
-        // stage('Test Frontend'){
-        //     steps{
-        //         dir('ui'){
-        //             sh 'npm test'
-        //         }
-        //     }
-        // }
-        // stage('Test Backend'){
-        //     steps {
-        //         dir('backend'){
-        //             sh 'mvn clean test'
-        //         }   
-        //     }
-        // }
-        // stage('Build'){
-        //     steps {
-        //         dir('spe_majorProject'){
-        //             sh 'mvn install'   
-        //         }
-        //     }
-        // }
         stage('Docker Build and Push'){
             steps {
                 dir('ui'){
