@@ -20,4 +20,4 @@
       shell: docker-compose down
 
     - name: Start the application
-      shell: docker-compose up
+      shell: docker-compose up -d
