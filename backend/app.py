@@ -4,10 +4,11 @@ from flask import Flask, request, session, jsonify
 from pymongo import MongoClient, ReturnDocument
 import bcrypt
 from urllib.parse import urlparse, parse_qs
-
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = "testing"
+CORS(app)
 
 client = MongoClient(
     "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tlsAllowInvalidCertificates=True)
