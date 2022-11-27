@@ -18,6 +18,11 @@ Applications = db.Applications
 UserProfiles = db.Profiles
 
 
+@app.route("/")
+def hello():
+    return "Hello"
+
+
 @app.route("/register", methods=["post"])
 def register():
     try:
