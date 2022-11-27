@@ -17,6 +17,8 @@ UserRecords = db.register
 Applications = db.Applications
 UserProfiles = db.Profiles
 
+# Test commit
+
 
 @app.route("/register", methods=["post"])
 def register():
