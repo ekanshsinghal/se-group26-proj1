@@ -1,25 +1,25 @@
 version: '3.3'
-
 services:
+  frontend:
+    image: jayrajmulani/jobtrackr_ui
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - jobtrackr
+    # pull_policy: always
+
   backend:
-    build: ./backend
-    expose:
-     - 8000
+    image: jayrajmulani/jobtrackr_backend
+    container_name: backend
     ports:
-      - 8000:8000
-    volumes:
-      - ./backend:/code/backend
-    environment:
-      - FLASK_ENV=production
-      - FLASK_APP=app.py
-  ui:
-    build: ./ui
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
-    volumes:
-      - ./ui/src/:/code/ui/src
-      - ./ui/public/:/code/ui/public
-    links:
-      - "backend:backend"
+      - "8000:8000"
+    networks:
+      - jobtrackr
+    # pull_policy: always
+  
+networks:
+  jobtrackr:
+
