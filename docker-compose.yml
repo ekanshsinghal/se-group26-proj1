@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.8'
 services:
   frontend:
     image: jayrajmulani/jobtrackr_ui
@@ -9,7 +9,7 @@ services:
       - backend
     networks:
       - jobtrackr
-    # pull_policy: always
+    pull_policy: always
 
   backend:
     image: jayrajmulani/jobtrackr_backend
@@ -18,7 +18,7 @@ services:
       - "8000:8000"
     networks:
       - jobtrackr
-    # pull_policy: always
+    pull_policy: always
   
 networks:
   jobtrackr:
