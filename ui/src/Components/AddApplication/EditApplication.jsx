@@ -41,7 +41,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 
 	const deleteApplication = () => {
 		axios
-			.post('/api/delete_application', { ...application, email })
+			.post(`${config.base_url}/delete_application`, { ...application, email })
 			.then(({ data }) => {
 				message.success(data.message);
 				updateApplications();
