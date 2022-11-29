@@ -188,7 +188,7 @@ def modify_application():
             # filter = {"_id": jobId, "email": email}
 
             application = {
-                "email": session["email"],
+                "email": email,
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
                 "jobId": req["jobId"],
