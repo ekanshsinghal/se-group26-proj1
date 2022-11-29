@@ -38,46 +38,18 @@ Excel sheets that are complex and disorganized must go! Every job-related data c
 https://user-images.githubusercontent.com/30636208/194798331-9338219d-cdbd-4ff1-96fa-b1425dfc9504.mp4
 
 
-## Built using
+## Built Using
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/30636208/194690148-8e3dbe93-2ede-4da8-a44a-e4ee165b6b3b.png" width="150"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="150"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width="150"> <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" width ="150"/> <img src="https://camo.githubusercontent.com/36ecb78d148678488fa43e5916e131906c15ea485b30232739d5633b2e0ce18c/68747470733a2f2f6b6576696e2d62726f776e2e636f6d2f696d616765732f666c61736b2d6c6f676f2e737667" width ="150"/> 
+<img src="https://user-images.githubusercontent.com/30636208/194690148-8e3dbe93-2ede-4da8-a44a-e4ee165b6b3b.png" width="100" style="margin-left:50px"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="100" style="margin-left:50px"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width="100" style="margin-left:50px"> <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" width ="100" style="margin-left:50px"/> <img src="https://camo.githubusercontent.com/36ecb78d148678488fa43e5916e131906c15ea485b30232739d5633b2e0ce18c/68747470733a2f2f6b6576696e2d62726f776e2e636f6d2f696d616765732f666c61736b2d6c6f676f2e737667" width ="100" style="margin-left:25px"/> 
 </p>
 
 
-## Basic Design
+<!-- ## Basic Design
 ![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Design.png)
 
 ## Roadmap
-![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Features.png)
-
-
-## Application Demo
-
-https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
-
-## Screenshots
-
--   Register Page
-
-    ![image](https://user-images.githubusercontent.com/30636208/194688086-ba40502a-e58b-441d-855d-585fecde3ec9.png)
-
--   Login Page
-
-    ![image](https://user-images.githubusercontent.com/30636208/194688064-d40566de-dcc4-424c-8059-14d655fb7109.png)
-
--   My Applications Page
-
-    ![My Applications page](https://user-images.githubusercontent.com/30636208/194687994-0ed3a4ac-3856-4ba9-a3af-9acf9d79ca08.png)
-
--   Add Application Page
-
-    ![image](https://user-images.githubusercontent.com/30636208/194688445-78b7d7b2-6af5-48f1-9197-ba65924660e1.png)
-
--   Profile Page
-
-    ![image](https://user-images.githubusercontent.com/30636208/194688372-b01a8cb5-b87d-40e3-95af-2cee42fc8de3.png)
-
+![image](https://github.com/ekanshsinghal/se-group26-proj1/blob/main/resources/Features.png) -->
 
 
 ## Built With
@@ -90,7 +62,25 @@ https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-
 -   `Flask`
 -   `MongoDB`
 
+## Deployed Using
+
+<p align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jenkins_logo.svg/langfr-1024px-Jenkins_logo.svg.png" width="100" style="margin-left:50px"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/2560px-Amazon_Web_Services_Logo.svg.png" width="150" style="margin-left:50px"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Docker_logo.svg/2880px-Docker_logo.svg.png" width="200" style="margin-left:50px; margin-bottom:25px"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/1280px-Ansible_logo.svg.png" width="100" style="margin-left:50px">
+</p>
+
+## Deployed With
+
+-   `AWS`
+-   `Docker`
+-   `Jenkins`
+-   `Ansible`
+
+
 Note: This repository is configured with [Dart-sass](https://github.com/sass/dart-sass) and not [Node Sass].
+
+## Application Demo
+
+https://user-images.githubusercontent.com/30636208/194689139-29cdb217-a9e1-4fea-977d-74cbeb6d6799.mp4
 
 ## Getting Started
 
@@ -199,6 +189,13 @@ python backend\tests.py
 ## Contributors 👨‍🏭
 
 <table>
+<tr>
+    <td align="center"><a href="https://github.com/jayrajmulani"><img src="https://avatars.githubusercontent.com/u/39649967?v=4" width="100px;" alt=""/><br /><sub><b>Jayraj Mulani</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Yashasya"><img src="https://avatars.githubusercontent.com/u/40204748?s=400&u=7a61d3a684ea684e3a2b3f2c3e83d90fd3e8ac0a&v=4" width="100px;" alt=""/><br /><sub><b>Yashasya Shah</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Dhrumil0310"><img src="https://avatars.githubusercontent.com/u/50771715?v=4" width="100px;" alt=""/><br /><sub><b>Dhrumil Shah</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Harshil47"><img src="https://avatars.githubusercontent.com/u/66715871?v=4" width="100px;" alt=""/><br /><sub><b>Harshil Sanghavi</b></sub></a></td>
+    <td align="center"><a href="https://github.com/anishasc99"><img src="https://avatars.githubusercontent.com/u/67101520?v=4" width="100px;" alt=""/><br /><sub><b>Anisha Chazhoor</b></sub></a></td>
+</tr>
   <tr>
     <td align="center"><a href="https://github.com/rahulrk2303"><img src="https://avatars.githubusercontent.com/u/30636208?v=4" width="100px;" alt=""/><br /><sub><b>Rahul Rangarajan Kannan</b></sub></a></td>
     <td align="center"><a href="https://github.com/ekanshsinghal"><img src="https://avatars.githubusercontent.com/u/15945880?v=4" width="100px;" alt=""/><br /><sub><b>Ekansh Singhal</b></sub></a></td>
