@@ -20,7 +20,7 @@ UserProfiles = db.Profiles
 
 @app.route("/")
 def hello():
-    return "Hello"
+    return "Hello, Track your job on :3000"
 
 
 @app.route("/register", methods=["post"])
