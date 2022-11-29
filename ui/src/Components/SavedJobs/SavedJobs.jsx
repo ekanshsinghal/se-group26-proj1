@@ -21,7 +21,7 @@ export default function SavedJobs() {
 
 	const updateApplications = () => {
 		axios
-			.get(`${config.base_url}/view_applications?email` + state.email)
+			.get(`${config.base_url}/view_applications?email=` + state.email)
 			.then(({ data }) =>
 				setApplications(data.applications.filter((app) => app.status == 'saved'))
 			)

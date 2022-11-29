@@ -126,7 +126,7 @@ def add_application():
                 "companyName": req["companyName"],
                 "jobTitle": req["jobTitle"],
                 "jobId": req["jobId"],
-                "description": req["description"],
+                "description": req["description"] if "description" in req.keys() else None,
                 "url": req["url"],
                 # "details": {
                 #     "Industry": "Software Development",
@@ -138,7 +138,7 @@ def add_application():
                 #         "State": "WA"
                 #     },
                 # },
-                "date": req["date"],
+                "date": req["date"] if "date" in req.keys() else None,
                 "status": req["status"]
             }
             try:
@@ -151,7 +151,6 @@ def add_application():
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
-
 
 @app.route("/delete_application", methods=["POST"])
 def delete_application():
