@@ -32,7 +32,7 @@ jobs:
         git diff-index --quiet HEAD || git commit -m "CI: Automated build push" -a
     - name: Push Documentation
       if: github.ref == 'refs/heads/style-checker'
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@style-checker
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #     - name: Code Coverage
