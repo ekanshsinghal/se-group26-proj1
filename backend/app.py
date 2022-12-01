@@ -11,7 +11,8 @@ app.secret_key = "testing"
 CORS(app)
 
 client = MongoClient(
-    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tlsAllowInvalidCertificates=True)
+    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", 
+    tlsAllowInvalidCertificates=True)
 db = client.get_database("development")
 UserRecords = db.register
 Applications = db.Applications
@@ -152,6 +153,7 @@ def add_application():
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
+
 @app.route("/delete_application", methods=["POST"])
 def delete_application():
     try:
@@ -163,7 +165,7 @@ def delete_application():
             # delete_document = Applications.find_one_and_delete({"_id":jobId, "email":email})
             delete_document = Applications.find_one_and_delete(
                 {"_id": ObjectId(_id), "email": email})
-            if delete_document == None:
+            if delete_document is None:
                 return jsonify({"error": "No such Job ID found for this user's email"}), 400
             else:
                 return jsonify({"message": "Job Application deleted successfully"}), 200
