@@ -25,7 +25,7 @@ jobs:
         pip install pytest-html
     - name: Test all
       run: |
-        pdoc --html=backend/src --html-dir=docs
+        pdoc --html --only-pypath --html-dir=./docs
         pycodestyle --first backend/tests.py
 #     - name: Code Coverage
 #       run: |
