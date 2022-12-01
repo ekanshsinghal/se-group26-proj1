@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>backend.app API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>backend.app</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import re
+from bson import ObjectId
+from flask import Flask, request, session, jsonify
+from pymongo import MongoClient, ReturnDocument
+import bcrypt
+from urllib.parse import urlparse, parse_qs
+from flask_cors import CORS
+
+app = Flask(__name__)
+app.secret_key = &#34;testing&#34;
+CORS(app)
+
+client = MongoClient(
+    &#34;mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&amp;w=majority&#34;, tlsAllowInvalidCertificates=True)
+db = client.get_database(&#34;development&#34;)
+UserRecords = db.register
+Applications = db.Applications
+UserProfiles = db.Profiles
+
+
+@app.route(&#34;/&#34;)
+def hello():
+    return &#34;Hello, Track your job on :3000&#34;
+
+
+@app.route(&#34;/register&#34;, methods=[&#34;post&#34;])
+def register():
+    try:
+        req = request.get_json()
+        name = {&#34;firstName&#34;: req[&#34;firstName&#34;], &#34;lastName&#34;: req[&#34;lastName&#34;]}
+        email = req[&#34;email&#34;]
+        password = req[&#34;password&#34;]
+        confirmPassword = req[&#34;confirmPassword&#34;]
+
+        email_found = UserRecords.find_one({&#34;email&#34;: email})
+        if email_found:
+            return jsonify({&#39;error&#39;: &#34;This email already exists in database&#34;}), 400
+        if password != confirmPassword:
+            return jsonify({&#39;error&#39;: &#34;Passwords should match!&#34;}), 400
+
+        else:
+            hashed = bcrypt.hashpw(
+                confirmPassword.encode(&#34;utf-8&#34;), bcrypt.gensalt())
+            user_input = {&#34;name&#34;: name, &#34;email&#34;: email, &#34;password&#34;: hashed}
+            UserRecords.insert_one(user_input)
+
+            # #find the new created account and its email
+            # user_data = UserRecords.find_one({&#34;email&#34;: email})
+            # new_email = user_data[&#34;email&#34;]
+            # #if registered redirect to logged in as the registered user
+            # session[&#34;email&#34;] = new_email
+            return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/login&#34;, methods=[&#34;POST&#34;])
+def login():
+    try:
+        req = request.get_json()
+        email = req[&#34;email&#34;]
+        password = req[&#34;password&#34;]
+
+        # check if email exists in database
+        email_found = UserRecords.find_one({&#34;email&#34;: email})
+        if email_found:
+            # email_val = email_found[&#34;email&#34;]
+            passwordcheck = email_found[&#34;password&#34;]
+            # encode the password and check if it matches
+            if bcrypt.checkpw(password.encode(&#34;utf-8&#34;), passwordcheck):
+                # session[&#34;email&#34;] = email_val
+                return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+            else:
+                if &#34;email&#34; in session:
+                    return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+                return jsonify({&#39;error&#39;: &#34;Wrong password&#34;}), 400
+        else:
+            return jsonify({&#39;error&#39;: &#34;Email not found&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/logout&#34;, methods=[&#34;POST&#34;, &#34;GET&#34;])
+def logout():
+    # if &#34;email&#34; in session:
+    #     session.pop(&#34;email&#34;, None)
+    return jsonify({&#39;message&#39;: &#39;Logout successful&#39;}), 200
+
+
+@app.route(&#34;/view_applications&#34;, methods=[&#34;GET&#34;])
+def view_applications():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            # email = session[&#34;email&#34;]
+            email = request.args.get(&#34;email&#34;)
+            out = Applications.find({&#34;email&#34;: email})
+            if out:
+                applications_list = []
+                # payload[&#34;msg&#34;]=&#34;Applications present&#34;
+                for i in out:
+                    del i[&#39;email&#39;]
+                    i[&#39;_id&#39;] = str(i[&#39;_id&#39;])
+                    applications_list.append(i)
+                return jsonify({&#39;message&#39;: &#39;Applications found&#39;, &#39;applications&#39;: applications_list}), 200
+            else:
+                return jsonify({&#39;message&#39;: &#39;You have no applications&#39;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/add_application&#34;, methods=[&#34;POST&#34;])
+def add_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            application = {
+                &#34;email&#34;: req[&#34;email&#34;],
+                &#34;companyName&#34;: req[&#34;companyName&#34;],
+                &#34;jobTitle&#34;: req[&#34;jobTitle&#34;],
+                &#34;jobId&#34;: req[&#34;jobId&#34;],
+                &#34;description&#34;: req[&#34;description&#34;] if &#34;description&#34; in req.keys() else None,
+                &#34;url&#34;: req[&#34;url&#34;],
+                # &#34;details&#34;: {
+                #     &#34;Industry&#34;: &#34;Software Development&#34;,
+                #     &#34;Employment Type&#34;: &#34;Full-time&#34;,
+                #     &#34;Seniority&#34;: &#34;Entry Level&#34;,
+                #     &#34;Posted Date&#34;: datetime.datetime(2022, 7, 23),
+                #     &#34;Location&#34;: {
+                #         &#34;City&#34;: &#34;Seattle&#34;,
+                #         &#34;State&#34;: &#34;WA&#34;
+                #     },
+                # },
+                &#34;date&#34;: req[&#34;date&#34;] if &#34;date&#34; in req.keys() else None,
+                &#34;status&#34;: req[&#34;status&#34;]
+            }
+            try:
+                Applications.insert_one(application)
+                return jsonify({&#34;message&#34;: &#34;Application added successfully&#34;}), 200
+            except Exception as e:
+                return jsonify({&#34;error&#34;: &#34;Unable to add Application&#34;}), 400
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+@app.route(&#34;/delete_application&#34;, methods=[&#34;POST&#34;])
+def delete_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            # delete_document = Applications.find_one_and_delete({&#34;_id&#34;:jobId, &#34;email&#34;:email})
+            delete_document = Applications.find_one_and_delete(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email})
+            if delete_document == None:
+                return jsonify({&#34;error&#34;: &#34;No such Job ID found for this user&#39;s email&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;Job Application deleted successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/modify_application&#34;, methods=[&#34;POST&#34;])
+def modify_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            filter = {&#39;_id&#39;: ObjectId(_id), &#34;email&#34;: email}
+            # filter = {&#34;_id&#34;: jobId, &#34;email&#34;: email}
+
+            application = {
+                &#34;email&#34;: email,
+                &#34;companyName&#34;: req[&#34;companyName&#34;],
+                &#34;jobTitle&#34;: req[&#34;jobTitle&#34;],
+                &#34;jobId&#34;: req[&#34;jobId&#34;],
+                &#34;description&#34;: req[&#34;description&#34;],
+                &#34;url&#34;: req[&#34;url&#34;],
+                # &#34;Details&#34;: {
+                #     &#34;Industry&#34;: &#34;Software Development&#34;,
+                #     &#34;Employment Type&#34;: &#34;Full-time&#34;,
+                #     &#34;Seniority&#34;: &#34;Entry Level&#34;,
+                #     &#34;Posted Date&#34;: datetime.datetime(2022, 7, 23),
+                #     &#34;Location&#34;: {
+                #         &#34;City&#34;: &#34;Seattle&#34;,
+                #         &#34;State&#34;: &#34;WA&#34;
+                #     },
+                # },
+                &#34;date&#34;: req[&#34;date&#34;],
+                &#34;status&#34;: req[&#34;status&#34;]
+            }
+            set_values = {&#34;$set&#34;: application}
+            modify_document = Applications.find_one_and_update(
+                filter, set_values, return_document=ReturnDocument.AFTER)
+            if modify_document == None:
+                return jsonify({&#34;error&#34;: &#34;No such Job ID found for this user&#39;s email&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;Job Application modified successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/create_profile&#34;, methods=[&#34;post&#34;])
+def create_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            email_found = UserProfiles.find_one({&#34;email&#34;: email})
+            if email_found:
+                return jsonify({&#34;error&#34;: &#34;Profile already created.&#34;}), 400
+            else:
+                user_profile = {
+                    &#34;firstName&#34;: req[&#34;firstName&#34;],
+                    &#34;lastName&#34;: req[&#34;lastName&#34;],
+                    &#34;email&#34;: req[&#34;email&#34;],
+                    &#34;phone&#34;: req.get(&#34;phone&#34;),
+                    &#34;city&#34;: req.get(&#34;city&#34;),
+                    &#34;state&#34;: req.get(&#34;state&#34;),
+                    &#34;resume&#34;: req.get(&#34;resume&#34;),
+                    &#34;gitHub&#34;: req.get(&#34;gitHub&#34;),
+                    &#34;linkedIn&#34;: req.get(&#34;linkedin&#34;),
+                    &#34;skills&#34;: req.get(&#34;skills&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;about&#34;: req.get(&#34;about&#34;),
+                    &#34;interests&#34;: req.get(&#34;interests&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;companyName&#34;: req.get(&#34;companyName&#34;),
+                    &#34;jobTitle&#34;: req.get(&#34;jobTitle&#34;),
+                    &#34;description&#34;: req.get(&#34;description&#34;),
+                    &#34;jobCity&#34;: req.get(&#34;jobCity&#34;),
+                    &#34;jobState&#34;: req.get(&#34;jobState&#34;),
+                    &#34;jobFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;toFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;curentJob&#34;: req.get(&#34;curentJob&#34;),
+                    &#34;institution&#34;: req.get(&#34;institution&#34;),
+                    &#34;major&#34;: req.get(&#34;major&#34;),
+                    &#34;degree&#34;: req.get(&#34;degree&#34;),
+                    &#34;courses&#34;: req.get(&#34;courses&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;universityCity&#34;: req.get(&#34;universityCity&#34;),
+                    &#34;universityState&#34;: req.get(&#34;universityState&#34;),
+                    &#34;universityFromDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;universityToDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;curentUniversity&#34;: req.get(&#34;curentUniversity&#34;)
+                }
+                try:
+                    UserProfiles.insert_one(user_profile)
+                    return jsonify({&#34;message&#34;: &#34;Profile created successfully&#34;}), 200
+                except Exception as e:
+                    return jsonify({&#34;error&#34;: &#34;Unable to create profile&#34;}), 400
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/view_profile&#34;, methods=[&#34;GET&#34;])
+def view_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            email = request.args.get(&#34;email&#34;)
+            filter = {&#34;email&#34;: email}
+            profile = UserProfiles.find(filter)
+            if profile == None:
+                return jsonify({&#39;message&#39;: &#34;Create a profile first&#34;, &#34;profile&#34;: {}}), 200
+            else:
+                # payload[&#34;profile&#34;] = profile
+                profile_out = {}
+                for p in profile:
+                    p[&#39;_id&#39;] = str(p[&#39;_id&#39;])
+                    profile_out = p
+                return jsonify({&#39;message&#39;: &#34;Found User Profile&#34;, &#34;profile&#34;: profile_out}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/modify_profile&#34;, methods=[&#34;POST&#34;])
+def modify_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            _id = req[&#34;_id&#34;]
+            email = req[&#34;email&#34;]
+            email_found = UserProfiles.find_one(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email})
+            if not email_found:
+                return jsonify({&#34;error&#34;: &#34;Profile not found.&#34;}), 400
+            else:
+                user_profile = {
+                    &#34;firstName&#34;: req[&#34;firstName&#34;],
+                    &#34;lastName&#34;: req[&#34;lastName&#34;],
+                    &#34;email&#34;: req[&#34;email&#34;],
+                    &#34;phone&#34;: req.get(&#34;phone&#34;),
+                    &#34;city&#34;: req.get(&#34;city&#34;),
+                    &#34;state&#34;: req.get(&#34;state&#34;),
+                    &#34;resume&#34;: req.get(&#34;resume&#34;),
+                    &#34;gitHub&#34;: req.get(&#34;gitHub&#34;),
+                    &#34;linkedIn&#34;: req.get(&#34;linkedin&#34;),
+                    &#34;skills&#34;: req.get(&#34;skills&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;about&#34;: req.get(&#34;about&#34;),
+                    &#34;interests&#34;: req.get(&#34;interests&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;companyName&#34;: req.get(&#34;companyName&#34;),
+                    &#34;jobTitle&#34;: req.get(&#34;jobTitle&#34;),
+                    &#34;description&#34;: req.get(&#34;description&#34;),
+                    &#34;jobCity&#34;: req.get(&#34;jobCity&#34;),
+                    &#34;jobState&#34;: req.get(&#34;jobState&#34;),
+                    &#34;jobFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;toFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;curentJob&#34;: req.get(&#34;curentJob&#34;),
+                    &#34;institution&#34;: req.get(&#34;institution&#34;),
+                    &#34;major&#34;: req.get(&#34;major&#34;),
+                    &#34;degree&#34;: req.get(&#34;degree&#34;),
+                    &#34;courses&#34;: req.get(&#34;courses&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;universityCity&#34;: req.get(&#34;universityCity&#34;),
+                    &#34;universityState&#34;: req.get(&#34;universityState&#34;),
+                    &#34;universityFromDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;universityToDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;curentUniversity&#34;: req.get(&#34;curentUniversity&#34;)
+                }
+
+                set_values = {&#34;$set&#34;: user_profile}
+                filter = {&#34;email&#34;: email}
+                modify_document = UserProfiles.find_one_and_update(
+                    filter, set_values, return_document=ReturnDocument.AFTER)
+                if modify_document == None:
+                    return jsonify({&#34;error&#34;: &#34;Unable to modify profile&#34;}), 400
+                else:
+                    return jsonify({&#34;message&#34;: &#34;Profile modified successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+@app.route(&#34;/clear_profile&#34;, methods=[&#34;POST&#34;])
+def clear_profile():
+    try:
+        if request:
+            req = request.get_json()
+            email_to_delete = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            delete_user = UserRecords.find_one({&#34;email&#34;: email_to_delete})
+            if delete_user == None:
+                return jsonify({&#39;error&#39;: &#34;User email not found&#34;}), 400
+            delete_profile = UserProfiles.find_one_and_delete(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email_to_delete})
+            if delete_profile == None:
+                return jsonify({&#39;error&#39;: &#34;Profile not found&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;User Profile cleared successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400
+
+
+if __name__ == &#34;__main__&#34;:
+    app.run(debug=True, host=&#34;0.0.0.0&#34;, port=8000)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="backend.app.add_application"><code class="name flex">
+<span>def <span class="ident">add_application</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/add_application&#34;, methods=[&#34;POST&#34;])
+def add_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            application = {
+                &#34;email&#34;: req[&#34;email&#34;],
+                &#34;companyName&#34;: req[&#34;companyName&#34;],
+                &#34;jobTitle&#34;: req[&#34;jobTitle&#34;],
+                &#34;jobId&#34;: req[&#34;jobId&#34;],
+                &#34;description&#34;: req[&#34;description&#34;] if &#34;description&#34; in req.keys() else None,
+                &#34;url&#34;: req[&#34;url&#34;],
+                # &#34;details&#34;: {
+                #     &#34;Industry&#34;: &#34;Software Development&#34;,
+                #     &#34;Employment Type&#34;: &#34;Full-time&#34;,
+                #     &#34;Seniority&#34;: &#34;Entry Level&#34;,
+                #     &#34;Posted Date&#34;: datetime.datetime(2022, 7, 23),
+                #     &#34;Location&#34;: {
+                #         &#34;City&#34;: &#34;Seattle&#34;,
+                #         &#34;State&#34;: &#34;WA&#34;
+                #     },
+                # },
+                &#34;date&#34;: req[&#34;date&#34;] if &#34;date&#34; in req.keys() else None,
+                &#34;status&#34;: req[&#34;status&#34;]
+            }
+            try:
+                Applications.insert_one(application)
+                return jsonify({&#34;message&#34;: &#34;Application added successfully&#34;}), 200
+            except Exception as e:
+                return jsonify({&#34;error&#34;: &#34;Unable to add Application&#34;}), 400
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.clear_profile"><code class="name flex">
+<span>def <span class="ident">clear_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/clear_profile&#34;, methods=[&#34;POST&#34;])
+def clear_profile():
+    try:
+        if request:
+            req = request.get_json()
+            email_to_delete = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            delete_user = UserRecords.find_one({&#34;email&#34;: email_to_delete})
+            if delete_user == None:
+                return jsonify({&#39;error&#39;: &#34;User email not found&#34;}), 400
+            delete_profile = UserProfiles.find_one_and_delete(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email_to_delete})
+            if delete_profile == None:
+                return jsonify({&#39;error&#39;: &#34;Profile not found&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;User Profile cleared successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.create_profile"><code class="name flex">
+<span>def <span class="ident">create_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/create_profile&#34;, methods=[&#34;post&#34;])
+def create_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            email_found = UserProfiles.find_one({&#34;email&#34;: email})
+            if email_found:
+                return jsonify({&#34;error&#34;: &#34;Profile already created.&#34;}), 400
+            else:
+                user_profile = {
+                    &#34;firstName&#34;: req[&#34;firstName&#34;],
+                    &#34;lastName&#34;: req[&#34;lastName&#34;],
+                    &#34;email&#34;: req[&#34;email&#34;],
+                    &#34;phone&#34;: req.get(&#34;phone&#34;),
+                    &#34;city&#34;: req.get(&#34;city&#34;),
+                    &#34;state&#34;: req.get(&#34;state&#34;),
+                    &#34;resume&#34;: req.get(&#34;resume&#34;),
+                    &#34;gitHub&#34;: req.get(&#34;gitHub&#34;),
+                    &#34;linkedIn&#34;: req.get(&#34;linkedin&#34;),
+                    &#34;skills&#34;: req.get(&#34;skills&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;about&#34;: req.get(&#34;about&#34;),
+                    &#34;interests&#34;: req.get(&#34;interests&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;companyName&#34;: req.get(&#34;companyName&#34;),
+                    &#34;jobTitle&#34;: req.get(&#34;jobTitle&#34;),
+                    &#34;description&#34;: req.get(&#34;description&#34;),
+                    &#34;jobCity&#34;: req.get(&#34;jobCity&#34;),
+                    &#34;jobState&#34;: req.get(&#34;jobState&#34;),
+                    &#34;jobFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;toFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;curentJob&#34;: req.get(&#34;curentJob&#34;),
+                    &#34;institution&#34;: req.get(&#34;institution&#34;),
+                    &#34;major&#34;: req.get(&#34;major&#34;),
+                    &#34;degree&#34;: req.get(&#34;degree&#34;),
+                    &#34;courses&#34;: req.get(&#34;courses&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;universityCity&#34;: req.get(&#34;universityCity&#34;),
+                    &#34;universityState&#34;: req.get(&#34;universityState&#34;),
+                    &#34;universityFromDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;universityToDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;curentUniversity&#34;: req.get(&#34;curentUniversity&#34;)
+                }
+                try:
+                    UserProfiles.insert_one(user_profile)
+                    return jsonify({&#34;message&#34;: &#34;Profile created successfully&#34;}), 200
+                except Exception as e:
+                    return jsonify({&#34;error&#34;: &#34;Unable to create profile&#34;}), 400
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.delete_application"><code class="name flex">
+<span>def <span class="ident">delete_application</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/delete_application&#34;, methods=[&#34;POST&#34;])
+def delete_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            # delete_document = Applications.find_one_and_delete({&#34;_id&#34;:jobId, &#34;email&#34;:email})
+            delete_document = Applications.find_one_and_delete(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email})
+            if delete_document == None:
+                return jsonify({&#34;error&#34;: &#34;No such Job ID found for this user&#39;s email&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;Job Application deleted successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.hello"><code class="name flex">
+<span>def <span class="ident">hello</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/&#34;)
+def hello():
+    return &#34;Hello, Track your job on :3000&#34;</code></pre>
+</details>
+</dd>
+<dt id="backend.app.login"><code class="name flex">
+<span>def <span class="ident">login</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/login&#34;, methods=[&#34;POST&#34;])
+def login():
+    try:
+        req = request.get_json()
+        email = req[&#34;email&#34;]
+        password = req[&#34;password&#34;]
+
+        # check if email exists in database
+        email_found = UserRecords.find_one({&#34;email&#34;: email})
+        if email_found:
+            # email_val = email_found[&#34;email&#34;]
+            passwordcheck = email_found[&#34;password&#34;]
+            # encode the password and check if it matches
+            if bcrypt.checkpw(password.encode(&#34;utf-8&#34;), passwordcheck):
+                # session[&#34;email&#34;] = email_val
+                return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+            else:
+                if &#34;email&#34; in session:
+                    return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+                return jsonify({&#39;error&#39;: &#34;Wrong password&#34;}), 400
+        else:
+            return jsonify({&#39;error&#39;: &#34;Email not found&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.logout"><code class="name flex">
+<span>def <span class="ident">logout</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/logout&#34;, methods=[&#34;POST&#34;, &#34;GET&#34;])
+def logout():
+    # if &#34;email&#34; in session:
+    #     session.pop(&#34;email&#34;, None)
+    return jsonify({&#39;message&#39;: &#39;Logout successful&#39;}), 200</code></pre>
+</details>
+</dd>
+<dt id="backend.app.modify_application"><code class="name flex">
+<span>def <span class="ident">modify_application</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/modify_application&#34;, methods=[&#34;POST&#34;])
+def modify_application():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            email = req[&#34;email&#34;]
+            _id = req[&#34;_id&#34;]
+            filter = {&#39;_id&#39;: ObjectId(_id), &#34;email&#34;: email}
+            # filter = {&#34;_id&#34;: jobId, &#34;email&#34;: email}
+
+            application = {
+                &#34;email&#34;: email,
+                &#34;companyName&#34;: req[&#34;companyName&#34;],
+                &#34;jobTitle&#34;: req[&#34;jobTitle&#34;],
+                &#34;jobId&#34;: req[&#34;jobId&#34;],
+                &#34;description&#34;: req[&#34;description&#34;],
+                &#34;url&#34;: req[&#34;url&#34;],
+                # &#34;Details&#34;: {
+                #     &#34;Industry&#34;: &#34;Software Development&#34;,
+                #     &#34;Employment Type&#34;: &#34;Full-time&#34;,
+                #     &#34;Seniority&#34;: &#34;Entry Level&#34;,
+                #     &#34;Posted Date&#34;: datetime.datetime(2022, 7, 23),
+                #     &#34;Location&#34;: {
+                #         &#34;City&#34;: &#34;Seattle&#34;,
+                #         &#34;State&#34;: &#34;WA&#34;
+                #     },
+                # },
+                &#34;date&#34;: req[&#34;date&#34;],
+                &#34;status&#34;: req[&#34;status&#34;]
+            }
+            set_values = {&#34;$set&#34;: application}
+            modify_document = Applications.find_one_and_update(
+                filter, set_values, return_document=ReturnDocument.AFTER)
+            if modify_document == None:
+                return jsonify({&#34;error&#34;: &#34;No such Job ID found for this user&#39;s email&#34;}), 400
+            else:
+                return jsonify({&#34;message&#34;: &#34;Job Application modified successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.modify_profile"><code class="name flex">
+<span>def <span class="ident">modify_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/modify_profile&#34;, methods=[&#34;POST&#34;])
+def modify_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            req = request.get_json()
+            _id = req[&#34;_id&#34;]
+            email = req[&#34;email&#34;]
+            email_found = UserProfiles.find_one(
+                {&#34;_id&#34;: ObjectId(_id), &#34;email&#34;: email})
+            if not email_found:
+                return jsonify({&#34;error&#34;: &#34;Profile not found.&#34;}), 400
+            else:
+                user_profile = {
+                    &#34;firstName&#34;: req[&#34;firstName&#34;],
+                    &#34;lastName&#34;: req[&#34;lastName&#34;],
+                    &#34;email&#34;: req[&#34;email&#34;],
+                    &#34;phone&#34;: req.get(&#34;phone&#34;),
+                    &#34;city&#34;: req.get(&#34;city&#34;),
+                    &#34;state&#34;: req.get(&#34;state&#34;),
+                    &#34;resume&#34;: req.get(&#34;resume&#34;),
+                    &#34;gitHub&#34;: req.get(&#34;gitHub&#34;),
+                    &#34;linkedIn&#34;: req.get(&#34;linkedin&#34;),
+                    &#34;skills&#34;: req.get(&#34;skills&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;about&#34;: req.get(&#34;about&#34;),
+                    &#34;interests&#34;: req.get(&#34;interests&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;companyName&#34;: req.get(&#34;companyName&#34;),
+                    &#34;jobTitle&#34;: req.get(&#34;jobTitle&#34;),
+                    &#34;description&#34;: req.get(&#34;description&#34;),
+                    &#34;jobCity&#34;: req.get(&#34;jobCity&#34;),
+                    &#34;jobState&#34;: req.get(&#34;jobState&#34;),
+                    &#34;jobFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;toFrom&#34;: req.get(&#34;jobDate&#34;),
+                    &#34;curentJob&#34;: req.get(&#34;curentJob&#34;),
+                    &#34;institution&#34;: req.get(&#34;institution&#34;),
+                    &#34;major&#34;: req.get(&#34;major&#34;),
+                    &#34;degree&#34;: req.get(&#34;degree&#34;),
+                    &#34;courses&#34;: req.get(&#34;courses&#34;, &#39;&#39;).split(&#34;,&#34;),
+                    &#34;universityCity&#34;: req.get(&#34;universityCity&#34;),
+                    &#34;universityState&#34;: req.get(&#34;universityState&#34;),
+                    &#34;universityFromDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;universityToDate&#34;: req.get(&#34;universityDate&#34;),
+                    &#34;curentUniversity&#34;: req.get(&#34;curentUniversity&#34;)
+                }
+
+                set_values = {&#34;$set&#34;: user_profile}
+                filter = {&#34;email&#34;: email}
+                modify_document = UserProfiles.find_one_and_update(
+                    filter, set_values, return_document=ReturnDocument.AFTER)
+                if modify_document == None:
+                    return jsonify({&#34;error&#34;: &#34;Unable to modify profile&#34;}), 400
+                else:
+                    return jsonify({&#34;message&#34;: &#34;Profile modified successfully&#34;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.register"><code class="name flex">
+<span>def <span class="ident">register</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/register&#34;, methods=[&#34;post&#34;])
+def register():
+    try:
+        req = request.get_json()
+        name = {&#34;firstName&#34;: req[&#34;firstName&#34;], &#34;lastName&#34;: req[&#34;lastName&#34;]}
+        email = req[&#34;email&#34;]
+        password = req[&#34;password&#34;]
+        confirmPassword = req[&#34;confirmPassword&#34;]
+
+        email_found = UserRecords.find_one({&#34;email&#34;: email})
+        if email_found:
+            return jsonify({&#39;error&#39;: &#34;This email already exists in database&#34;}), 400
+        if password != confirmPassword:
+            return jsonify({&#39;error&#39;: &#34;Passwords should match!&#34;}), 400
+
+        else:
+            hashed = bcrypt.hashpw(
+                confirmPassword.encode(&#34;utf-8&#34;), bcrypt.gensalt())
+            user_input = {&#34;name&#34;: name, &#34;email&#34;: email, &#34;password&#34;: hashed}
+            UserRecords.insert_one(user_input)
+
+            # #find the new created account and its email
+            # user_data = UserRecords.find_one({&#34;email&#34;: email})
+            # new_email = user_data[&#34;email&#34;]
+            # #if registered redirect to logged in as the registered user
+            # session[&#34;email&#34;] = new_email
+            return jsonify({&#39;message&#39;: &#39;Login successful&#39;}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.view_applications"><code class="name flex">
+<span>def <span class="ident">view_applications</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/view_applications&#34;, methods=[&#34;GET&#34;])
+def view_applications():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            # email = session[&#34;email&#34;]
+            email = request.args.get(&#34;email&#34;)
+            out = Applications.find({&#34;email&#34;: email})
+            if out:
+                applications_list = []
+                # payload[&#34;msg&#34;]=&#34;Applications present&#34;
+                for i in out:
+                    del i[&#39;email&#39;]
+                    i[&#39;_id&#39;] = str(i[&#39;_id&#39;])
+                    applications_list.append(i)
+                return jsonify({&#39;message&#39;: &#39;Applications found&#39;, &#39;applications&#39;: applications_list}), 200
+            else:
+                return jsonify({&#39;message&#39;: &#39;You have no applications&#39;}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+<dt id="backend.app.view_profile"><code class="name flex">
+<span>def <span class="ident">view_profile</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/view_profile&#34;, methods=[&#34;GET&#34;])
+def view_profile():
+    try:
+        # if &#34;email&#34; in session:
+        if request:
+            email = request.args.get(&#34;email&#34;)
+            filter = {&#34;email&#34;: email}
+            profile = UserProfiles.find(filter)
+            if profile == None:
+                return jsonify({&#39;message&#39;: &#34;Create a profile first&#34;, &#34;profile&#34;: {}}), 200
+            else:
+                # payload[&#34;profile&#34;] = profile
+                profile_out = {}
+                for p in profile:
+                    p[&#39;_id&#39;] = str(p[&#39;_id&#39;])
+                    profile_out = p
+                return jsonify({&#39;message&#39;: &#34;Found User Profile&#34;, &#34;profile&#34;: profile_out}), 200
+        # else:
+        #     return jsonify({&#39;error&#39;: &#34;Not Logged in&#34;}), 400
+
+    except Exception as e:
+        print(e)
+        return jsonify({&#39;error&#39;: &#34;Something went wrong&#34;}), 400</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="backend" href="index.html">backend</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="backend.app.add_application" href="#backend.app.add_application">add_application</a></code></li>
+<li><code><a title="backend.app.clear_profile" href="#backend.app.clear_profile">clear_profile</a></code></li>
+<li><code><a title="backend.app.create_profile" href="#backend.app.create_profile">create_profile</a></code></li>
+<li><code><a title="backend.app.delete_application" href="#backend.app.delete_application">delete_application</a></code></li>
+<li><code><a title="backend.app.hello" href="#backend.app.hello">hello</a></code></li>
+<li><code><a title="backend.app.login" href="#backend.app.login">login</a></code></li>
+<li><code><a title="backend.app.logout" href="#backend.app.logout">logout</a></code></li>
+<li><code><a title="backend.app.modify_application" href="#backend.app.modify_application">modify_application</a></code></li>
+<li><code><a title="backend.app.modify_profile" href="#backend.app.modify_profile">modify_profile</a></code></li>
+<li><code><a title="backend.app.register" href="#backend.app.register">register</a></code></li>
+<li><code><a title="backend.app.view_applications" href="#backend.app.view_applications">view_applications</a></code></li>
+<li><code><a title="backend.app.view_profile" href="#backend.app.view_profile">view_profile</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
