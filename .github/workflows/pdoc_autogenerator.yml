@@ -22,6 +22,7 @@ jobs:
         pip install -r backend/requirements.txt
         sudo pip install pycodestyle
         pip install pdoc
+        pip install pytest-html
     - name: Test all
       run: |
         pdoc --html backend/src --html-dir docs
