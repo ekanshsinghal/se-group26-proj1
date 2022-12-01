@@ -22,12 +22,19 @@ jobs:
         pip install -r backend/requirements.txt
         sudo pip install pycodestyle
         pip install pdoc3
-        pip install pytest-html
     - name: Test all
       run: |
         pdoc --html backend --force --output-dir docs
-        pycodestyle --first backend/tests.py
+#       pycodestyle --first backend/tests.py
         echo ${{ github.ref }}
+          git add .
+          git config --local user.name "auto generate docs"
+          git diff-index --quiet HEAD || git commit -m "CI: Automated build push" -a
+    - name: Push Documentation
+      if: github.ref == 'refs/heads/main'
+      uses: ad-m/github-push-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #     - name: Code Coverage
 #       run: |
 #         python -m pip install coverage
