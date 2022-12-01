@@ -25,6 +25,7 @@ jobs:
     - name: Test all
       run: |
         pdoc --html backend --force --output-dir docs
+        echo "Github reference"
         echo ${{ github.ref }}
         git add .
         git config --local user.name "auto generate docs"
