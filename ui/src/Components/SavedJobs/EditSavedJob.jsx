@@ -8,7 +8,6 @@ import moment from 'moment';
 export default function EditSavedJob({ application, onClose, updateApplications, email }) {
     console.log(application)
     const [form] = Form.useForm();
-    const { state } = useLocation();
 
     const closeForm = () => {
         form.resetFields();
@@ -16,7 +15,6 @@ export default function EditSavedJob({ application, onClose, updateApplications,
     };
     const updateApplication = (values) => {
         const loading = message.loading('Saving...', 0);
-        console.log(values)
         axios
             .post(`${config.base_url}/modify_application`, {
                 ...values,

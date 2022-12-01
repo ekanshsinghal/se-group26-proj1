@@ -6,11 +6,13 @@ import { useLocation } from 'react-router-dom';
 import config from '../../config';
 import AddSavedJob from './AddSavedJob';
 import EditSavedJob from './EditSavedJob';
+import EditApplication from '../AddApplication/EditApplication';
 import './SavedJobs.scss';
 
 export default function SavedJobs() {
 	const [applications, setApplications] = useState([]);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
+	const [shiftApplicationOpen, setShiftApplicationOpen] = useState(false);
 	const [editApplication, setEditApplication] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const { state } = useLocation();
@@ -30,6 +32,7 @@ export default function SavedJobs() {
 			.catch((err) => console.log(err))
 			.finally(() => setLoading(false));
 	};
+
 
 	return (
 		<div className="SavedJobs">
@@ -56,6 +59,14 @@ export default function SavedJobs() {
 						application={editApplication}
 						email={state.email}
 					/>)}
+				{shiftApplicationOpen &&
+					(
+						<EditApplication
+							application={shiftApplicationOpen}
+							onClose={() => setShiftApplicationOpen(false)}
+							updateApplications={updateApplications}
+							email={state.email}
+						/>)}
 			</div>
 			<div className="Jobs">
 				{loading && (
@@ -82,6 +93,9 @@ export default function SavedJobs() {
 						<a href={'//' + application.url} target={'_blank'}>
 							{application.url}
 						</a>
+						<Button id={application.jobId + 'edit'} key="apply" onClick={() => setShiftApplicationOpen(application)}>
+							Applied?
+						</Button>
 
 					</Card>
 				))}

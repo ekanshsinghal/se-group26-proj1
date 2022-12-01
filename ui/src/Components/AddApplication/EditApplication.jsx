@@ -19,6 +19,7 @@ export default function EditApplication({ application, onClose, updateApplicatio
 		form.resetFields();
 		onClose();
 	};
+	console.log(application)
 
 	const updateApplication = (values) => {
 		const loading = message.loading('Saving...', 0);
