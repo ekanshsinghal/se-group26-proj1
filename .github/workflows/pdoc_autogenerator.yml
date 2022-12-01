@@ -22,6 +22,7 @@ jobs:
         pip install -r backend/requirements.txt
     - name: Test all
       run: |
+        black --check . || black --fast .
         sudo pip install pycodestyle
         pycodestyle --first backend/tests.py
 #     - name: Code Coverage
