@@ -25,7 +25,6 @@ jobs:
     - name: Test all
       run: |
         pdoc --html backend --force --output-dir docs
-#       pycodestyle --first backend/tests.py
         echo ${{ github.ref }}
         git add .
         git config --local user.name "auto generate docs"
