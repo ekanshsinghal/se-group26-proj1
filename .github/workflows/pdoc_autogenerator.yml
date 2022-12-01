@@ -1,5 +1,4 @@
-name: Style-Checker
-
+name: style-checker
 on: [push]
 
 jobs:
