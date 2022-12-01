@@ -1,0 +1,48 @@
+name: Test-style-check
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        sudo pip install pycodestyle
+        pip install pdoc3
+    - name: Test all
+      run: |
+        pdoc --html backend --force --output-dir docs
+        echo "Github reference"
+        echo ${{ github.ref }}
+        git add .
+        git config --local user.name "auto generate docs"
+        git diff-index --quiet HEAD || git commit -m "CI: Automated build push" -a
+    - name: Push Documentation
+      if: github.ref == 'refs/heads/main'
+      uses: ad-m/github-push-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Code Coverage
+#       run: |
+#         python -m pip install coverage
+#         pip install coverage-badge
+#         python -m coverage run -m backend.app
+#         python -m coverage report 
+#         # coverage-badge -o coverage.svg	        
+#         # percent=$(tail -1 coverage_report.txt | awk '{print $(NF)}')
+#         # echo "Code coverage = $percent"
+    - name: CodeCov
+      uses: codecov/codecov-action@v3
