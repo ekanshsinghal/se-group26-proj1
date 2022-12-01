@@ -21,8 +21,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
         sudo pip install pycodestyle
+        pip install pdoc
     - name: Test all
       run: |
+        pdoc --html backend/src --html-dir docs
         pycodestyle --first backend/tests.py
 #     - name: Code Coverage
 #       run: |
