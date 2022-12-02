@@ -9,12 +9,12 @@ pipeline {
         stage('Docker Build and Push'){
             steps {
                 dir('ui'){
-                    sh 'sudo docker build -t jayrajmulani/jobtrackr_ui .'
-                    sh 'sudo docker push jayrajmulani/jobtrackr_ui'
+                    sh 'docker build -t jayrajmulani/jobtrackr_ui .'
+                    sh 'docker push jayrajmulani/jobtrackr_ui'
                 }
                 dir('backend'){
-                    sh 'sudo docker build -t jayrajmulani/jobtrackr_backend .'
-                    sh 'sudo docker push jayrajmulani/jobtrackr_backend'
+                    sh 'docker build -t jayrajmulani/jobtrackr_backend .'
+                    sh 'docker push jayrajmulani/jobtrackr_backend'
                 }
             }
         }
