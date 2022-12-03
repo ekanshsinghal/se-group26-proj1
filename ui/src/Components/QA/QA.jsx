@@ -1,60 +1,56 @@
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Empty } from 'antd';
-import React from 'react';
-import { useState, useEffect } from 'react';
 import './QA.scss'
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import config from '../../config';
+import AddQuestion from './AddQuestion';
+import EditQuestion from './EditQuestion';
+
 export default function QA() {
-    const [QAs, setQAs] = useState([]);
-    const [addQAOpen, setAddQAOpen] = useState(false);
-    const [editQAOpen, setEditAOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-		updateQAs();
+	const [questions, setQuestions] = useState([]);
+	const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+	const [editQuestions, setEditQuestions] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const { state } = useLocation();
+
+	useEffect(() => {
+		updateQuestions();
 	}, []);
-    const updateQAs = () => {
-        let numbers = ['1','2','3','4','5','6','7']
-        setLoading(false)
-		setQAs(numbers.map((n) => {
-            return {
-            'id': n,
-            'question': 'Question '+ n,
-            'answer': 'Answer '+ n
-            }
-        }));
-    }
-    return(
-<div className="QAs">
+	const updateQuestions = () => {
+		axios
+			.get(`${config.base_url}/view_questions?email=` + state.email)
+			.then((res) => {
+				return res.data;
+			})
+			.then((data) => setQuestions(data.questions))
+			.catch((err) => console.log(err))
+			.finally(() => setLoading(false));
+	}
+	const toggleAddQuestion = () => setAddQuestionOpen(!addQuestionOpen);
+
+	return (
+		<div className="QAs">
 			<div className="SubHeader">
 				<div className="flex" />
-				<Button
-					id="add-qa"
-					type="primary"
-					size="large"
-					icon={<PlusOutlined />}
-					// onClick={toggleAddApplication}
-				>
-					Add QA
-				</Button>
-				{/* <AddSavedJob
-					isOpen={addApplicationOpen}
-					onClose={toggleAddApplication}
-					updateApplications={updateApplications}
-				/>
-				{editApplication && (
-					<EditSavedJob
-						onClose={() => setEditApplication(false)}
-						updateApplications={updateApplications}
-						application={editApplication}
-						email={state.email}
-					/>)}
-				{shiftApplicationOpen &&
-					(
-						<EditApplication
-							application={shiftApplicationOpen}
-							onClose={() => setShiftApplicationOpen(false)}
-							updateApplications={updateApplications}
-							email={state.email}
-						/>)} */}
+				<div className="SubHeader">
+					<div className="flex" />
+					<Button
+						id="add-questions"
+						type="primary"
+						size="large"
+						icon={<PlusOutlined />}
+						onClick={toggleAddQuestion}
+					>
+						Add Question
+					</Button>
+					<AddQuestion
+						isOpen={addQuestionOpen}
+						onClose={toggleAddQuestion}
+						updateQuestions={updateQuestions}
+					/>
+				</div>
 			</div>
 			<div className="QA">
 				{loading && (
@@ -63,33 +59,27 @@ export default function QA() {
 						<Card loading />
 					</>
 				)}
-				{QAs.map((qa) => (
-					<Card className="QACard" key={qa.id} title={qa.question} 
-                    // extra=
-                    // {
-					// 	<Button
-					// 		type="text"
-					// 		icon={<EditFilled />}
-					// 		onClick={() => setEditApplication(application)}
-					// 		id={application.jobId + 'edit'}
-					// 	/>
-					// }
-                    >
+				{questions.map((qa) => (
+					<Card className="QACard" key={qa._id} title={qa.question}
+                    extra={<Button
+                         icon={<EditOutlined/>}
+                         onClick={() => setEditQuestions(qa)}
+                         >Edit</Button>}
+					>
 						Answer: {qa.answer}
-						{/* {'URL: '}
-						<a href={'//' + application.url} target={'_blank'}>
-							{application.url}
-						</a>
-						<br/>
-						<br/>
-						<Button type='primary' id={application.jobId + 'edit'} key="apply" onClick={() => setShiftApplicationOpen(application)}>
-							Already Applied?
-						</Button> */}
 					</Card>
 				))}
-				{QAs.length === 0 && <Empty/>}
+				{questions.length === 0 && <Empty />}
 			</div>
+			{editQuestions && (
+				<EditQuestion
+					question={editQuestions}
+					onClose={() => setEditQuestions(false)}
+					updateQuestions={updateQuestions}
+					email={state.email}
+				/>
+			)}
 		</div>
-    );
+	);
 
 }
