@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import config from '../../config';
 
-export default function addQuestion({ isOpen, onClose, updateApplications }) {
+export default function AddQuestion({ isOpen, onClose, updateQuestions }) {
     const [form] = Form.useForm();
     const { state } = useLocation();
 
@@ -18,7 +18,7 @@ export default function addQuestion({ isOpen, onClose, updateApplications }) {
             .post(`${config.base_url}/add_question`, { ...values, email: state.email })
             .then(({ data }) => {
                 message.success(data.message);
-                updateApplications();
+                updateQuestions();
                 closeForm();
             })
             .catch((err) => message.error(err.response.data?.error));
@@ -42,89 +42,28 @@ export default function addQuestion({ isOpen, onClose, updateApplications }) {
         >
             <Form form={form} layout="vertical" requiredMark={false} onFinish={onOk}>
                 <Form.Item
-                    label="Company Name"
-                    name="companyName"
+                    label="Question"
+                    name="question"
                     rules={[
                         {
                             required: true,
-                            message: 'Please enter Company Name!',
+                            message: 'Please enter Question!',
                         },
                     ]}
                 >
-                    <Input placeholder="Enter Company Name" />
+                    <Input placeholder="Enter Question" />
                 </Form.Item>
                 <Form.Item
-                    label="Job Title"
-                    name="jobTitle"
+                    label="Answer"
+                    name="answer"
                     rules={[
                         {
                             required: true,
-                            message: 'Please enter Job Title!',
+                            message: 'Please enter Answer!',
                         },
                     ]}
                 >
-                    <Input placeholder="Enter Job Title" />
-                </Form.Item>
-                <Form.Item
-                    label="Job Id"
-                    name="jobId"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter Job Id!',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Enter Job Id" />
-                </Form.Item>
-                <Form.Item label="Notes" name="description">
-                    <Input.TextArea placeholder="Enter Notes" />
-                </Form.Item>
-                <Form.Item
-                    label="URL / Application Link"
-                    name="url"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter URL / Application Link!',
-                        },
-                        {
-                            type: 'url',
-                            warningOnly: true,
-                        },
-                    ]}
-                >
-                    <Input placeholder="Enter URL / Application Link" />
-                </Form.Item>
-                <Form.Item
-                    label="Applied Date"
-                    name="date"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter Applied Date!',
-                        },
-                    ]}
-                >
-                    <DatePicker />
-                </Form.Item>
-                <Form.Item
-                    label="Status"
-                    name="status"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter Status!',
-                        },
-                    ]}
-                >
-                    <Select>
-                        {Object.keys(statuses).map((key) => (
-                            <Select.Option value={key} key={key}>
-                                {statuses[key]}
-                            </Select.Option>
-                        ))}
-                    </Select>
+                    <Input placeholder="Enter Answer" />
                 </Form.Item>
             </Form>
         </Modal>
