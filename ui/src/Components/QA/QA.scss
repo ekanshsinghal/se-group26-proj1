@@ -1,17 +1,17 @@
-.SavedJobs {
+.QAs {
 	.SubHeader {
 		display: flex;
 		padding: 0.7rem;
 	}
 
-	.Jobs {
+	.QA {
 		background-color: #ECF0F1;
 		border-radius: 0.5rem;
 		flex: 1;
 		margin: 0.5rem;
 		padding: 0.75rem 1rem;
 
-		.Job {
+		.QACard {
 			margin: 1rem 0;
 		}
 	}

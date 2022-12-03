@@ -8,7 +8,7 @@ import AddSavedJob from './AddSavedJob';
 import EditSavedJob from './EditSavedJob';
 import EditApplication from '../AddApplication/EditApplication';
 import './SavedJobs.scss';
-
+import {Empty} from 'antd'
 export default function SavedJobs() {
 	const [applications, setApplications] = useState([]);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
@@ -93,13 +93,15 @@ export default function SavedJobs() {
 						<a href={'//' + application.url} target={'_blank'}>
 							{application.url}
 						</a>
-						<Button id={application.jobId + 'edit'} key="apply" onClick={() => setShiftApplicationOpen(application)}>
-							Applied?
+						<br/>
+						<br/>
+						<Button type='primary' id={application.jobId + 'edit'} key="apply" onClick={() => setShiftApplicationOpen(application)}>
+							Already Applied?
 						</Button>
 
 					</Card>
 				))}
-				{applications.length === 0 && <Typography.Text>No Saved Jobs</Typography.Text>}
+				{applications.length === 0 && <Empty/>}
 			</div>
 		</div>
 	);
