@@ -8,16 +8,19 @@ import LoginPage from './Components/LoginPage/LoginPage';
 import RegisterPage from './Components/RegisterPage/RegisterPage';
 import LandingPage from './Components/LandingPage/LandingPage';
 import SavedJobs from './Components/SavedJobs/SavedJobs';
-import RecommendedJobs from './Components/RecommendedJobs/RecommendedJobs';
 import Profile from './Components/Profile/Profile';
 import './App.scss';
+import ManageFiles from './Components/ManageFiles/ManageFiles';
+import QA from './Components/QA/QA';
+import config from './config';
 
 const { Header, Content } = Layout;
 
 const signedInPages = {
 	'/home': 'My Applications',
 	'/interested': 'Saved Jobs',
-	'/recommended': 'Recommended',
+	'/files': 'Manage Files',
+	'/qa': 'Q & A'
 };
 
 export default function App() {
@@ -40,7 +43,7 @@ export default function App() {
 	};
 
 	const logout = () => {
-		axios.post('/api/logout', { email: state.email });
+		axios.post(`${config.base_url}logout`, { email: state.email });
 		navigate('/login', { state: { email: undefined } });
 	};
 
@@ -74,9 +77,9 @@ export default function App() {
 									{
 										key: 'profile',
 										label: (
-											<div onClick={() => navigate('/profile', { state })}>
-												Profile
-											</div>
+											<Button type='link' onClick={() => navigate('/profile', { state })}>
+												My Profile
+											</Button>
 										),
 									},
 									{
@@ -98,7 +101,8 @@ export default function App() {
 					<Routes>
 						<Route path="/home" element={<LandingPage />} />
 						<Route path="/interested" element={<SavedJobs />} />
-						<Route path="/recommended" element={<RecommendedJobs />} />
+						<Route path="/files" element={<ManageFiles />} />
+						<Route path="/qa" element={<QA />} />						
 						<Route path="/profile" element={<Profile />} />
 						<Route path="*" element={<Navigate to="/home" replace />} />
 					</Routes>
