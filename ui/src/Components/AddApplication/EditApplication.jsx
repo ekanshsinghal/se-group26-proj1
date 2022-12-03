@@ -19,8 +19,6 @@ export default function EditApplication({ application, onClose, updateApplicatio
 		form.resetFields();
 		onClose();
 	};
-	console.log(application)
-
 	const updateApplication = (values) => {
 		const loading = message.loading('Saving...', 0);
 		axios
@@ -77,8 +75,8 @@ export default function EditApplication({ application, onClose, updateApplicatio
 					jobTitle: application.jobTitle,
 					description: application.description,
 					url: application.url,
-					status: application.status,
-					date: moment(application.date),
+					status: application.status != 'saved' ? application.status : 'applied',
+					date: application.date == null || application.date == undefined  ? moment(new Date()): moment(application.date),
 				}}
 				onFinish={updateApplication}
 			>
