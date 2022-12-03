@@ -1,9 +1,5 @@
-import re
-from bson import ObjectId
-from flask import Flask, request, session, jsonify
-from pymongo import MongoClient, ReturnDocument
-import bcrypt
-from urllib.parse import urlparse, parse_qs
+from flask import Flask
+from pymongo import MongoClient
 from flask_cors import CORS
 import auth
 import applications
@@ -21,6 +17,7 @@ Applications = db.Applications
 UserProfiles = db.Profiles
 Questions = db.QA
 
+
 @app.route("/")
 def hello():
     return "Hello, Track your job on :3000"
@@ -34,6 +31,7 @@ def register():
 @app.route("/login", methods=["POST"])
 def login():
     return auth.login(UserRecords)
+
 
 @app.route("/logout", methods=["POST", "GET"])
 def logout():
@@ -49,30 +47,41 @@ def view_applications():
 def view_questions():
     return questions.view_questions(Questions)
 
+
 @app.route("/add_application", methods=["POST"])
 def add_application():
     return applications.add_application(Applications)
+
 
 @app.route("/add_question", methods=["POST"])
 def add_question():
     return questions.add_question(Questions)
 
+
 @app.route("/delete_application", methods=["POST"])
 def delete_application():
     return applications.delete_application(Applications)
 
+
 @app.route("/delete_question", methods=["POST"])
 def delete_question():
     return questions.delete_question(Questions)
+
 
 @app.route("/modify_application", methods=["POST"])
 def modify_application():
     return applications.modify_application(Applications)
 
 
+@app.route("/modify_question", methods=["POST"])
+def modify_question():
+    return questions.modify_question(Questions)
+
+
 @app.route("/create_profile", methods=["post"])
 def create_profile():
     return auth.create_profile(UserProfiles)
+
 
 @app.route("/view_profile", methods=["GET"])
 def view_profile():
@@ -86,7 +95,7 @@ def modify_profile():
 
 @app.route("/clear_profile", methods=["POST"])
 def clear_profile():
-    return auth.clear_profile(UserProfiles,UserRecords)
+    return auth.clear_profile(UserProfiles, UserRecords)
 
 
 if __name__ == "__main__":

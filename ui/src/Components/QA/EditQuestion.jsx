@@ -14,6 +14,7 @@ export default function EditQuestion({ question, onClose, updateQuestions, email
     };
 
     const updateQuestion = (values) => {
+        console.log(values)
         const loading = message.loading('Saving...', 0);
         axios
             .post(`${config.base_url}/modify_question`, {
@@ -70,7 +71,7 @@ export default function EditQuestion({ question, onClose, updateQuestions, email
                 onFinish={updateQuestion}
             >
                 <Form.Item
-                    label="question"
+                    label="Question"
                     name="question"
                     rules={[
                         {
@@ -82,16 +83,9 @@ export default function EditQuestion({ question, onClose, updateQuestions, email
                     <Input placeholder="Enter Question" />
                 </Form.Item>
                 <Form.Item
-                    label="answer"
-                    name="answer"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter Answer!',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Enter Answer" />
+                    label="Answer"
+                    name="answer">
+                    <Input.TextArea placeholder="Enter Answer" />
                 </Form.Item>
             </Form>
         </Modal>

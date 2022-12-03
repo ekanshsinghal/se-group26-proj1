@@ -43,14 +43,7 @@ export default function AddQuestion({ isOpen, onClose, updateQuestions }) {
             <Form form={form} layout="vertical" requiredMark={false} onFinish={onOk}>
                 <Form.Item
                     label="Question"
-                    name="question"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please enter Question!',
-                        },
-                    ]}
-                >
+                    name="question">
                     <Input placeholder="Enter Question" />
                 </Form.Item>
                 <Form.Item
@@ -63,7 +56,7 @@ export default function AddQuestion({ isOpen, onClose, updateQuestions }) {
                         },
                     ]}
                 >
-                    <Input placeholder="Enter Answer" />
+                    <Input.TextArea placeholder="Enter Answer" />
                 </Form.Item>
             </Form>
         </Modal>

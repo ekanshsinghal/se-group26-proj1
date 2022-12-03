@@ -1,10 +1,8 @@
-import re
 from bson import ObjectId
-from flask import Flask, request, session, jsonify
-from pymongo import MongoClient, ReturnDocument
+from flask import request, session, jsonify
+from pymongo import ReturnDocument
 import bcrypt
-from urllib.parse import urlparse, parse_qs
-from flask_cors import CORS
+
 
 def register(UserRecords):
     try:
@@ -25,31 +23,21 @@ def register(UserRecords):
                 confirmPassword.encode("utf-8"), bcrypt.gensalt())
             user_input = {"name": name, "email": email, "password": hashed}
             UserRecords.insert_one(user_input)
-
-            # #find the new created account and its email
-            # user_data = UserRecords.find_one({"email": email})
-            # new_email = user_data["email"]
-            # #if registered redirect to logged in as the registered user
-            # session["email"] = new_email
             return jsonify({'message': 'Login successful'}), 200
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
+
 
 def login(UserRecords):
     try:
         req = request.get_json()
         email = req["email"]
         password = req["password"]
-
-        # check if email exists in database
         email_found = UserRecords.find_one({"email": email})
         if email_found:
-            # email_val = email_found["email"]
             passwordcheck = email_found["password"]
-            # encode the password and check if it matches
             if bcrypt.checkpw(password.encode("utf-8"), passwordcheck):
-                # session["email"] = email_val
                 return jsonify({'message': 'Login successful'}), 200
             else:
                 if "email" in session:
@@ -61,14 +49,13 @@ def login(UserRecords):
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
+
 def logout():
-    # if "email" in session:
-    #     session.pop("email", None)
     return jsonify({'message': 'Logout successful'}), 200
+
 
 def create_profile(UserProfiles):
     try:
-        # if "email" in session:
         if request:
             req = request.get_json()
             email = req["email"]
@@ -112,17 +99,13 @@ def create_profile(UserProfiles):
                     return jsonify({"message": "Profile created successfully"}), 200
                 except Exception as e:
                     return jsonify({"error": "Unable to create profile"}), 400
-        # else:
-        #     return jsonify({'error': "Not Logged in"}), 400
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
 
-
 def view_profile(UserProfiles):
     try:
-        # if "email" in session:
         if request:
             email = request.args.get("email")
             filter = {"email": email}
@@ -130,7 +113,6 @@ def view_profile(UserProfiles):
             if profile == None:
                 return jsonify({'message': "Create a profile first", "profile": {}}), 200
             else:
-                # payload["profile"] = profile
                 profile_out = {}
                 for p in profile:
                     p['_id'] = str(p['_id'])
@@ -141,7 +123,8 @@ def view_profile(UserProfiles):
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
-def clear_profile(UserProfiles,UserRecords):
+
+def clear_profile(UserProfiles, UserRecords):
     try:
         if request:
             req = request.get_json()
@@ -156,16 +139,13 @@ def clear_profile(UserProfiles,UserRecords):
                 return jsonify({'error': "Profile not found"}), 400
             else:
                 return jsonify({"message": "User Profile cleared successfully"}), 200
-        # else:
-        #     return jsonify({'error': "Not Logged in"}), 400
-
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
 
+
 def modify_profile(UserProfiles):
     try:
-        # if "email" in session:
         if request:
             req = request.get_json()
             _id = req["_id"]
@@ -206,7 +186,6 @@ def modify_profile(UserProfiles):
                     "universityToDate": req.get("universityDate"),
                     "curentUniversity": req.get("curentUniversity")
                 }
-
                 set_values = {"$set": user_profile}
                 filter = {"email": email}
                 modify_document = UserProfiles.find_one_and_update(
@@ -215,7 +194,6 @@ def modify_profile(UserProfiles):
                     return jsonify({"error": "Unable to modify profile"}), 400
                 else:
                     return jsonify({"message": "Profile modified successfully"}), 200
-
     except Exception as e:
         print(e)
         return jsonify({'error': "Something went wrong"}), 400
