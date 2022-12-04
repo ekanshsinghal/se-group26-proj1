@@ -12,7 +12,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
 client = MongoClient(
-    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority", tlsAllowInvalidCertificates=True)
+    "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority"
+    , tlsAllowInvalidCertificates=True)
 db = client.get_database("development")
 UserRecords = db.register
 Applications = db.Applications
@@ -117,7 +118,7 @@ def download_file():
     def delete(response):
         try:
             os.remove(request.get_json()["filename"].split("--;--")[1])
-        except:
+        except Exception:
             pass
         return response
     return files.download_file(Files)
