@@ -1,12 +1,14 @@
-from flask import Flask
+from flask import Flask, request, after_this_request
 from pymongo import MongoClient
 from flask_cors import CORS
 import auth
 import applications
 import questions
-
+import files
+import os
 app = Flask(__name__)
 app.secret_key = "testing"
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
 client = MongoClient(
@@ -16,6 +18,7 @@ UserRecords = db.register
 Applications = db.Applications
 UserProfiles = db.Profiles
 Questions = db.QA
+Files = db.file
 
 
 @app.route("/")
@@ -96,6 +99,33 @@ def modify_profile():
 @app.route("/clear_profile", methods=["POST"])
 def clear_profile():
     return auth.clear_profile(UserProfiles, UserRecords)
+
+
+@app.route("/upload_file", methods=["GET", "POST"])
+def upload_file():
+    return files.upload_file(UserRecords, Files)
+
+
+@app.route("/view_files", methods=["GET"])
+def view_files():
+    return files.view_files(Files)
+
+
+@app.route("/download_file", methods=["POST"])
+def download_file():
+    @after_this_request
+    def delete(response):
+        try:
+            os.remove(request.get_json()["filename"].split("--;--")[1])
+        except:
+            pass
+        return response
+    return files.download_file(Files)
+
+
+@app.route("/delete_file", methods=["POST"])
+def delete_file():
+    return files.delete_file(Files)
 
 
 if __name__ == "__main__":
