@@ -11,4 +11,6 @@ pymongo==4.2.0
 Werkzeug==2.2.2
 requests
 Flask-Cors==3.0.10
+boto3==1.26.22
+
 
