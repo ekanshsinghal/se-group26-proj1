@@ -1,4 +1,4 @@
-name: Test-auto-doc-generation
+name: Test-style-checker
 
 on: [push]
 
@@ -21,23 +21,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
         sudo pip install pycodestyle
-        pip install pdoc3
     - name: Add folders to Python Path
       run: |
           echo "PYTHONPATH=backend" >> $GITHUB_ENV
     - name: Test all
       run: |
         echo "PYTHONPATH=./backend" >> $GITHUB_ENV
-        pdoc --html backend --force --output-dir docs
-        echo "Github reference"
-        echo ${{ github.ref }}
-        git add .
-        git config --local user.name "auto generate docs"
-        git diff-index --quiet HEAD || git commit -m "CI: Automated build push" -a
-    - name: Push Documentation
-      if: github.ref == 'refs/heads/main'
-      uses: ad-m/github-push-action@master
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        pycodestyle --first backend/app.py
     - name: CodeCov
       uses: codecov/codecov-action@v3
