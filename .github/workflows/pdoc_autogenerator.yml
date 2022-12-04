@@ -24,6 +24,7 @@ jobs:
         pip install pdoc3
     - name: Test all
       run: |
+        echo "PYTHONPATH=./backend" >> $GITHUB_ENV
         pdoc --html backend --force --output-dir docs
         echo "Github reference"
         echo ${{ github.ref }}
