@@ -11,7 +11,9 @@ app.secret_key = "testing"
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
-db="mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/?retryWrites=true&w=majority"
+db1 = "mongodb+srv://mongo:yWXYQRPzPLGeE1AX@cluster0.cp3anun.mongodb.net/"
+db2 = "?retryWrites=true&w=majority"
+db = db1 + db2
 client = MongoClient(db, tlsAllowInvalidCertificates=True)
 db = client.get_database("development")
 UserRecords = db.register
