@@ -8,7 +8,7 @@ import AddSavedJob from './AddSavedJob';
 import EditSavedJob from './EditSavedJob';
 import EditApplication from '../AddApplication/EditApplication';
 import './SavedJobs.scss';
-import {Empty} from 'antd'
+import { Empty } from 'antd';
 export default function SavedJobs() {
 	const [applications, setApplications] = useState([]);
 	const [addApplicationOpen, setAddApplicationOpen] = useState(false);
@@ -32,7 +32,6 @@ export default function SavedJobs() {
 			.catch((err) => console.log(err))
 			.finally(() => setLoading(false));
 	};
-
 
 	return (
 		<div className="SavedJobs">
@@ -58,15 +57,16 @@ export default function SavedJobs() {
 						updateApplications={updateApplications}
 						application={editApplication}
 						email={state.email}
-					/>)}
-				{shiftApplicationOpen &&
-					(
-						<EditApplication
-							application={shiftApplicationOpen}
-							onClose={() => setShiftApplicationOpen(false)}
-							updateApplications={updateApplications}
-							email={state.email}
-						/>)}
+					/>
+				)}
+				{shiftApplicationOpen && (
+					<EditApplication
+						application={shiftApplicationOpen}
+						onClose={() => setShiftApplicationOpen(false)}
+						updateApplications={updateApplications}
+						email={state.email}
+					/>
+				)}
 			</div>
 			<div className="Jobs">
 				{loading && (
@@ -76,15 +76,19 @@ export default function SavedJobs() {
 					</>
 				)}
 				{applications.map((application) => (
-					<Card className="Job" key={application._id} title={application.companyName} extra={
-						<Button
-							type="text"
-							icon={<EditFilled />}
-							onClick={() => setEditApplication(application)}
-							id={application.jobId + 'edit'}
-						/>
-					}>
-
+					<Card
+						className="Job"
+						key={application._id}
+						title={application.companyName}
+						extra={
+							<Button
+								type="text"
+								icon={<EditFilled />}
+								onClick={() => setEditApplication(application)}
+								id={application.jobId + 'edit'}
+							/>
+						}
+					>
 						ID: {application.jobId}
 						<br />
 						Title: {application.jobTitle}
@@ -93,15 +97,19 @@ export default function SavedJobs() {
 						<a href={'//' + application.url} target={'_blank'}>
 							{application.url}
 						</a>
-						<br/>
-						<br/>
-						<Button type='primary' id={application.jobId + 'edit'} key="apply" onClick={() => setShiftApplicationOpen(application)}>
+						<br />
+						<br />
+						<Button
+							type="primary"
+							id={application.jobId + 'edit'}
+							key="apply"
+							onClick={() => setShiftApplicationOpen(application)}
+						>
 							Already Applied?
 						</Button>
-
 					</Card>
 				))}
-				{applications.length === 0 && <Empty/>}
+				{applications.length === 0 && <Empty />}
 			</div>
 		</div>
 	);
